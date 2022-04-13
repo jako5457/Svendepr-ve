@@ -21,5 +21,9 @@ namespace ApiDataLayer.Entities
 
         public string Phone { get; set; } = string.Empty;
 
+        public List<Warehouse> Warehouses { get; set; } = new();
+
+        public List<Employee> Employees { get; set; } = new();
+
     }
 }

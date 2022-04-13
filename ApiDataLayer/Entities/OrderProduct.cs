@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace ApiDataLayer.Entities
 {
-    public class ProductCategory
+    public class OrderProduct
     {
         public int ProductId { get; set; }
 
-        public int CategoryId { get; set; }
+        public int OrderId { get; set; }
+
+        public Order Order { get; set; } = new();
 
         public Product Product { get; set; } = new();
-
-        public Category Category { get; set; } = new();
     }
 }

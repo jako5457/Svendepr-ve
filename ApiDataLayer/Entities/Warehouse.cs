@@ -24,5 +24,7 @@ namespace ApiDataLayer.Entities
 
         public Company Company { get; set; } = new Company();
 
+        public List<WarehouseProduct> Products { get; set; } = new();
+
     }
 }
