@@ -13,7 +13,7 @@ namespace ApiDataLayer.Entities
         
         public string Name { get; set; } = string.Empty;
 
-        public List<ProductCategory> Products = new List<ProductCategory>();
+        public List<ProductCategory> Products = new();
 
     }
 }
