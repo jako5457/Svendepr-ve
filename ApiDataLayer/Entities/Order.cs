@@ -15,6 +15,8 @@ namespace ApiDataLayer.Entities
 
         public int EmployeeId { get; set; }
 
+        public DateTime CreatedDate { get; set; }
+
         public string TrackingNumber { get; set; } = string.Empty;
 
         public string DeliveryAddress { get; set; } = string.Empty;
