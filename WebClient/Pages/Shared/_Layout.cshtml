@@ -29,6 +29,14 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
                     </ul>
+                    <ul>
+                        <li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a asp-area="" asp-page="/Privacy">@User.Identity.Name</a>
+                            }
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>

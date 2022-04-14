@@ -24,7 +24,12 @@ builder.Services.AddAuthentication(options =>
         options.ResponseType = "code";
 
         options.SaveTokens = true;
+        options.Scope.Add("offline_access"); //Client Request AccesToken
+        options.Scope.Add("openid");
+        options.Scope.Add("profile");
         options.Scope.Add("Api1");
+        options.GetClaimsFromUserInfoEndpoint = true; //User Information
+        options.SaveTokens = true; //Client saves AccessToken
     });
 
 
