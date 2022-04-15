@@ -13,5 +13,7 @@ namespace ApiDataLayer.Entities
         public int EmployeeId { get; set; }
 
         public Employee Employee { get; set; } = new();
+
+        public List<Order> Orders { get; set; } = new();
     }
 }

@@ -14,6 +14,10 @@ namespace ApiDataLayer.Entities
 
         public string Description { get; set; } = string.Empty;
 
+        public double BuyPrice { get; set; }
+
+        public string EAN { get; set; } = string.Empty;
+
         public List<ProductCategory> Categories { get; set; } = new List<ProductCategory>();
     }
 }

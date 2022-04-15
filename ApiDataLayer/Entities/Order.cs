@@ -27,5 +27,7 @@ namespace ApiDataLayer.Entities
 
         public Employee Employee { get; set; } = new();
 
+        List<OrderProduct> Products { get; set; } = new();
+
     }
 }

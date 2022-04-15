@@ -19,5 +19,11 @@ namespace ApiDataLayer.Entities
         public int? CompanyId { get; set; }
 
         public Company? Company { get; set; }
+
+        public Driver? Driver { get; set; }
+
+        public List<Order> Orders { get; set; } = new();
+
+        public List<ProductRequest> ProductRequests { get; set; } = new();
     }
 }

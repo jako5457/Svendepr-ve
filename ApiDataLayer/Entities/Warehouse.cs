@@ -22,7 +22,7 @@ namespace ApiDataLayer.Entities
 
         public int CompanyId { get; set; }
 
-        public Company Company { get; set; } = new Company();
+        public Company Company { get; set; } = new();
 
         public List<WarehouseProduct> Products { get; set; } = new();
 
