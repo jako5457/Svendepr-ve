@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "IdentityServer\IdentityServer.csproj", "{3B282A97-C859-4194-AD05-622E21A89ECF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClient", "WebClient\WebClient.csproj", "{9F30C4E4-B0AA-4394-A3A8-C298D75A2604}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebClient", "WebClient\WebClient.csproj", "{9F30C4E4-B0AA-4394-A3A8-C298D75A2604}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
