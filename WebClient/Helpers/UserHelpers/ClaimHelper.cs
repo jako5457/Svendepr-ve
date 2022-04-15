@@ -9,7 +9,6 @@ namespace WebClient.Helpers.UserHelpers
             try
             {
                 return claims.FirstOrDefault(c => c.Type == typevalue).Value;
-
             }
             catch (Exception)
             {
