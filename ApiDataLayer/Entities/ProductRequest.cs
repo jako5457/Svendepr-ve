@@ -10,10 +10,10 @@ namespace ApiDataLayer.Entities
     {
         public int ProductRequestId { get; set; }
 
-        public string Location { get; set; } = string.Empty;
+        public string Location { get; set; } = default!;
 
         public int EmployeeId { get; set; }
 
-        public Employee Employee { get; set; } = new();
+        public Employee Employee { get; set; } = default!;
     }
 }

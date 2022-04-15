@@ -12,8 +12,8 @@ namespace ApiDataLayer.Entities
 
         public int EmployeeId { get; set; }
 
-        public Employee Employee { get; set; } = new();
+        public Employee Employee { get; set; } = default!;
 
-        public List<Order> Orders { get; set; } = new();
+        public List<Order> Orders { get; set; } = default!;
     }
 }

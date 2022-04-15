@@ -12,8 +12,8 @@ namespace ApiDataLayer.Entities
 
         public int CategoryId { get; set; }
 
-        public Product Product { get; set; } = new();
+        public Product Product { get; set; } = default!;
 
-        public Category Category { get; set; } = new();
+        public Category Category { get; set; } = default!;
     }
 }

@@ -17,17 +17,17 @@ namespace ApiDataLayer.Entities
 
         public DateTime CreatedDate { get; set; }
 
-        public string TrackingNumber { get; set; } = string.Empty;
+        public string TrackingNumber { get; set; } = default!;
 
-        public string DeliveryAddress { get; set; } = string.Empty;
+        public string DeliveryAddress { get; set; } = default!;
 
-        public string DeliveryLocation { get; set; } = string.Empty;
+        public string DeliveryLocation { get; set; } = default!;
 
-        public Driver Driver { get; set; } = new();
+        public Driver Driver { get; set; } = default!;
 
-        public Employee Employee { get; set; } = new();
+        public Employee Employee { get; set; } = default!;
 
-        List<OrderProduct> Products { get; set; } = new();
+        List<OrderProduct> Products { get; set; } = default!;
 
     }
 }

@@ -10,14 +10,14 @@ namespace ApiDataLayer.Entities
     {
         public int ProductId { get; set; }
 
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; } = default!;
 
-        public string Description { get; set; } = string.Empty;
+        public string Description { get; set; } = default!;
 
         public double BuyPrice { get; set; }
 
-        public string EAN { get; set; } = string.Empty;
+        public string EAN { get; set; } = default!;
 
-        public List<ProductCategory> Categories { get; set; } = new List<ProductCategory>();
+        public List<ProductCategory> Categories { get; set; } = default!;
     }
 }

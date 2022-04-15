@@ -11,19 +11,19 @@ namespace ApiDataLayer.Entities
 
         public int CompanyId { get; set; }
 
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; } = default!;
 
-        public string Address { get; set; } = string.Empty;
+        public string Address { get; set; } = default!;
 
-        public string Zipcode { get; set; } = string.Empty;
+        public string Zipcode { get; set; } = default!;
 
-        public string Email { get; set; } = string.Empty;
+        public string Email { get; set; } = default!;
 
-        public string Phone { get; set; } = string.Empty;
+        public string Phone { get; set; } = default!;
 
-        public List<Warehouse> Warehouses { get; set; } = new();
+        public List<Warehouse> Warehouses { get; set; } = default!;
 
-        public List<Employee> Employees { get; set; } = new();
+        public List<Employee> Employees { get; set; } = default!;
 
     }
 }

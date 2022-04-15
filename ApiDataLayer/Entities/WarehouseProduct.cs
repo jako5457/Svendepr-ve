@@ -14,8 +14,8 @@ namespace ApiDataLayer.Entities
 
         public int Amount { get; set; }
 
-        public Product Product { get; set; } = new Product();
+        public Product Product { get; set; } = default!;
 
-        public Warehouse Warehouse { get; set; } = new Warehouse();
+        public Warehouse Warehouse { get; set; } = default!;
     }
 }
