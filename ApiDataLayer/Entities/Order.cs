@@ -11,9 +11,9 @@ namespace ApiDataLayer.Entities
 
         public int OrderId { get; set; }
 
-        public int DriverId { get; set; }
+        public int? DriverId { get; set; }
 
-        public int EmployeeId { get; set; }
+        public int? EmployeeId { get; set; }
 
         public DateTime CreatedDate { get; set; }
 
@@ -23,11 +23,11 @@ namespace ApiDataLayer.Entities
 
         public string DeliveryLocation { get; set; } = default!;
 
-        public Driver Driver { get; set; } = default!;
+        public Driver? Driver { get; set; } = default!;
 
-        public Employee Employee { get; set; } = default!;
+        public Employee? Employee { get; set; } = default!;
 
-        List<OrderProduct> Products { get; set; } = default!;
+        public List<OrderProduct> Products { get; set; } = default!;
 
     }
 }
