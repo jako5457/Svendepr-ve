@@ -24,15 +24,21 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
                     </ul>
                     <ul class="navbar-nav">
                         @if (User?.Identity?.IsAuthenticated == true)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">@User?.Claims.GetValueFromClaim("name")</a>
+                                @User?.Claims.GetValueFromClaim("sub")
+                            </li>
+                            <li>
+                                <form asp-page="/Account/Logout" method="post">
+                                    <button class="btn btn-light" type="submit">
+                                        Log out
+                                        <img src="~/lib/bootstrap/Icons/box-arrow-right.svg" />
+                                    </button>
+                                </form>
                             </li>
                             <li class="nav-item">
                                 <div class="btn-group">
@@ -42,13 +48,13 @@
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <li><h6 class="dropdown-header">Options:</h6></li>
                                         <li>
-                                            <a class="dropdown-item" asp-area="" asp-page="/Account/MyOrders">My orders</a>
+                                            <a class="dropdown-item" asp-area="" asp-page="/Account/MyOrders">My Orders</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item" asp-area="" asp-page="/Account/MyAccount">My Account</a>
                                         </li>
-                                        <li>
-
+                                        <li class="nav-item">
+                                            <a class="dropdown-item" asp-area="" asp-page="/Privacy">Privacy</a>
                                         </li>
                                     </ul>
                                 </div>
