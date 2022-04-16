@@ -1,5 +1,68 @@
-﻿@page
+﻿@page "{currentpage?}"
 @model WebClient.Pages.Account.MyOrdersModel
 @{
     ViewData["Title"] = "My Orders";
 }
+
+<h3 class="text-center">@User.Claims.GetValueFromClaim("name") - Orders</h3>
+
+<div class="container">
+    <div class="row g-2">
+        @for (var i = 0; i < 4; i++)
+        {
+            <div class="row p-3 ms-1 border bg-light">
+                <div class="col-3">
+                    <span>OrdreId</span>
+                    <span class="badge bg-info text-dark">Info</span>
+                </div>
+                <div class="col-6 text-center">
+                    Dato?
+                </div>
+                <div class="col-3 text-end">
+                    <a asp-route-id="Something" asp-page="/Orders/Details">
+                        <img src="~/lib/bootstrap/Icons/info-square-fill.svg" width="24" height="24" />
+                    </a>
+                </div>
+            </div>
+        }
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                @if (Model.Pager?.CurrentPage <= 1)
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link">Previous</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-page="/Account/MyOrders" asp-route-currentpage="@(Model.Pager?.CurrentPage - 1)">Previous</a>
+                    </li>
+                }
+                @foreach (var item in Model.Pager?.Pages)
+                {
+                    if (item == Model.Pager.CurrentPage)
+                    {
+                        <li class="page-item active"><a class="page-link" href="#">@item.ToString()</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link" asp-page="/Account/MyOrders" asp-route-currentpage="@item.ToString()">@item.ToString()</a></li>
+                    }
+                }
+                @if (Model.Pager?.CurrentPage >= Model.Pager?.EndPage)
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-page="/Account/MyOrders" asp-route-currentpage="@(Model.Pager?.CurrentPage + 1)">Next</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</div>
