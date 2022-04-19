@@ -25,44 +25,7 @@
                 </div>
             </div>
         }
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                @if (Model.Pager?.CurrentPage <= 1)
-                {
-                    <li class="page-item disabled">
-                        <a class="page-link">Previous</a>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item">
-                        <a class="page-link" asp-page="/Account/MyOrders" asp-route-currentpage="@(Model.Pager?.CurrentPage - 1)">Previous</a>
-                    </li>
-                }
-                @foreach (var item in Model.Pager?.Pages)
-                {
-                    if (item == Model.Pager.CurrentPage)
-                    {
-                        <li class="page-item active"><a class="page-link" href="#">@item.ToString()</a></li>
-                    }
-                    else
-                    {
-                        <li class="page-item"><a class="page-link" asp-page="/Account/MyOrders" asp-route-currentpage="@item.ToString()">@item.ToString()</a></li>
-                    }
-                }
-                @if (Model.Pager?.CurrentPage >= Model.Pager?.EndPage)
-                {
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                }
-                else
-                {
-                    <li class="page-item">
-                        <a class="page-link" asp-page="/Account/MyOrders" asp-route-currentpage="@(Model.Pager?.CurrentPage + 1)">Next</a>
-                    </li>
-                }
-            </ul>
-        </nav>
+        <partial name="_Pagenation" model="@new _PagenationModel(Model?.Currentpage, 130)" />
+
     </div>
 </div>

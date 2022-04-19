@@ -1,0 +1,59 @@
+﻿@page "{kategory?}/{currentpage?}"
+@model WebClient.Pages.Products.ReadModel
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button text-center btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Filtering
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <form class="row mb-3">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">Category:</span>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">Search:</span>
+                                <input type="text" class="form-control" aria-label="Text input with segmented dropdown button">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-bottom: 15px;">
+        @for (var i = 0; i < 10; i++)
+        {
+            <div class="col">
+                <div class="card h-100">
+                    <img src="~/images/placeholder-image.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <a asp-page="/Products/Details" asp-route-id="@i" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <partial name="_Pagenation" model="@new _PagenationModel(Model?.Currentpage, 111)" />
+</div>
