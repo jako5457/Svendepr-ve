@@ -54,5 +54,66 @@ namespace Api.Controllers
                                             .ToListAsync());
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CreateCompany(CompanyModel model)
+        {
+            Company company = new Company()
+            {
+                Name = model.Name,
+                Address = model.Address,
+                Email = model.Email,
+                Phone = model.Phone,
+                Zipcode = model.Zipcode,
+            };
+
+            try
+            {
+                _Dbcontext.Companys.Add(company);
+                await _Dbcontext.SaveChangesAsync();
+                return Ok("Company created");
+            }
+            catch (Exception)
+            {
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateCompany(Company company)
+        {
+            try
+            {
+                _Dbcontext.Companys.Attach(company);
+                _Dbcontext.Entry(company).State = EntityState.Modified;
+                await _Dbcontext.SaveChangesAsync();
+                return Ok("Company updated");
+            }
+            catch (Exception)
+            {
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteCompany(int CompanyId)
+        {
+            try
+            {
+                var comp = _Dbcontext.Companys.Where(e => e.CompanyId == CompanyId).FirstOrDefault();
+
+                if (comp == null)
+                {
+                    return NotFound();
+                }
+
+                _Dbcontext.Companys.Remove(comp);
+                await _Dbcontext.SaveChangesAsync();
+                return Ok("Company Deleted.");
+            }
+            catch (Exception)
+            {
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
+        }
     }
 }

@@ -50,9 +50,9 @@ namespace Api.Controllers
 
         [HttpGet]
         [Route("PageCount/{Items}")]
-        public async Task<int> GetEmployeePageCountAsync(int Items)
+        public Task<int> GetEmployeePageCountAsync(int Items)
         {
-            return await _Dbcontext.Employees.PageCountAsync(Items);
+            return Task.FromResult(_Dbcontext.Employees.PageCount(Items));
         }
 
         [HttpPost]

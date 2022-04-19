@@ -13,7 +13,7 @@
         /// <returns></returns>
         public static IQueryable<T> GetPage<T>(this IQueryable<T> query,int page,int ItemCount)
         {
-            return query.Skip(ItemCount * page).Take(ItemCount);
+            return query.Skip(ItemCount * (page -1)).Take(ItemCount);
         }
 
         /// <summary>
