@@ -56,7 +56,7 @@ namespace ApiDataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Employeees",
+                name: "Employees",
                 columns: table => new
                 {
                     EmployeeId = table.Column<int>(type: "int", nullable: false)
@@ -68,9 +68,9 @@ namespace ApiDataLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Employeees", x => x.EmployeeId);
+                    table.PrimaryKey("PK_Employees", x => x.EmployeeId);
                     table.ForeignKey(
-                        name: "FK_Employeees_Companys_CompanyId",
+                        name: "FK_Employees_Companys_CompanyId",
                         column: x => x.CompanyId,
                         principalTable: "Companys",
                         principalColumn: "CompanyId");
@@ -136,9 +136,9 @@ namespace ApiDataLayer.Migrations
                 {
                     table.PrimaryKey("PK_Drivers", x => x.DriverId);
                     table.ForeignKey(
-                        name: "FK_Drivers_Employeees_EmployeeId",
+                        name: "FK_Drivers_Employees_EmployeeId",
                         column: x => x.EmployeeId,
-                        principalTable: "Employeees",
+                        principalTable: "Employees",
                         principalColumn: "EmployeeId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -156,9 +156,9 @@ namespace ApiDataLayer.Migrations
                 {
                     table.PrimaryKey("PK_ProductRequests", x => x.ProductRequestId);
                     table.ForeignKey(
-                        name: "FK_ProductRequests_Employeees_EmployeeId",
+                        name: "FK_ProductRequests_Employees_EmployeeId",
                         column: x => x.EmployeeId,
-                        principalTable: "Employeees",
+                        principalTable: "Employees",
                         principalColumn: "EmployeeId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -210,9 +210,9 @@ namespace ApiDataLayer.Migrations
                         principalTable: "Drivers",
                         principalColumn: "DriverId");
                     table.ForeignKey(
-                        name: "FK_Orders_Employeees_EmployeeId",
+                        name: "FK_Orders_Employees_EmployeeId",
                         column: x => x.EmployeeId,
-                        principalTable: "Employeees",
+                        principalTable: "Employees",
                         principalColumn: "EmployeeId");
                 });
 
@@ -274,8 +274,8 @@ namespace ApiDataLayer.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employeees_CompanyId",
-                table: "Employeees",
+                name: "IX_Employees_CompanyId",
+                table: "Employees",
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
@@ -352,7 +352,7 @@ namespace ApiDataLayer.Migrations
                 name: "Drivers");
 
             migrationBuilder.DropTable(
-                name: "Employeees");
+                name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "Companys");

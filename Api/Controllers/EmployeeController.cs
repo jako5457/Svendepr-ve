@@ -38,6 +38,23 @@ namespace Api.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("Page/{Items}/{Page}")]
+        public async Task<List<Employee>> GetEmployeePageAsync(int Items,int Page)
+        {
+            return await _Dbcontext.Employees
+                                   .GetPage(Page, Items)
+                                   .AsQueryable()
+                                   .ToListAsync();
+        }
+
+        [HttpGet]
+        [Route("PageCount/{Items}")]
+        public async Task<int> GetEmployeePageCountAsync(int Items)
+        {
+            return await _Dbcontext.Employees.PageCountAsync(Items);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateEmployeeAsync(EmployeeModel model)
         {

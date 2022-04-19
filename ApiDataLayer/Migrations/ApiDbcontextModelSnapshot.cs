@@ -118,7 +118,7 @@ namespace ApiDataLayer.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("Employeees");
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("ApiDataLayer.Entities.Order", b =>
