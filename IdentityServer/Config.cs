@@ -57,6 +57,28 @@ namespace IdentityServer
                         IdentityServerConstants.StandardScopes.Profile,
                         "Api1"
                     }
-                }};
+                },
+                new Client
+                {
+                    ClientName ="",
+                    ClientId = "",
+                    AllowOfflineAccess = true,
+                    RequireClientSecret = false,
+                    RedirectUris = new List<string>
+                    {
+                        ""
+                    },
+                    PostLogoutRedirectUris = new List<string>
+                    {
+
+                    },
+                    AllowedScopes = new List<string>
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "Api1"
+                    }
+                }
+            };
     }
 }

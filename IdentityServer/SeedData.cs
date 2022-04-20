@@ -84,5 +84,23 @@ namespace IdentityServer
                 }
             }
         }
+
+        public static async Task CreateRoles(IServiceProvider service)
+        {
+            var RoleMananger = service.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserMananger = service.GetRequiredService<UserManager<ApplicationUser>>();
+
+            IdentityResult adminRoleResult;
+
+            bool adminRoleExists = await RoleMananger.RoleExistsAsync("Admin");
+
+            if (!adminRoleExists)
+            {
+                adminRoleResult = await RoleMananger.CreateAsync(new IdentityRole("Admin"));
+            }
+
+            ApplicationUser adminuser = await UserMananger.FindByNameAsync("Alice");
+            await UserMananger.AddToRoleAsync(adminuser, "Admin");
+        }
     }
 }
