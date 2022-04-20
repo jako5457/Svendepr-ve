@@ -9,7 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{80D61E08-1B78-4370-AD7F-0920BF3D2690}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiUnitTest", "ApiUnitTest\ApiUnitTest.csproj", "{C29FEBC5-8E53-41B4-A5CE-470E78303152}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiUnitTest", "ApiUnitTest\ApiUnitTest.csproj", "{C29FEBC5-8E53-41B4-A5CE-470E78303152}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A8E0A61E-2357-4684-A274-4C43B45BD6E9}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\Api-Test.yml = .github\workflows\Api-Test.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
