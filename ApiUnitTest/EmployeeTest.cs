@@ -45,7 +45,7 @@ namespace ApiUnitTest
         [InlineData(97, 10, 10, 7)]
         public async Task TestGetPagination(int employees, int itemsPerPage,int page,int ExpectedItemsOnPage)
         {
-            await CreateEmpoyeesAsync(_Dbcontext,employees);
+            await CreateEmpoyeesAsync(employees);
 
             var controller = new EmployeeController(_Dbcontext);
 
@@ -54,14 +54,14 @@ namespace ApiUnitTest
             Assert.Equal(ExpectedItemsOnPage, result.Count);
         }
 
-        private async Task CreateEmpoyeesAsync(ApiDbcontext context,int amount)
+        private async Task CreateEmpoyeesAsync(int amount)
         {
 
             for (int i = 0; i < amount; i++)
             {
                 string filler = new Guid().ToString();
 
-                context.Employees.Add(new Employee
+                _Dbcontext.Employees.Add(new Employee
                 {
                     Email = filler,
                     Name = filler,
@@ -71,7 +71,7 @@ namespace ApiUnitTest
                 });
             }
 
-            await context.SaveChangesAsync();
+            await _Dbcontext.SaveChangesAsync();
         }
     }
 }
