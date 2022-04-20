@@ -60,24 +60,25 @@ namespace IdentityServer
                 },
                 new Client
                 {
-                    ClientName ="",
-                    ClientId = "",
+                    ClientId = "Xamarin",
+                    ClientName = "TrackingAPP",
+                    AllowedGrantTypes = GrantTypes.Hybrid,
+                    ClientSecrets = { new Secret("ThisIsAXamarinSecret".Sha256()) },
+                    
                     AllowOfflineAccess = true,
                     RequireClientSecret = false,
-                    RedirectUris = new List<string>
-                    {
-                        ""
-                    },
-                    PostLogoutRedirectUris = new List<string>
-                    {
-
-                    },
+                    RedirectUris = { "dk.duende.xamarin" },
+                    RequireConsent = false,
+                    RequirePkce = true,
+                    PostLogoutRedirectUris = { $"dk.duende.xamarin/Account/Redirecting" },
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.OfflineAccess,
                         "Api1"
-                    }
+                    },
+                    AllowAccessTokensViaBrowser = true
                 }
             };
     }
