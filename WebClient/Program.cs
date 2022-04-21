@@ -37,7 +37,7 @@ builder.Services.AddAuthentication(options =>
         options.BackchannelHttpHandler = handler;
     });
 
-
+builder.Services.AddHttpClient();
 #endregion
 
 // Add services to the container.
