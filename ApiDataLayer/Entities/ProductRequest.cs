@@ -15,5 +15,7 @@ namespace ApiDataLayer.Entities
         public int EmployeeId { get; set; }
 
         public Employee Employee { get; set; } = default!;
+
+        public List<ProductRequestProduct> Products { get; set; } = default!;
     }
 }
