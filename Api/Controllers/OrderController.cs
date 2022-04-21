@@ -97,9 +97,9 @@ namespace Api.Controllers
         [HttpDelete]
         public async Task<IActionResult> RemoveOrderAsync(int orderId)
         {
-            var order = await _Dbcontext.Orders.Where(o => o.OrderId == orderId).FirstOrDefaultAsync();
+            Order? order = await _Dbcontext.Orders.Where(o => o.OrderId == orderId).FirstOrDefaultAsync();
 
-            if (order != null)
+            if (order == null)
                 return NotFound();
 
             try

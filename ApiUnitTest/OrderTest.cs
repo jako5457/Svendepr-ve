@@ -1,9 +1,7 @@
 ﻿using ApiDataLayer;
 using System;
 using Xunit;
-using ApiDataLayer;
 using ApiDataLayer.Entities;
-using System;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
