@@ -17,11 +17,12 @@ builder.Services.AddAuthentication(options =>
     .AddCookie("Cookies")
     .AddOpenIdConnect("oidc", options =>
     {
-        options.Authority = "https://localhost:5001";
+        options.Authority = "https://10.135.16.154:5001";
 
         options.ClientId = "WebRazor";
         options.ClientSecret = "ThisIsASecretRazor";
         options.ResponseType = "code";
+        
 
         options.SaveTokens = true;
         options.Scope.Add("offline_access"); //Client Request AccesToken
@@ -30,6 +31,10 @@ builder.Services.AddAuthentication(options =>
         options.Scope.Add("Api1");
         options.GetClaimsFromUserInfoEndpoint = true; //User Information
         options.SaveTokens = true; //Client saves AccessToken
+
+        HttpClientHandler handler = new HttpClientHandler();
+        handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+        options.BackchannelHttpHandler = handler;
     });
 
 

@@ -62,9 +62,8 @@ namespace IdentityServer
                 {
                     ClientId = "Xamarin",
                     ClientName = "TrackingAPP",
-                    AllowedGrantTypes = GrantTypes.Hybrid,
+                    AllowedGrantTypes = GrantTypes.Code,
                     ClientSecrets = { new Secret("ThisIsAXamarinSecret".Sha256()) },
-                    
                     AllowOfflineAccess = true,
                     RequireClientSecret = false,
                     RedirectUris = { "dk.duende.xamarin" },
