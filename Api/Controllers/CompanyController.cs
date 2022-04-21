@@ -57,7 +57,7 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCompany(CompanyModel model)
         {
-            Company company = new Company()
+            Company company = new()
             {
                 Name = model.Name,
                 Address = model.Address,

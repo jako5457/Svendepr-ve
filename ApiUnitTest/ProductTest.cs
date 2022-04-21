@@ -33,7 +33,7 @@ namespace ApiUnitTest
 
             var controller = new ProductController(_Dbcontext);
 
-            ProductModel model = new ProductModel()
+            ProductModel model = new()
             {
                 Name = "test",
                 BuyPrice = 986986,

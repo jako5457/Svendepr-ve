@@ -37,7 +37,7 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateWarehouseAsync(WarehouseModel model)
         {
-            Warehouse warehouse = new Warehouse()
+            Warehouse warehouse = new()
             {
                 Address = model.Address,
                 CompanyId = model.CompanyId,
@@ -122,7 +122,7 @@ namespace Api.Controllers
         [Route("product")]
         public async Task<IActionResult> AddPrductAsync(WarehouseProductModel product)
         {
-            WarehouseProduct? warehouseProduct = new WarehouseProduct()
+            WarehouseProduct? warehouseProduct = new()
             {
                 WarehouseId = product.WarehouseId,
                 ProductId = product.ProductId,

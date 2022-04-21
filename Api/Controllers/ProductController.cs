@@ -54,7 +54,7 @@ namespace Api.Controllers
                 return BadRequest();
             }
 
-            Product product = new Product()
+            Product product = new()
             {
                 BuyPrice = model.BuyPrice,
                 Description = model.Description,
@@ -62,7 +62,7 @@ namespace Api.Controllers
                 Name = model.Name,
             };
 
-            if (model.Categories.Count() != 0)
+            if (model.Categories.Count != 0)
             {
                 foreach (int Categoryid in model.Categories)
                 {

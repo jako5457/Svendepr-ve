@@ -31,9 +31,9 @@ namespace ApiUnitTest
         {
             await CreateEntities();
 
-            WarehouseController controller = new WarehouseController(_Dbcontext);
+            WarehouseController controller = new(_Dbcontext);
 
-            WarehouseModel warehouse = new WarehouseModel ()
+            WarehouseModel warehouse = new()
             {
                 Name = "warehouse",
                 Address = "SomeWarehouse",
@@ -52,9 +52,9 @@ namespace ApiUnitTest
         public async Task WarehouseProductCreation()
         {
             await CreateEntities();
-            WarehouseController controller = new WarehouseController(_Dbcontext);
+            WarehouseController controller = new(_Dbcontext);
 
-            WarehouseProductModel warehouseProduct = new WarehouseProductModel()
+            WarehouseProductModel warehouseProduct = new()
             {
                 ProductId = 2,
                 WarehouseId = 1,

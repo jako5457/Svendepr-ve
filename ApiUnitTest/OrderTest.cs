@@ -30,9 +30,9 @@ namespace ApiUnitTest
         {
             await CreateEntities();
 
-            OrderController controller = new OrderController(_Dbcontext);
+            OrderController controller = new(_Dbcontext);
 
-            OrderModel order = new OrderModel
+            OrderModel order = new()
             {
                 DriverId = 1,
                 EmployeeId = 2,

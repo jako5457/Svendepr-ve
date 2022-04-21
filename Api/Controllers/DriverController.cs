@@ -32,7 +32,7 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateDriverAsync(int EmployeeId)
         {
-            Driver driver = new Driver
+            Driver driver = new()
             {
                 EmployeeId = EmployeeId,
             };

@@ -42,7 +42,7 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateOrderAsync(OrderModel model)
         {
-            Order order = new Order()
+            Order order = new()
             {
                 DriverId = model.DriverId,
                 EmployeeId = model.EmployeeId,
