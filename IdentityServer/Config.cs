@@ -69,7 +69,7 @@ namespace IdentityServer
                     RedirectUris = { "dk.duende.xamarin" },
                     RequireConsent = false,
                     RequirePkce = true,
-                    PostLogoutRedirectUris = { $"dk.duende.xamarin/Account/Redirecting" },
+                    PostLogoutRedirectUris = { $"com.companyname.xamarinclient/Account/Redirecting" },
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
