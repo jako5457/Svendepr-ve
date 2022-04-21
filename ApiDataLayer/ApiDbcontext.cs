@@ -20,6 +20,8 @@ namespace ApiDataLayer
 
         public DbSet<Driver> Drivers { get; set; } = default!;
 
+        public DbSet<Warehouse> Warehouses { get; set; } = default!;
+
         public DbSet<Employee> Employees { get; set; } = default!;
 
         public DbSet<Order> Orders { get; set; } = default!;
