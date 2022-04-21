@@ -3,28 +3,29 @@ using System.Text.Json;
 
 namespace WebClient.Helpers.Api
 {
-    public class ApiCaller<T> where T : class
+    public class ApiCaller : IApiCaller
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly ILogger<ApiCaller<T>> _logger;
+        private readonly IConfiguration _configuration;
 
-        public ApiCaller(IHttpClientFactory httpClientFactory, ILogger<ApiCaller<T>> logger)
+        public ApiCaller(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
             _httpClientFactory = httpClientFactory;
-            _logger = logger;
+            _configuration = configuration;
         }
 
-        public async Task<T> GetTAsync(HttpMethod method, string url, string accessToken)
+        public async Task<T> GetTAsync<T>(HttpMethod method, string url, string accessToken)
         {
             try
             {
+                url = _configuration.GetValue<string>("Api:Endpoint") + url;
                 var httpRequestMessage = new HttpRequestMessage(method, url);
 
                 httpRequestMessage.Headers.Add("Accept", "application/json");
-                httpRequestMessage.Headers.Add("Content-Type", "application/json");
+                //httpRequestMessage.Headers.Add("Content-Type", "application/json");
 
                 var httpclient = _httpClientFactory.CreateClient();
-                
+
                 httpclient.DefaultRequestHeaders.Authorization = !String.IsNullOrEmpty(accessToken) ? null : new AuthenticationHeaderValue("Bearer", accessToken); //No access token authenticationheader = null
 
                 var response = await httpclient.SendAsync(httpRequestMessage);
@@ -39,10 +40,10 @@ namespace WebClient.Helpers.Api
             }
             catch (Exception e)
             {
-                _logger.LogInformation(e.Message);
+                return default;
             }
 
-            return null;
+            return default;
         }
     }
 }

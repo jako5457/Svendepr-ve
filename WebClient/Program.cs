@@ -1,4 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
+using WebClient.Helpers.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,7 @@ builder.Services.AddAuthentication(options =>
     .AddCookie("Cookies")
     .AddOpenIdConnect("oidc", options =>
     {
-        options.Authority = "https://10.135.16.154:5001";
+        options.Authority = "https://localhost:5001";
 
         options.ClientId = "WebRazor";
         options.ClientSecret = "ThisIsASecretRazor";
@@ -38,6 +39,8 @@ builder.Services.AddAuthentication(options =>
     });
 
 builder.Services.AddHttpClient();
+
+builder.Services.AddScoped<IApiCaller, ApiCaller>();
 #endregion
 
 // Add services to the container.
