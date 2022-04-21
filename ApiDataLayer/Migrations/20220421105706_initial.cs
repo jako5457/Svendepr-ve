@@ -77,7 +77,7 @@ namespace ApiDataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WarehouseOrders",
+                name: "Warehouse",
                 columns: table => new
                 {
                     WarehouseId = table.Column<int>(type: "int", nullable: false)
@@ -91,9 +91,9 @@ namespace ApiDataLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WarehouseOrders", x => x.WarehouseId);
+                    table.PrimaryKey("PK_Warehouse", x => x.WarehouseId);
                     table.ForeignKey(
-                        name: "FK_WarehouseOrders_Companys_CompanyId",
+                        name: "FK_Warehouse_Companys_CompanyId",
                         column: x => x.CompanyId,
                         principalTable: "Companys",
                         principalColumn: "CompanyId",
@@ -181,9 +181,9 @@ namespace ApiDataLayer.Migrations
                         principalColumn: "ProductId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_WarehouseProducts_WarehouseOrders_WarehouseId",
+                        name: "FK_WarehouseProducts_Warehouse_WarehouseId",
                         column: x => x.WarehouseId,
-                        principalTable: "WarehouseOrders",
+                        principalTable: "Warehouse",
                         principalColumn: "WarehouseId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -309,8 +309,8 @@ namespace ApiDataLayer.Migrations
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WarehouseOrders_CompanyId",
-                table: "WarehouseOrders",
+                name: "IX_Warehouse_CompanyId",
+                table: "Warehouse",
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
@@ -346,7 +346,7 @@ namespace ApiDataLayer.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "WarehouseOrders");
+                name: "Warehouse");
 
             migrationBuilder.DropTable(
                 name: "Drivers");

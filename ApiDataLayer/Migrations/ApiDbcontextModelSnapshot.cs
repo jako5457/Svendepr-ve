@@ -298,7 +298,7 @@ namespace ApiDataLayer.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("WarehouseOrders");
+                    b.ToTable("Warehouse");
                 });
 
             modelBuilder.Entity("ApiDataLayer.Entities.WarehouseProduct", b =>

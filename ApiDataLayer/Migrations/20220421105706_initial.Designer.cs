@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiDataLayer.Migrations
 {
     [DbContext(typeof(ApiDbcontext))]
-    [Migration("20220419112024_initial")]
+    [Migration("20220421105706_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -300,7 +300,7 @@ namespace ApiDataLayer.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("WarehouseOrders");
+                    b.ToTable("Warehouse");
                 });
 
             modelBuilder.Entity("ApiDataLayer.Entities.WarehouseProduct", b =>
