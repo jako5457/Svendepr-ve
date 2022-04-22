@@ -15,8 +15,25 @@ namespace IdentityServer
         {
             builder.Services.AddRazorPages();
 
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            if (builder.Environment.IsDevelopment())
+            {
+                builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                                options.UseSqlServer(builder.Configuration.GetConnectionString("LocalConnection")));
+            }
+
+            if (builder.Environment.IsProduction())
+            {
+                builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            }
+
+            builder.Services.AddCors(o => { 
+                o.AddDefaultPolicy(b => { 
+                            b.WithOrigins("https://localhost:7039")
+                                .AllowAnyMethod()
+                                .AllowAnyHeader(); 
+                }); 
+            });
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -68,6 +85,9 @@ namespace IdentityServer
 
             app.UseStaticFiles();
             app.UseRouting();
+
+            app.UseCors();
+
             app.UseIdentityServer();
             app.UseAuthorization();
 

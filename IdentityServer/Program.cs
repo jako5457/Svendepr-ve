@@ -32,7 +32,6 @@ try
         Log.Information("Done seeding database. Exiting.");
         return;
     }
-
     app.Run();
 }
 catch (Exception ex) when (ex.GetType().Name is not "StopTheHostException") // https://github.com/dotnet/runtime/issues/60600

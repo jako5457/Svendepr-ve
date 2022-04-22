@@ -31,7 +31,7 @@ namespace IdentityServer
                 ClientSecrets = {new Secret("websecret".Sha256())},
                 AllowedGrantTypes = GrantTypes.Code,
                 // where to redirect to after login
-                RedirectUris = { "https://localhost:5002/signin-oidc" },
+                RedirectUris = { "https://localhost:7039/swagger/oauth2-redirect.html" },
 
                 // where to redirect to after logout
                 PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc" },

@@ -3,7 +3,7 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string endpoint = "https://identityserversvende.azurewebsites.net";
+string endpoint = "https://localhost:5001";
 
 // Add services to the container.
 
@@ -70,7 +70,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.OAuthScopes("Api1", "openid");
-        c.OAuthUseBasicAuthenticationWithAccessCodeGrant();
+        c.OAuthUsePkce();
     });
 }
 
