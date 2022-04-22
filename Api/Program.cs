@@ -14,6 +14,8 @@ builder.Services.AddSwaggerGen(options =>
 {
     Dictionary<string,string> scopes = new Dictionary<string, string>();
 
+    scopes.Add("openid", "openid");
+    scopes.Add("profile", "profile");
     scopes.Add("Api1", "Api1");
 
     var scheme = new OpenApiSecurityScheme
@@ -67,7 +69,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.OAuthScopes("Api", "OpenIdConnect");
+        c.OAuthScopes("Api1", "openid");
         c.OAuthUseBasicAuthenticationWithAccessCodeGrant();
     });
 }
