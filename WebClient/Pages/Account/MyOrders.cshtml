@@ -1,0 +1,31 @@
+﻿@page "{currentpage?}"
+@model WebClient.Pages.Account.MyOrdersModel
+@{
+    ViewData["Title"] = "My Orders";
+}
+
+<h3 class="text-center">@User.Claims.GetValueFromClaim("name") - Orders</h3>
+
+<div class="container">
+    <div class="row g-2">
+        @for (var i = 0; i < 4; i++)
+        {
+            <div class="row p-3 ms-1 border bg-light">
+                <div class="col-3">
+                    <span>OrdreId</span>
+                    <span class="badge bg-info text-dark">Info</span>
+                </div>
+                <div class="col-6 text-center">
+                    Dato?
+                </div>
+                <div class="col-3 text-end">
+                    <a asp-route-id="Something" asp-page="/Orders/Details">
+                        <img src="~/lib/bootstrap/Icons/info-square-fill.svg" width="24" height="24" />
+                    </a>
+                </div>
+            </div>
+        }
+        <partial name="_Pagenation" model="@new _PagenationModel(Model?.Currentpage, 130)" />
+
+    </div>
+</div>

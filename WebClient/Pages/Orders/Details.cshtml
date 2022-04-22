@@ -1,0 +1,86 @@
+﻿@page "{id}"
+@model WebClient.Pages.Orders.DetailsModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+
+<div class="container">
+    <div class="row" style="background: lightgrey;border-radius: 0.25rem;">
+        <h3 class="text-center">
+            Tracking
+        </h3>
+        <div class="container">
+            <div class="row px-3">
+                <div class="col-6 text-start">
+                    <img src="~/lib/bootstrap/Icons/truck.svg" width="64" height="64" />
+                </div>
+                <div class="col-6 text-end">
+                    <img src="~/lib/bootstrap/Icons/box-seam.svg" width="64" height="64" />
+                </div>
+            </div>
+            <div class="col-12 px-3 align-content-center" style="margin-top: 15px;">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                </div>
+            </div>
+        </div>
+        <h6 class="text-center" style="margin-top: 15px;">
+            <a href="#">
+                See live tracking
+            </a>
+        </h6>
+    </div>
+
+    <h3 class="text-center"></h3>
+    <div class="row">
+        <div class="card w-100" style="width: 18rem;">
+            <div class="card-body">
+                <div class="card-header row">
+                    <div class="text-start col-6">
+                        OrderID
+                    </div>
+                    <div class="text-end col-6">
+                        <span class="badge bg-info text-dark">Info</span>
+                    </div>
+                </div>
+
+                <ul class="list-group list-group-flush">
+                    @for (var i = 0; i < 5; i++)
+                    {
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-9">
+                                    Some Product
+                                </div>
+                                <div class="col-3 text-end">
+                                    Amount: <span style="font-weight:600">@i</span>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    <li class="list-group-item">
+
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-9">
+                                Total:
+                            </div>
+                            <div class="col-3 text-end">
+                                <span style="font-weight: 800"> 3 </span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="card-footer text-center text-muted">
+                    @DateTime.Now.ToLongDateString()
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
