@@ -17,7 +17,7 @@ builder.Services.AddAuthentication(options =>
     .AddCookie("Cookies")
     .AddOpenIdConnect("oidc", options =>
     {
-        options.Authority = "https://10.135.16.154:5001";
+        options.Authority = "https://10.135.16.153:5001";
 
         options.ClientId = "WebRazor";
         options.ClientSecret = "ThisIsASecretRazor";
