@@ -18,14 +18,13 @@ builder.Services.AddAuthentication(options =>
     .AddCookie("Cookies")
     .AddOpenIdConnect("oidc", options =>
     {
-        options.Authority = "https://localhost:5001";
+        options.Authority = "https://identityserversvende.azurewebsites.net/";
 
-        options.ClientId = "WebRazor";
-        options.ClientSecret = "ThisIsASecretRazor";
+        options.ClientId = "web";
+        options.ClientSecret = "websecret";
         options.ResponseType = "code";
-        
 
-        options.SaveTokens = true;
+        //options.Scope.Clear();
         options.Scope.Add("offline_access"); //Client Request AccesToken
         options.Scope.Add("openid");
         options.Scope.Add("profile");
@@ -33,9 +32,6 @@ builder.Services.AddAuthentication(options =>
         options.GetClaimsFromUserInfoEndpoint = true; //User Information
         options.SaveTokens = true; //Client saves AccessToken
 
-        HttpClientHandler handler = new HttpClientHandler();
-        handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-        options.BackchannelHttpHandler = handler;
     });
 
 builder.Services.AddHttpClient();
@@ -61,17 +57,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseEndpoints(endpoins =>
-{
-    endpoins.MapDefaultControllerRoute()
-    .RequireAuthorization();
-});
-
-app.MapRazorPages();
+app.MapRazorPages().RequireAuthorization();
 
 app.Run();
 
