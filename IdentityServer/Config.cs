@@ -81,6 +81,26 @@ namespace IdentityServer
                     "api_all_write",
                 }
 
+            },
+            new Client
+            {
+                ClientId = "native",
+                RequireClientSecret = false,
+                //ClientSecrets = { new Secret("nativesecret".Sha256())},
+                AllowedGrantTypes = GrantTypes.Code,
+                AllowOfflineAccess = true,
+
+                RedirectUris = {"com.companyname.xamarinclient://callback"},
+                
+                PostLogoutRedirectUris = { "oidcxamarin101:/signout-callback-oidc" },
+
+                AllowedScopes = new List<string>
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile,
+                    IdentityServerConstants.StandardScopes.OfflineAccess,
+                    "Api1"
+                }
             }
         };
     }
