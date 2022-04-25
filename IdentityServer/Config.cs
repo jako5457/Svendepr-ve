@@ -38,13 +38,31 @@ namespace IdentityServer
 
                 AllowOfflineAccess = true,
 
+                    AllowedScopes = new List<string>
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "Api1"
+                    }
+
+            },
+            new Client
+            {
+                ClientId = "native",
+                ClientSecrets = { new Secret("nativesecret".Sha256())},
+                AllowedGrantTypes = GrantTypes.Code,
+                AllowOfflineAccess = true,
+
+                RedirectUris = {"oidcxamarin101:/authenticated"},
+
+                PostLogoutRedirectUris = { "oidcxamarin101:/signout-callback-oidc" },
+
                 AllowedScopes = new List<string>
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
                     "Api1"
                 }
-
             }
         };
     }
