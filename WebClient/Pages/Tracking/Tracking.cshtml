@@ -4,8 +4,29 @@
 
 }
 
-<div class="container">
+
+<div class="container ">
     <div class="row">
-<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=8.493804931640627%2C54.718275018302315%2C10.306549072265625%2C55.43680510545246&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/#map=10/55.0792/9.4002">Vis større kort</a></small>
+        <iframe width="600"
+                height="450"
+                style="border:0"
+                loading="lazy"
+                disableDefaultUI="true"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"
+                frameborder="0"
+                src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyAhShiSbwyU-t0uvBojMmt29E0lrFYx3jA&origin=Oslo+Norway&destination=Telemark+Norway&units=metric">
+        </iframe>
     </div>
 </div>
+
+<script>
+    $(window).on('load',function (){
+        setTimeout(hidesomething, 6000)
+    });
+
+    function hidesomething(){
+        $(".directions-card").hide();
+        alert("ost")
+    }
+</script>
