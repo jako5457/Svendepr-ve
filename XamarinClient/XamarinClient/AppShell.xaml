@@ -1,0 +1,29 @@
+﻿<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       x:Class="XamarinClient.AppShell"
+       xmlns:pages="XamarinClient.Pages">
+
+    <FlyoutItem Title="Login"
+                Icon="monkey.png">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate pages:MainPage}" />
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="Orders"
+                Icon="monkey.png">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate pages:Orders}" />
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem Title="My Profile"
+                Icon="monkey.png">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate pages:ProfilePage}" />
+        </Tab>
+    </FlyoutItem>
+
+
+
+</Shell>

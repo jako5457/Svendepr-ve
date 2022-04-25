@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinClient.ProfilePage">
+    <ContentPage.Content>
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label x:Name="lblUsername" FontSize="18" Text="Test Driver" Grid.Column="1" Grid.Row="0"/>
+
+            <Image x:Name="imgQRCode" Grid.Column="1" Grid.Row="1"/>
+
+            <Label x:Name="lblCurrentLocation"  FontSize="18" Text="Current Location" Grid.Column="0" Grid.Row="2"/>
+            <Label x:Name="lblXPosition" FontSize="18" Text="" Grid.Column="1" Grid.Row="2"/>
+            <Label x:Name="lblYPosition" FontSize="18" Text="" Grid.Column="2" Grid.Row="2"/>
+
+            <Button x:Name="btnMyOrders" Text="My Orders" BackgroundColor="LightBlue" Grid.Column="1" Grid.Row="3"/>
+            
+            <Button x:Name="btnLogOut" Text="Log Out" BackgroundColor="Red" Grid.Column="1" Grid.Row="4" />
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
