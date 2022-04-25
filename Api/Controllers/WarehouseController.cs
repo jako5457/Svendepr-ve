@@ -5,6 +5,7 @@ namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class WarehouseController : ControllerBase
     {
 
@@ -17,6 +18,7 @@ namespace Api.Controllers
 
         [HttpGet]
         [Route("list")]
+        [RequiredScope("warehouse_read")]
         public async Task<List<Warehouse>> GetWarehousesAsync()
         {
             return await _Dbcontext.Warehouses.ToListAsync();
@@ -24,6 +26,7 @@ namespace Api.Controllers
 
         [HttpGet]
         [Route("{WarehouseId}")]
+        [RequiredScope("warehouse_read")]
         public async Task<IActionResult> GetWarehouseAsync(int WarehouseId)
         {
             Warehouse? warehouse = await _Dbcontext.Warehouses.Where(x => x.WarehouseId == WarehouseId).FirstOrDefaultAsync();
@@ -35,6 +38,7 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        [RequiredScope("warehouse_write")]
         public async Task<IActionResult> CreateWarehouseAsync(WarehouseModel model)
         {
             Warehouse warehouse = new()
@@ -60,6 +64,7 @@ namespace Api.Controllers
         }
 
         [HttpPut]
+        [RequiredScope("warehouse_write")]
         public async Task<IActionResult> UpdateWarehouseAsync(Warehouse warehouse)
         {
             _Dbcontext.Warehouses.Attach(warehouse);
@@ -77,6 +82,7 @@ namespace Api.Controllers
         }
 
         [HttpDelete]
+        [RequiredScope("warehouse_write")]
         public async Task<IActionResult> DeleteWarehouseAsync(int WarehouseId)
         {
             Warehouse? warehouse = await _Dbcontext.Warehouses.Where(x => x.WarehouseId == WarehouseId).FirstOrDefaultAsync();
@@ -100,6 +106,7 @@ namespace Api.Controllers
         #region Products
 
         [HttpGet]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:warehouse:read")]
         [Route("{WarehouseId}/products")]
         public async Task<List<WarehouseProductListModel>> GetWarehouseProducts(int WarehouseId)
         {
@@ -119,6 +126,7 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:warehouse:write")]
         [Route("product")]
         public async Task<IActionResult> AddPrductAsync(WarehouseProductModel product)
         {
@@ -143,6 +151,7 @@ namespace Api.Controllers
         }
 
         [HttpPut]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:warehouse:write")]
         [Route("product")]
         public async Task<IActionResult> UpdateWarehousePrductAsync(WarehouseProductModel product)
         {
@@ -169,6 +178,7 @@ namespace Api.Controllers
         }
 
         [HttpDelete]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:warehouse:write")]
         [Route("product")]
         public async Task<IActionResult> RemoveWarehouseProduct(WarehouseProductModel product)
         {

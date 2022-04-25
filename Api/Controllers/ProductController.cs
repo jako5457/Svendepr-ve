@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -15,6 +16,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:product:read")]
         [Route("list")]
         public async Task<List<Product>> GetAllProductsAsync()
         {
@@ -22,6 +24,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:product:read")]
         [Route("list/category/{CategoryId}")]
         public async Task<List<Product>> GetProductsByCategoryAsync(int CategoryId)
         {
@@ -30,6 +33,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:product:read")]
         [Route("Page/{Items}/{Page}")]
         public async Task<List<Product>> GetProductPagesAsync(int Items, int Page)
         {
@@ -40,6 +44,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:product:read")]
         [Route("Pagecount/{Items}")]
         public Task<int> GetProductPageCountAsync(int Items)
         {
@@ -47,6 +52,7 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:product:write")]
         public async Task<IActionResult> CreateProductAsync(ProductModel model)
         {
             if (model == null)
@@ -91,6 +97,7 @@ namespace Api.Controllers
         }
         
         [HttpPut]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:product:write")]
         public async Task<IActionResult> EditProductAsync(Product product)
         {
             _Dbcontext.Products.Attach(product);
@@ -108,6 +115,7 @@ namespace Api.Controllers
         }
 
         [HttpDelete]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:product:write")]
         public async Task<IActionResult> DeleteProductAsync(int ProductId)
         {
             Product? product = await _Dbcontext.Products.Where(p => p.ProductId == ProductId).FirstOrDefaultAsync();

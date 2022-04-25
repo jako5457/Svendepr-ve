@@ -1,21 +1,20 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CompanyController : ControllerBase
     {
 
         private readonly ApiDbcontext _Dbcontext;
-
         public CompanyController(ApiDbcontext dbcontext)
         {
             _Dbcontext = dbcontext;
         }
 
         [HttpGet]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:company:read")]
         [Route("list")]
         public async Task<List<Company>> GetCompanies()
         {
@@ -23,6 +22,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:company:read")]
         [Route("{Companyid}")]
         public async Task<IActionResult> GetCompanyByidAsync(int Companyid)
         {
@@ -36,6 +36,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:company:read")]
         [Route("page/{ItemCount}/{Page}")]
         public async Task<IActionResult> SearchCompanyAsync(string query,int ItemCount,int Page)
         {
@@ -55,6 +56,7 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:company:write")]
         public async Task<IActionResult> CreateCompany(CompanyModel model)
         {
             Company company = new()
@@ -79,6 +81,7 @@ namespace Api.Controllers
         }
 
         [HttpPut]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:company:write")]
         public async Task<IActionResult> UpdateCompany(Company company)
         {
             try
@@ -95,6 +98,7 @@ namespace Api.Controllers
         }
 
         [HttpDelete]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:company:write")]
         public async Task<IActionResult> DeleteCompany(int CompanyId)
         {
             try

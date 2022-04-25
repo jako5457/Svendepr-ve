@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class OrderController : ControllerBase
@@ -16,12 +17,14 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:order:read")]
         public async Task<List<Order>> GetAllOrdersAsync()
         {
             return await _Dbcontext.Orders.ToListAsync();
         }
 
         [HttpGet]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:order:read")]
         [Route("employee/{EmployeeId}")]
         public async Task<List<Order>> GetOrderbyEmployeeAsync(int EmployeeId)
         {
@@ -31,6 +34,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:order:read")]
         [Route("driver/{DriverId}")]
         public async Task<List<Order>> GetOrdersbyDriverAsync(int DriverId)
         {
@@ -40,6 +44,7 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:order:write")]
         public async Task<IActionResult> CreateOrderAsync(OrderModel model)
         {
             Order order = new()
@@ -95,6 +100,7 @@ namespace Api.Controllers
         }
 
         [HttpDelete]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:order:write")]
         public async Task<IActionResult> RemoveOrderAsync(int orderId)
         {
             Order? order = await _Dbcontext.Orders.Where(o => o.OrderId == orderId).FirstOrDefaultAsync();

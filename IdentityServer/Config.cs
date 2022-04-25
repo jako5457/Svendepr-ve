@@ -14,7 +14,31 @@ namespace IdentityServer
             };
 
         public static IEnumerable<ApiScope> ApiScopes =>
-            new List<ApiScope> { new ApiScope("Api1", "My API") };
+            new List<ApiScope> {
+                new ApiScope("company_read", "read company data"),
+                new ApiScope("company_write", "Edit/create company data"),
+
+                new ApiScope("driver_read", "Read driver information"),
+                new ApiScope("driver_write", "Edit/create driver information"),
+
+                new ApiScope("employee_read", "Read employees"),
+                new ApiScope("employee_write", "edit/create employees"),
+
+                new ApiScope("order_read", "Read order information"),
+                new ApiScope("order_write", "Edit/create order information"),
+
+                new ApiScope("product_read", "Read product information"),
+                new ApiScope("product_write", "Edit/create product"),
+
+                new ApiScope("product_request_read", "Read order requests"),
+                new ApiScope("product_request_write", "Edit/create order requests"),
+
+                new ApiScope("warehouse_read", "Read warehouse information"),
+                new ApiScope("warehouse_write", "Edit/create warehouse information"),
+
+                new ApiScope("api_all_read","Read everything"),
+                new ApiScope("api_all_write","Write everything")
+            };
 
         public static IEnumerable<Client> Clients => new List<Client>
         {
@@ -42,7 +66,22 @@ namespace IdentityServer
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
-                    "Api1"
+                    "company_read",
+                    "company_write",
+                    "driver_read",
+                    "driver_write",
+                    "employee_read",
+                    "employee_write",
+                    "order_read",
+                    "order_write",
+                    "product_read",
+                    "product_write",
+                    "product_request_read",
+                    "product_request_write",
+                    "warehouse_read",
+                    "warehouse_write",
+                    "api_all_read",
+                    "api_all_write",
                 }
 
             }

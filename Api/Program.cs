@@ -16,7 +16,21 @@ builder.Services.AddSwaggerGen(options =>
 
     scopes.Add("openid", "openid");
     scopes.Add("profile", "profile");
-    scopes.Add("Api1", "Api1");
+
+    scopes.Add("company_read", "read company data");
+    scopes.Add("company_write", "Edit/create company data");
+    scopes.Add("driver_read", "Read driver information");
+    scopes.Add("driver_write", "Edit/create driver information");
+    scopes.Add("employee_read", "Read employees");
+    scopes.Add("employee_write", "edit/create employees");
+    scopes.Add("order_read", "Read order information");
+    scopes.Add("order_write", "Edit/create order information");
+    scopes.Add("product_read", "Read product information");
+    scopes.Add("product_write", "Edit/create product");
+    scopes.Add("product_request_read", "Read order requests");
+    scopes.Add("product_request_write", "Edit/create order requests");
+    scopes.Add("warehouse_read", "Read warehouse information");
+    scopes.Add("warehouse_write", "Edit/create warehouse information");
 
     var scheme = new OpenApiSecurityScheme
     {
@@ -69,14 +83,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.OAuthScopes("Api1", "openid");
+        c.OAuthClientId("web");
+        c.OAuthClientSecret("websecret");
         c.OAuthUsePkce();
     });
 }
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

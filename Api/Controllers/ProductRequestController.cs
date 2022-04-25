@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductRequestController : ControllerBase
@@ -16,6 +17,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:productRequest:read")]
         [Route("list")]
         public async Task<List<ProductRequest>> GetProductRequests()
         {
@@ -23,6 +25,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:productRequest:read")]
         [Route("{ProductRequestId}")]
         public async Task<IActionResult> GetProductRequest(int ProductRequestId)
         {
@@ -37,6 +40,7 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:productRequest:write")]
         public async Task<IActionResult> CreateProductRequest(ProductRequestModel model)
         {
             ProductRequest request = new ProductRequest()
@@ -87,6 +91,7 @@ namespace Api.Controllers
         }
 
         [HttpDelete]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:productRequest:write")]
         [Route("{ProductRequestId}")]
         public async Task<IActionResult> DeleteProductRequest(int ProductRequestId)
         {

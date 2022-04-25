@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DriverController : ControllerBase
@@ -16,6 +17,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:driver:read")]
         public async Task<List<DriverModel>> GetDriversAsync()
         {
             return await _Dbcontext.Drivers.Select(x => new DriverModel
@@ -30,6 +32,7 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:driver:write")]
         public async Task<IActionResult> CreateDriverAsync(int EmployeeId)
         {
             Driver driver = new()
@@ -50,6 +53,7 @@ namespace Api.Controllers
         }
 
         [HttpDelete]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:driver:write")]
         public async Task<IActionResult> DeleteDriverAsync(int DriverId)
         {
             var driver = await _Dbcontext.Drivers.FirstOrDefaultAsync(x => x.DriverId == DriverId);

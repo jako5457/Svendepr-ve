@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    [Route("api/[controller]")]
     [Authorize]
+    [Route("api/[controller]")]
     [ApiController]
     public class EmployeeController : ControllerBase
     {
@@ -18,6 +18,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:employee:read")]
         [Route("list")]
         public async Task<List<Employee>> GetEmployees()
         {
@@ -25,6 +26,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:employee:read")]
         [Route("{Email}")]
         public async Task<IActionResult> GetEmployeeByEmailAsync(string Email)
         {
@@ -41,6 +43,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:employee:read")]
         [Route("Page/{Items}/{Page}")]
         public async Task<List<Employee>> GetEmployeePageAsync(int Items,int Page)
         {
@@ -51,6 +54,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:employee:read")]
         [Route("PageCount/{Items}")]
         public Task<int> GetEmployeePageCountAsync(int Items)
         {
@@ -58,6 +62,7 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:employee:write")]
         public async Task<IActionResult> CreateEmployeeAsync(EmployeeModel model)
         {
             if (model == null)
@@ -86,6 +91,7 @@ namespace Api.Controllers
         }
 
         [HttpPut]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:employee:write")]
         public async Task<IActionResult> EditEmployeeAsync(Employee employee)
         {
             try
@@ -102,6 +108,7 @@ namespace Api.Controllers
         }
 
         [HttpDelete]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:employee:write")]
         public async Task<IActionResult> DeleteEmployeeAsync(int EmployeeId)
         {
             try
