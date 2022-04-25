@@ -14,9 +14,9 @@ builder.Services.AddSwaggerGen(options =>
 {
     Dictionary<string,string> scopes = new Dictionary<string, string>();
 
-    scopes.Add("openid", "openid");
-    scopes.Add("profile", "profile");
-
+    scopes.Add("openid", "OpenId Connect");
+    scopes.Add("profile", "Profile");
+    #region Swagger scopes
     scopes.Add("company_read", "read company data");
     scopes.Add("company_write", "Edit/create company data");
     scopes.Add("driver_read", "Read driver information");
@@ -31,6 +31,7 @@ builder.Services.AddSwaggerGen(options =>
     scopes.Add("product_request_write", "Edit/create order requests");
     scopes.Add("warehouse_read", "Read warehouse information");
     scopes.Add("warehouse_write", "Edit/create warehouse information");
+    #endregion Swagger scopes
 
     var scheme = new OpenApiSecurityScheme
     {
@@ -83,6 +84,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
+        c.OAuthScopes("openid", "profile");
         c.OAuthClientId("web");
         c.OAuthClientSecret("websecret");
         c.OAuthUsePkce();
@@ -91,6 +93,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

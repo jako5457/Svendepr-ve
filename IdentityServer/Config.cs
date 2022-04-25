@@ -35,9 +35,6 @@ namespace IdentityServer
 
                 new ApiScope("warehouse_read", "Read warehouse information"),
                 new ApiScope("warehouse_write", "Edit/create warehouse information"),
-
-                new ApiScope("api_all_read","Read everything"),
-                new ApiScope("api_all_write","Write everything")
             };
 
         public static IEnumerable<Client> Clients => new List<Client>
