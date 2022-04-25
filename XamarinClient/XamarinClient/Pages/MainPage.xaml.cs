@@ -30,16 +30,16 @@ namespace XamarinClient
 
             var options = new OidcClientOptions
             {
-                Authority = "https://identityserver20220422094421.azurewebsites.net/",
-                ClientId = "Xamarin",
-                ClientSecret = "ThisIsAXamarinSecret",
-                Scope = "openid profile offline_access",
-                RedirectUri = "https://identityserver20220422094421.azurewebsites.net/callback",
+                Authority = "https://identityserversvende.azurewebsites.net/",
+                ClientId = "native",
+                ClientSecret = "nativesecret",
+                Scope = "openid profile Api1",
+                RedirectUri = "https://identityserversvende.azurewebsites.net/callback",
                 Browser = browser
             };
 
             _client = new OidcClient(options);
-            _apiClient.Value.BaseAddress = new Uri("https://identityserver20220422094421.azurewebsites.net/");
+            _apiClient.Value.BaseAddress = new Uri("https://identityserversvende.azurewebsites.net/");
         }
 
         private async void Login_Clicked(object sender, EventArgs e)

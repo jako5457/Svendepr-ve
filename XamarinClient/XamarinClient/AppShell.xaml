@@ -17,6 +17,13 @@
         </Tab>
     </FlyoutItem>
 
+    <FlyoutItem Title="My Profile"
+                Icon="monkey.png">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate pages:ProfilePage}" />
+        </Tab>
+    </FlyoutItem>
+
 
 
 </Shell>
