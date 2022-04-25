@@ -15,6 +15,18 @@ namespace XamarinClient
         public AppShell()
         {
             InitializeComponent();
+
+            MessagingCenter.Subscribe<AppShell>(this, "SwitchOn", (sender) =>
+            {
+                FlyOutMyProfile.IsEnabled = true;
+                FlyOutMyProfile.IsVisible = true;
+            });
+
+            MessagingCenter.Subscribe<AppShell>(this, "SwitchOff", (sender) =>
+            {
+                FlyOutMyProfile.IsEnabled = false;
+                FlyOutMyProfile.IsVisible = false;
+            });
         }
     }
 }

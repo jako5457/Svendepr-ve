@@ -8,6 +8,7 @@ using System.Text.Json;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XamarinClient.Helpers.UserHelpers;
 
 namespace XamarinClient
 {
@@ -16,6 +17,7 @@ namespace XamarinClient
     {
         OidcClient _client;
         LoginResult _result;
+
 
         Lazy<HttpClient> _apiClient = new Lazy<HttpClient>(() => new HttpClient());
 
@@ -55,6 +57,7 @@ namespace XamarinClient
             foreach (var claim in _result.User.Claims)
             {
                 sb.AppendFormat("{0}: {1}\n", claim.Type, claim.Value);
+                Application.Current.Properties[$"{claim.Type}"] = claim.Value;
             }
 
             sb.AppendFormat("\n{0}: {1}\n", "refresh token", _result?.RefreshToken ?? "none");
@@ -63,6 +66,30 @@ namespace XamarinClient
             OutputText.Text = sb.ToString();
 
             _apiClient.Value.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _result?.AccessToken ?? "");
+
+            Login.Text = "Logout";
+            Login.Clicked -= Login_Clicked;
+            Login.Clicked += LogutButtonClicked;
+
+            MessagingCenter.Send<AppShell>(new AppShell(), "SwitchOn");
+
+        }
+
+        async void LogutButtonClicked(object sender, EventArgs e)
+        {
+            OutputText.Text = "";
+
+            Login.Text = "Login";
+
+            Login.Clicked -= LogutButtonClicked;
+            Login.Clicked += Login_Clicked;
+
+            Application.Current.Properties.Clear();
+
+            MessagingCenter.Send<AppShell>(new AppShell(), "SwitchOff");
+
+            await _client.LogoutAsync(new LogoutRequest());
+
         }
 
         private async void CallApi_Clicked(object sender, EventArgs e)

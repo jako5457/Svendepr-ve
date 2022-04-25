@@ -17,7 +17,7 @@
         </Tab>
     </FlyoutItem>
 
-    <FlyoutItem Title="My Profile"
+    <FlyoutItem IsEnabled="False" IsVisible="False" x:Name="FlyOutMyProfile" Title="My Profile"
                 Icon="monkey.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate pages:ProfilePage}" />

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using IdentityModel.OidcClient;
+using IdentityModel.OidcClient.Browser;
+using Microsoft.AspNetCore.Authorization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +16,8 @@ namespace XamarinClient
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProfilePage : ContentPage
     {
+        OidcClient _client;
+
         public ProfilePage()
         {
             InitializeComponent();
@@ -21,9 +26,15 @@ namespace XamarinClient
 
             GetCurrentLocation();
 
+            
         }
         CancellationTokenSource cts;
 
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            lblUsername.Text = Application.Current.Properties["name"] as string;
+        }
 
         async Task GetCurrentLocation()
         {
@@ -53,6 +64,10 @@ namespace XamarinClient
             }
         }
 
+        async void LogutButtonClicked(object sender, EventArgs e)
+        {
+            await _client.LogoutAsync();
+        }
 
     }
 }

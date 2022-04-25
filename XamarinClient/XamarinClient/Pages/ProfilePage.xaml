@@ -17,7 +17,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Label x:Name="lblUsername" FontSize="18" Text="Test Driver" Grid.Column="1" Grid.Row="0"/>
+            <Label x:Name="lblUsername" FontSize="18" Grid.Column="1" Grid.Row="0"/>
 
             <Image x:Name="imgQRCode" Grid.Column="1" Grid.Row="1"/>
 
@@ -27,7 +27,6 @@
 
             <Button x:Name="btnMyOrders" Text="My Orders" BackgroundColor="LightBlue" Grid.Column="1" Grid.Row="3"/>
             
-            <Button x:Name="btnLogOut" Text="Log Out" BackgroundColor="Red" Grid.Column="1" Grid.Row="4" />
 
         </Grid>
     </ContentPage.Content>
