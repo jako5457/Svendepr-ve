@@ -32,9 +32,8 @@ namespace XamarinClient
             {
                 Authority = "https://identityserversvende.azurewebsites.net/",
                 ClientId = "native",
-                ClientSecret = "nativesecret",
-                Scope = "openid profile Api1",
-                RedirectUri = "https://identityserversvende.azurewebsites.net/callback",
+                Scope = "openid profile offline_access Api1",
+                RedirectUri = "com.companyname.xamarinclient://callback",
                 Browser = browser
             };
 
