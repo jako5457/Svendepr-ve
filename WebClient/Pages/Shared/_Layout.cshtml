@@ -1,4 +1,5 @@
 ﻿@using Helpers.UserHelpers;
+@using Helpers.Constants;
 
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +54,7 @@
                                             <a class="dropdown-item" asp-page="/Account/MyOrders">My Orders</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="https://localhost:5001/Identity/Account/Manage/index">My Account</a>
+                                            <a class="dropdown-item" href="@IdentityConst.IdentityServer/Identity/Account/Manage/index">My Account</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="dropdown-item" asp-area="" asp-page="/Privacy">Privacy</a>

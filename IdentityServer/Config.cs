@@ -49,18 +49,20 @@ namespace IdentityServer
             new Client
             {
                 ClientId = "native",
-                ClientSecrets = { new Secret("nativesecret".Sha256())},
+                RequireClientSecret = false,
+                //ClientSecrets = { new Secret("nativesecret".Sha256())},
                 AllowedGrantTypes = GrantTypes.Code,
                 AllowOfflineAccess = true,
 
-                RedirectUris = {"oidcxamarin101:/authenticated"},
-
+                RedirectUris = {"com.companyname.xamarinclient://callback"},
+                
                 PostLogoutRedirectUris = { "oidcxamarin101:/signout-callback-oidc" },
 
                 AllowedScopes = new List<string>
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
+                    IdentityServerConstants.StandardScopes.OfflineAccess,
                     "Api1"
                 }
             }
