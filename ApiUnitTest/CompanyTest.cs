@@ -24,9 +24,9 @@ namespace ApiUnitTest
         }
 
         [Theory]
-        [InlineData(10, 10)]
-        [InlineData(5, 5)]
-        [InlineData(97, 97)]
+        [InlineData(10, 12)]
+        [InlineData(5, 7)]
+        [InlineData(97, 99)]
         public async Task TestGet(int companies,int expectedcompanys)
         {
             await CreateCompaniesAsync(companies);

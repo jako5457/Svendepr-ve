@@ -6,8 +6,6 @@
 
         public int? EmployeeId { get; set; }
 
-        public string TrackingNumber { get; set; } = default!;
-
         public string DeliveryAddress { get; set; } = default!;
 
         public string DeliveryLocation { get; set; } = default!;

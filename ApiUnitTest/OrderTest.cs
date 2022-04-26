@@ -38,7 +38,6 @@ namespace ApiUnitTest
                 EmployeeId = 2,
                 DeliveryAddress = "Somewhere",
                 DeliveryLocation = "Around the corner",
-                TrackingNumber = "1234",
                 Products = new List<OrderProductModel>()
                 {
                     new OrderProductModel()

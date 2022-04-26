@@ -34,6 +34,8 @@ namespace ApiDataLayer
 
         public DbSet<WarehouseProduct> WarehouseProducts { get; set; } = default!;
 
+        public DbSet<TrackingInfo> TrackingInfos { get; set; } = default!;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProductCategory>().HasKey(c => new { c.CategoryId, c.ProductId });
@@ -71,6 +73,97 @@ namespace ApiDataLayer
                 .WithMany(c => c.Orders)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<Employee>().HasData(
+                new Employee
+                {
+                    EmployeeId = 1,
+                    CompanyId = 1,
+                    Name = "Bob Smith",
+                    Email = "BobSmith@email.com",
+                    Phone = "90593032",
+                },
+                new Employee
+                {
+                    EmployeeId = 2,
+                    CompanyId = 2,
+                    Name = "Alice Smith",
+                    Email = "AliceSmith@email.com",
+                    Phone = "90534563",
+                }
+            );
+
+            modelBuilder.Entity<Company>().HasData(
+                new Company {
+                    CompanyId = 1,
+                    Name = "Lilla kors",
+                    Address = "Padborg",
+                    Email = "Lillakors@email.com",
+                    Phone = "1234567",
+                    Zipcode = "6330"
+                },
+                new Company
+                {
+                    CompanyId = 2,
+                    Name = "Company",
+                    Address = "Somewhere",
+                    Email = "Comany@email.com",
+                    Phone = "1234567",
+                    Zipcode = "6330"
+                }
+            );
+
+            modelBuilder.Entity<Driver>().HasData(
+                new Driver()
+                {
+                    DriverId = 1,
+                    EmployeeId = 2
+                }
+            );
+
+            modelBuilder.Entity<Product>().HasData(
+                new Product()
+                {
+                    ProductId = 1,
+                    BuyPrice = 20,
+                    Name = "Toiletpapir",
+                    EAN = "169505",
+                    Description = "",
+                },
+                new Product()
+                {
+                    ProductId = 2,
+                    BuyPrice = 3000,
+                    Name = "Starlink satelite dish",
+                    EAN = "123456",
+                    Description = ""
+                }
+            );
+
+            Guid TrackingGuid = Guid.NewGuid();
+
+            modelBuilder.Entity<Order>().HasData(new Order()
+            {
+                OrderId = 1,
+                EmployeeId=1,
+                DriverId=1,
+                DeliveryAddress = "SomeWhere",
+                DeliveryLocation = "222222222",
+                TrackingInfoId = TrackingGuid,
+            });
+
+            modelBuilder.Entity<OrderProduct>().HasData(
+            new OrderProduct()
+            {
+                OrderId=1,
+                ProductId=1,
+                Amount=100,
+            },
+            new OrderProduct()
+            {
+                OrderId = 1,
+                ProductId = 2,
+                Amount = 2,
+            });
         }
 
     }
