@@ -1,5 +1,6 @@
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,8 +9,20 @@ string endpoint = "https://localhost:5001";
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
+
+TfRabbitmqService.MqttMode = true;
+TfRabbitmqService.MessageDebug = true;
+
+builder.Services.AddTfRabbitConnectionFactory(factory =>
+{
+    factory.HostName = builder.Configuration.GetValue<string>("RabbitMq:Host");
+    factory.UserName = builder.Configuration.GetValue<string>("RabbitMq:User");
+    factory.Password = builder.Configuration.GetValue<string>("RabbitMq:Password");
+    factory.Port = builder.Configuration.GetValue<int>("RabbitMq:Port");
+});
+
+builder.Services.AddTfRabbit();
+
 builder.Services.AddSwaggerGen(options =>
 {
     Dictionary<string,string> scopes = new Dictionary<string, string>();
@@ -76,6 +89,7 @@ builder.Services.AddAuthentication("Bearer")
     };
 });
 
+builder.Services.AddTopicFrameWork(Assembly.GetEntryAssembly());
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
