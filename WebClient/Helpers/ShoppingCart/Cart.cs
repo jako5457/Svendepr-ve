@@ -2,6 +2,11 @@
 {
     public class Cart
     {
+        public Cart()
+        {
+            items = new List<Item>();
+        }
+
         public ICollection<Item>? items { get; set; }
 
         public int CalTotalItems()

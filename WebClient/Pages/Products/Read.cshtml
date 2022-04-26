@@ -48,9 +48,11 @@
                         <a asp-page="/Products/Details" asp-route-id="@i" class="btn btn-light">
                             Details <img src="~/lib/bootstrap/Icons/zoom-in.svg" />
                         </a>
-                        <a href="#" class="btn btn-light float-right">
-                            Add to Cart <img src="~/lib/bootstrap/Icons/cart-plus.svg" />
-                        </a>
+                        <form method="post" asp-page-handler="Add" id="@i" >
+                            <button type="submit" class="btn btn-light float-right">
+                                Add to Cart <img src="~/lib/bootstrap/Icons/cart-plus.svg" />
+                            </button>
+                        </form>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">Last updated 3 mins ago</small>
