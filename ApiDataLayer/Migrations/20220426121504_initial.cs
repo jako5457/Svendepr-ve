@@ -56,6 +56,20 @@ namespace ApiDataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TrackingInfos",
+                columns: table => new
+                {
+                    TrackingInfoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Longitude = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Latitude = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TrackingInfos", x => x.TrackingInfoId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Employees",
                 columns: table => new
                 {
@@ -197,7 +211,7 @@ namespace ApiDataLayer.Migrations
                     DriverId = table.Column<int>(type: "int", nullable: true),
                     EmployeeId = table.Column<int>(type: "int", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TrackingNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TrackingInfoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DeliveryAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DeliveryLocation = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -267,6 +281,54 @@ namespace ApiDataLayer.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Companys",
+                columns: new[] { "CompanyId", "Address", "Email", "Name", "Phone", "Zipcode" },
+                values: new object[,]
+                {
+                    { 1, "Padborg", "Lillakors@email.com", "Lilla kors", "1234567", "6330" },
+                    { 2, "Somewhere", "Comany@email.com", "Company", "1234567", "6330" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "ProductId", "BuyPrice", "Description", "EAN", "Name" },
+                values: new object[,]
+                {
+                    { 1, 20.0, "", "169505", "Toiletpapir" },
+                    { 2, 3000.0, "", "123456", "Starlink satelite dish" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Employees",
+                columns: new[] { "EmployeeId", "CompanyId", "Email", "Name", "Phone" },
+                values: new object[] { 1, 1, "BobSmith@email.com", "Bob Smith", "90593032" });
+
+            migrationBuilder.InsertData(
+                table: "Employees",
+                columns: new[] { "EmployeeId", "CompanyId", "Email", "Name", "Phone" },
+                values: new object[] { 2, 2, "AliceSmith@email.com", "Alice Smith", "90534563" });
+
+            migrationBuilder.InsertData(
+                table: "Drivers",
+                columns: new[] { "DriverId", "EmployeeId" },
+                values: new object[] { 1, 2 });
+
+            migrationBuilder.InsertData(
+                table: "Orders",
+                columns: new[] { "OrderId", "CreatedDate", "DeliveryAddress", "DeliveryLocation", "DriverId", "EmployeeId", "TrackingInfoId" },
+                values: new object[] { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "SomeWhere", "222222222", 1, 1, new Guid("00000000-0000-0000-0000-000000000000") });
+
+            migrationBuilder.InsertData(
+                table: "OrderProduct",
+                columns: new[] { "OrderId", "ProductId", "Amount" },
+                values: new object[] { 1, 1, 100 });
+
+            migrationBuilder.InsertData(
+                table: "OrderProduct",
+                columns: new[] { "OrderId", "ProductId", "Amount" },
+                values: new object[] { 1, 2, 2 });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Drivers_EmployeeId",
                 table: "Drivers",
@@ -329,6 +391,9 @@ namespace ApiDataLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProductRequestProduct");
+
+            migrationBuilder.DropTable(
+                name: "TrackingInfos");
 
             migrationBuilder.DropTable(
                 name: "WarehouseProducts");

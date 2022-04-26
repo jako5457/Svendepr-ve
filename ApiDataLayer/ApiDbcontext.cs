@@ -87,7 +87,7 @@ namespace ApiDataLayer
                     EmployeeId = 2,
                     CompanyId = 2,
                     Name = "Alice Smith",
-                    Email = "BobSmith@email.com",
+                    Email = "AliceSmith@email.com",
                     Phone = "90534563",
                 }
             );
@@ -147,6 +147,7 @@ namespace ApiDataLayer
                 EmployeeId=1,
                 DriverId=1,
                 DeliveryAddress = "SomeWhere",
+                DeliveryLocation = "222222222",
                 TrackingInfoId = TrackingGuid,
             });
 
@@ -155,13 +156,13 @@ namespace ApiDataLayer
             {
                 OrderId=1,
                 ProductId=1,
-                Amount=10,
+                Amount=100,
             },
             new OrderProduct()
             {
                 OrderId = 1,
                 ProductId = 2,
-                Amount = 20,
+                Amount = 2,
             });
         }
 

@@ -70,6 +70,26 @@ namespace ApiDataLayer.Migrations
                     b.HasKey("CompanyId");
 
                     b.ToTable("Companys");
+
+                    b.HasData(
+                        new
+                        {
+                            CompanyId = 1,
+                            Address = "Padborg",
+                            Email = "Lillakors@email.com",
+                            Name = "Lilla kors",
+                            Phone = "1234567",
+                            Zipcode = "6330"
+                        },
+                        new
+                        {
+                            CompanyId = 2,
+                            Address = "Somewhere",
+                            Email = "Comany@email.com",
+                            Name = "Company",
+                            Phone = "1234567",
+                            Zipcode = "6330"
+                        });
                 });
 
             modelBuilder.Entity("ApiDataLayer.Entities.Driver", b =>
@@ -89,6 +109,13 @@ namespace ApiDataLayer.Migrations
                         .IsUnique();
 
                     b.ToTable("Drivers");
+
+                    b.HasData(
+                        new
+                        {
+                            DriverId = 1,
+                            EmployeeId = 2
+                        });
                 });
 
             modelBuilder.Entity("ApiDataLayer.Entities.Employee", b =>
@@ -119,6 +146,24 @@ namespace ApiDataLayer.Migrations
                     b.HasIndex("CompanyId");
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            EmployeeId = 1,
+                            CompanyId = 1,
+                            Email = "BobSmith@email.com",
+                            Name = "Bob Smith",
+                            Phone = "90593032"
+                        },
+                        new
+                        {
+                            EmployeeId = 2,
+                            CompanyId = 2,
+                            Email = "AliceSmith@email.com",
+                            Name = "Alice Smith",
+                            Phone = "90534563"
+                        });
                 });
 
             modelBuilder.Entity("ApiDataLayer.Entities.Order", b =>
@@ -146,9 +191,8 @@ namespace ApiDataLayer.Migrations
                     b.Property<int?>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<string>("TrackingNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("TrackingInfoId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("OrderId");
 
@@ -157,6 +201,18 @@ namespace ApiDataLayer.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            OrderId = 1,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DeliveryAddress = "SomeWhere",
+                            DeliveryLocation = "222222222",
+                            DriverId = 1,
+                            EmployeeId = 1,
+                            TrackingInfoId = new Guid("00000000-0000-0000-0000-000000000000")
+                        });
                 });
 
             modelBuilder.Entity("ApiDataLayer.Entities.OrderProduct", b =>
@@ -175,6 +231,20 @@ namespace ApiDataLayer.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("OrderProduct");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            OrderId = 1,
+                            Amount = 100
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            OrderId = 1,
+                            Amount = 2
+                        });
                 });
 
             modelBuilder.Entity("ApiDataLayer.Entities.Product", b =>
@@ -203,6 +273,24 @@ namespace ApiDataLayer.Migrations
                     b.HasKey("ProductId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            BuyPrice = 20.0,
+                            Description = "",
+                            EAN = "169505",
+                            Name = "Toiletpapir"
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            BuyPrice = 3000.0,
+                            Description = "",
+                            EAN = "123456",
+                            Name = "Starlink satelite dish"
+                        });
                 });
 
             modelBuilder.Entity("ApiDataLayer.Entities.ProductCategory", b =>
@@ -261,6 +349,28 @@ namespace ApiDataLayer.Migrations
                     b.HasIndex("ProductRequestId");
 
                     b.ToTable("ProductRequestProduct");
+                });
+
+            modelBuilder.Entity("ApiDataLayer.Entities.TrackingInfo", b =>
+                {
+                    b.Property<Guid>("TrackingInfoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Latitude")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Longitude")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TrackingInfoId");
+
+                    b.ToTable("TrackingInfos");
                 });
 
             modelBuilder.Entity("ApiDataLayer.Entities.Warehouse", b =>
@@ -414,7 +524,7 @@ namespace ApiDataLayer.Migrations
                         .IsRequired();
 
                     b.HasOne("ApiDataLayer.Entities.ProductRequest", "ProductRequest")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("ProductRequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -483,6 +593,11 @@ namespace ApiDataLayer.Migrations
             modelBuilder.Entity("ApiDataLayer.Entities.Product", b =>
                 {
                     b.Navigation("Categories");
+                });
+
+            modelBuilder.Entity("ApiDataLayer.Entities.ProductRequest", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("ApiDataLayer.Entities.Warehouse", b =>
