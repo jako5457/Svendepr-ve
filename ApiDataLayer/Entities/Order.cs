@@ -17,7 +17,7 @@ namespace ApiDataLayer.Entities
 
         public DateTime CreatedDate { get; set; }
 
-        public string TrackingNumber { get; set; } = default!;
+        public Guid TrackingInfoId { get; set; } = default!;
 
         public string DeliveryAddress { get; set; } = default!;
 
