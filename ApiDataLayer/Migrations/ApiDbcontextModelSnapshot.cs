@@ -211,7 +211,7 @@ namespace ApiDataLayer.Migrations
                             DeliveryLocation = "222222222",
                             DriverId = 1,
                             EmployeeId = 1,
-                            TrackingInfoId = new Guid("00000000-0000-0000-0000-000000000000")
+                            TrackingInfoId = new Guid("38f5f83b-7ad4-4a36-8253-fc76e4dcbd28")
                         });
                 });
 

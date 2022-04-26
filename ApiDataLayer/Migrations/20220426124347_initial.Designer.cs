@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiDataLayer.Migrations
 {
     [DbContext(typeof(ApiDbcontext))]
-    [Migration("20220426121504_initial")]
+    [Migration("20220426124347_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -213,7 +213,7 @@ namespace ApiDataLayer.Migrations
                             DeliveryLocation = "222222222",
                             DriverId = 1,
                             EmployeeId = 1,
-                            TrackingInfoId = new Guid("00000000-0000-0000-0000-000000000000")
+                            TrackingInfoId = new Guid("38f5f83b-7ad4-4a36-8253-fc76e4dcbd28")
                         });
                 });
 

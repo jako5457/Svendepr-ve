@@ -317,7 +317,7 @@ namespace ApiDataLayer.Migrations
             migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "OrderId", "CreatedDate", "DeliveryAddress", "DeliveryLocation", "DriverId", "EmployeeId", "TrackingInfoId" },
-                values: new object[] { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "SomeWhere", "222222222", 1, 1, new Guid("00000000-0000-0000-0000-000000000000") });
+                values: new object[] { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "SomeWhere", "222222222", 1, 1, new Guid("38f5f83b-7ad4-4a36-8253-fc76e4dcbd28") });
 
             migrationBuilder.InsertData(
                 table: "OrderProduct",

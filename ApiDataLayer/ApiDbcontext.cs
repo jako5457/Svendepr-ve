@@ -139,7 +139,7 @@ namespace ApiDataLayer
                 }
             );
 
-            Guid TrackingGuid = new Guid();
+            Guid TrackingGuid = Guid.NewGuid();
 
             modelBuilder.Entity<Order>().HasData(new Order()
             {

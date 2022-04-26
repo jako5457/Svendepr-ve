@@ -49,9 +49,9 @@ namespace ApiUnitTest
 
         [Theory]
         [InlineData(1, 10, 1)]
-        [InlineData(5, 2, 3)]
-        [InlineData(10, 5, 2)]
-        [InlineData(100, 10, 10)]
+        [InlineData(5, 2, 4)]
+        [InlineData(10, 5, 3)]
+        [InlineData(100, 10, 11)]
         public async Task TestGetPageCount(int products, int itemsPerPage, int expectedpages)
         {
             await CreateProductsAsync(products);
@@ -64,10 +64,10 @@ namespace ApiUnitTest
         }
 
         [Theory]
-        [InlineData(1, 10, 1, 1)]
+        [InlineData(1, 10, 1, 3)]
         [InlineData(5, 2, 2, 2)]
         [InlineData(10, 5, 2, 5)]
-        [InlineData(97, 10, 10, 7)]
+        [InlineData(97, 10, 10, 9)]
         public async Task TestGetPagination(int products, int itemsPerPage, int page, int ExpectedItemsOnPage)
         {
             await CreateProductsAsync(products);
