@@ -13,6 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 </head>
 <body>
     <header>
@@ -38,13 +39,18 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">@User?.Claims.GetValueFromClaim("name")</a>
                             </li>
-                            <li>
-                                <form asp-page="/Account/Logout" method="post">
-                                    <button class="btn btn-light" type="submit">
-                                        Log out
-                                        <img src="~/lib/bootstrap/Icons/box-arrow-right.svg" />
+                            <li class="nav-item">
+                                <div class="btn-group">
+                                    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="~/lib/bootstrap/Icons/cart.svg" class="text-light" alt="Bootstrap" width="24" height="24" />
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            10
+                                        </span>
                                     </button>
-                                </form>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <li><h6 class="dropdown-header">Products:</h6></li>
+                                    </ul>
+                                </div>
                             </li>
                             <li class="nav-item">
                                 <div class="btn-group">
@@ -59,8 +65,17 @@
                                         <li>
                                             <a class="dropdown-item" href="@IdentityConst.IdentityServer/Identity/Account/Manage/index">My Account</a>
                                         </li>
-                                        <li class="nav-item">
+                                        <li>
                                             <a class="dropdown-item" asp-area="" asp-page="/Privacy">Privacy</a>
+                                        </li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li class="nav-item text-center">
+                                            <form asp-page="/Account/Logout" method="post">
+                                                <button class="btn btn-light" type="submit">
+                                                    Log out
+                                                    <img src="~/lib/bootstrap/Icons/box-arrow-right.svg" />
+                                                </button>
+                                            </form>
                                         </li>
                                     </ul>
                                 </div>
