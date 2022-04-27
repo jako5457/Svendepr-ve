@@ -8,8 +8,7 @@
 <div class="container">
     <div class="row">
         <div class="col-8">
-            <h3 class="text-center"></h3>
-            <div class="card w-100">
+            <div class="card w-100 shadow">
                 <div class="card-body">
                     <div class="card-header row">
                         <div class="text-start col-4">
@@ -72,21 +71,56 @@
             </div>
         </div>
         <div class="col-4">
-            <div class="card w-100">
+            <div class="card w-100 shadow">
                 <div class="card-body">
-                    <div class="card-header row">
-                        <div class="text-start col-4">
-                            Item
-                        </div>
-                        <div class="col-6">
-                            Description
-                        </div>
-                        <div class="text-end col-2">
-                            Amount
-                        </div>
+                    <div class="card-header">
+                        Destination
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-groupe">
+                                <div class="row mt-1">
+                                    <div class="col">
+                                        <label class="form-label">Delivery Address</label>
+                                        <input id="ship-address" name="ship-address" placeholder="Delivery Address" required autocomplete="off" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row mt-1">
+                                    <div class="col">
+                                        <label class="form-label">Apartment, unit, suite, or floor #</label>
+                                        <input id="address2" name="address2" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row mt-1">
+                                    <div class="col">
+                                        <label class="form-label">City*</label>
+                                        <input id="locality" name="locality" required class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row mt-1">
+                                    <div class="col">
+                                        <label class="form-label">State/Province*</label>
+                                        <input id="state" name="state" required  class="form-control">
+                                    </div>
+                                    <div class="col mt-1">
+                                        <label class="form-label">Postal code*</label>
+                                        <input id="postcode" name="postcode" required class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mt-1">
+                                        <label class="form-label">Country/Region*</label>
+                                        <input id="country" name="country" required class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-outline-secondary">Save address</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhShiSbwyU-t0uvBojMmt29E0lrFYx3jA&callback=initAutocomplete&libraries=places&v=weekly" defer></script>
+<script type="text/javascript" src="~/js/AutofillGoogle.js"></script>

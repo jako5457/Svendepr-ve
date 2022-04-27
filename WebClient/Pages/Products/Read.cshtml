@@ -9,7 +9,7 @@
         <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button text-center btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <button class="accordion-button text-center btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         Filtering
                     </button>
                 </h2>
@@ -45,14 +45,20 @@
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <a asp-page="/Products/Details" asp-route-id="@i" class="btn btn-light">
-                            Details <img src="~/lib/bootstrap/Icons/zoom-in.svg" />
-                        </a>
-                        <form method="post" asp-page-handler="Add" asp-route-id="@i" asp-route-name="Hej Item" >
-                            <button type="submit" class="btn btn-light float-right">
-                                Add to Cart <img src="~/lib/bootstrap/Icons/cart-plus.svg" />
-                            </button>
-                        </form>
+                        <div class="row">
+                            <div class="col-6">
+                                <a asp-page="/Products/Details" asp-route-id="@i" class="btn btn-outline-secondary w-100">
+                                    Details <img src="~/lib/bootstrap/Icons/zoom-in.svg" />
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <form method="post" asp-page-handler="Add" asp-route-id="@i" asp-route-name="Hej Item">
+                                    <button type="submit" class="btn btn-outline-secondary w-100">
+                                        Add <img src="~/lib/bootstrap/Icons/cart-plus.svg" />
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">Last updated 3 mins ago</small>
