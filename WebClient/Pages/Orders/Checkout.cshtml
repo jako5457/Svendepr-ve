@@ -39,8 +39,10 @@
                                                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                                             </div>
                                         </div>
-                                        <div class="col-2 text-end">
-                                            @item.amount
+                                        <div class="col-2 text-center">
+                                            <span style="position:absolute;top:45%;">
+                                                Qty: @item.amount
+                                            </span>
                                         </div>
                                     </div>
                                 </li>
@@ -55,7 +57,7 @@
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-9">
-                                    Total:
+                                    Total Qty:
                                 </div>
                                 <div class="col-3 text-end">
                                     <span style="font-weight: 800"> @Model.shoppingCart.GetCartItemsCount() </span>
@@ -114,7 +116,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-outline-secondary">Save address</button>
+                            <button type="button" class="btn btn-outline-secondary mt-2">Save address</button>
                         </form>
                     </div>
                 </div>
