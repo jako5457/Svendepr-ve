@@ -5,7 +5,6 @@
 
     <StackLayout Padding="20">
         <Button Text="Login" x:Name="Login" Padding="20" />
-        <Button Text="Call Api" x:Name="CallApi" Padding="20" />
         <Label x:Name="OutputText"
                 VerticalOptions="EndAndExpand" 
                 HorizontalOptions="FillAndExpand" />

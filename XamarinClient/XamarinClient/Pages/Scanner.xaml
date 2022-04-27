@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             x:Class="XamarinClient.Scanner">
+    <ContentPage.Content>
+        <StackLayout>
+            <zxing:ZXingScannerView x:Name="zxing" VerticalOptions="FillAndExpand"/>
+            <Button x:Name="btnSeeOrder" Clicked="btnSeeOrder_Clicked" IsEnabled="False" Text="See Order" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

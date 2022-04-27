@@ -1,22 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using XamarinClient.Pages;
 using XamarinClient.ViewModels;
 
 namespace XamarinClient
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Orders : ContentPage
+    public partial class MyOrders : ContentPage
     {
         public ObservableCollection<TestOrder> OrderList { get; set; }
 
-        public Orders()
+        public MyOrders(string id)
         {
             InitializeComponent();
 
@@ -30,23 +30,15 @@ namespace XamarinClient
             };
 
             MyListView.ItemsSource = OrderList;
+
+
         }
 
-        async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            if (e.Item == null)
-                return;
-
-            await DisplayAlert("Item Tapped", "An item was tapped.", "OK");
-
-            //Deselect Item
-            ((ListView)sender).SelectedItem = null;
-        }
-
-        async void DetailsButtonClicked (object sender, EventArgs e)
+        private void btnDelivered_Clicked(object sender, EventArgs e)
         {
             var testorder = (TestOrder)((Button)sender).CommandParameter;
-            await Navigation.PushAsync(new OrderDetails(testorder.Id));
+            
+
         }
     }
 }

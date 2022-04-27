@@ -13,11 +13,11 @@ namespace XamarinClient.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OrderDetails : ContentPage
     {
-        public OrderDetails()
+        public OrderDetails(int id)
         {
             InitializeComponent();
 
-            TestOrder order = new TestOrder() { Id = 1, Name = "Test Details", DeliveryAddress = "Ukraine", Status = 1, Driver = "Martin \"hurtig\" Høj" };
+            TestOrder order = new TestOrder() { Id = id, Name = "Test Details", DeliveryAddress = "Ukraine", Status = 1 };
             this.BindingContext = order;
         }
     }

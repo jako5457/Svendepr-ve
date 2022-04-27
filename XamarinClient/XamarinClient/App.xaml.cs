@@ -1,5 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
+using Xamarin.Forms.Background;
 using Xamarin.Forms.Xaml;
 
 namespace XamarinClient
@@ -15,6 +16,9 @@ namespace XamarinClient
 
         protected override void OnStart()
         {
+            BackgroundAggregatorService.Add(() => new TrackingService());
+
+            BackgroundAggregatorService.StartBackgroundService();
         }
 
         protected override void OnSleep()

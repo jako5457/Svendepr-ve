@@ -22,10 +22,10 @@
             <Image x:Name="imgQRCode" Grid.Column="1" Grid.Row="1"/>
 
             <Label x:Name="lblCurrentLocation"  FontSize="18" Text="Current Location" Grid.Column="0" Grid.Row="2"/>
-            <Label x:Name="lblXPosition" FontSize="18" Text="" Grid.Column="1" Grid.Row="2"/>
-            <Label x:Name="lblYPosition" FontSize="18" Text="" Grid.Column="2" Grid.Row="2"/>
+            <Label x:Name="lblYPosition" FontSize="18" Text="" Grid.Column="1" Grid.Row="2"/>
+            <Label x:Name="lblXPosition" FontSize="18" Text="" Grid.Column="2" Grid.Row="2"/>
 
-            <Button x:Name="btnMyOrders" Text="My Orders" BackgroundColor="LightBlue" Grid.Column="1" Grid.Row="3"/>
+            <Button x:Name="btnMyOrders" Clicked="btnMyOrders_Clicked" Text="My Orders" BackgroundColor="LightBlue" Grid.Column="1" Grid.Row="3"/>
             
 
         </Grid>

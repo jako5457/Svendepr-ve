@@ -24,6 +24,13 @@
         </Tab>
     </FlyoutItem>
 
+    <FlyoutItem IsEnabled="False" IsVisible="False" x:Name="FlyOutScanner" Title="Scanner"
+                Icon="monkey.png">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate pages:Scanner}" />
+        </Tab>
+    </FlyoutItem>
+
 
 
 </Shell>

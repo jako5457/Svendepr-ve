@@ -53,7 +53,7 @@ namespace XamarinClient
 
 
                     }
-                    await Task.Delay(60000); // 1 minut
+                    await Task.Delay(3000); // 1 minut
                 }
 
             }
@@ -64,10 +64,9 @@ namespace XamarinClient
             }
         }
 
-        async void LogutButtonClicked(object sender, EventArgs e)
+        private void btnMyOrders_Clicked(object sender, EventArgs e)
         {
-            await _client.LogoutAsync();
+            Navigation.PushAsync(new MyOrders(Application.Current.Properties["sub"].ToString()));
         }
-
     }
 }

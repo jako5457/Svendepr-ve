@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.Json;
 
 using Xamarin.Forms;
+using Xamarin.Forms.Background;
 using Xamarin.Forms.Xaml;
 using XamarinClient.Helpers.UserHelpers;
 
@@ -26,7 +27,6 @@ namespace XamarinClient
             InitializeComponent();
 
             Login.Clicked += Login_Clicked;
-            CallApi.Clicked += CallApi_Clicked;
 
             var browser = DependencyService.Get<IBrowser>();
 
@@ -34,7 +34,7 @@ namespace XamarinClient
             {
                 Authority = "https://identityserversvende.azurewebsites.net/",
                 ClientId = "native",
-                Scope = "openid profile offline_access Api1",
+                Scope = "openid profile offline_access",
                 RedirectUri = "com.companyname.xamarinclient://callback",
                 Browser = browser
             };
@@ -73,6 +73,8 @@ namespace XamarinClient
 
             MessagingCenter.Send<AppShell>(new AppShell(), "SwitchOn");
 
+            
+
         }
 
         async void LogutButtonClicked(object sender, EventArgs e)
@@ -90,21 +92,7 @@ namespace XamarinClient
 
             await _client.LogoutAsync(new LogoutRequest());
 
-        }
 
-        private async void CallApi_Clicked(object sender, EventArgs e)
-        {
-
-            var result = await _apiClient.Value.GetAsync("api/test");
-
-            if (result.IsSuccessStatusCode)
-            {
-                OutputText.Text = JsonDocument.Parse(await result.Content.ReadAsStringAsync()).RootElement.GetRawText();
-            }
-            else
-            {
-                OutputText.Text = result.ReasonPhrase;
-            }
         }
     }
 }

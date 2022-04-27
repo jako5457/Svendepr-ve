@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="XamarinClient.Orders">
+             x:Class="XamarinClient.MyOrders">
     <ListView x:Name="MyListView"
             ItemsSource="{Binding Items}"
-            ItemTapped="Handle_ItemTapped"
             CachingStrategy="RecycleElement"
             RowHeight="60">
         <ListView.ItemTemplate>
@@ -18,16 +17,32 @@
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
 
 
                         <Label Text="{Binding Name}" FontSize="18" Grid.Column="0" Grid.Row="0" />
                         <Label Text="{Binding DeliveryAddress}" FontSize="16" Grid.Column="0" Grid.Row="1"  />
-                        <Button Text="Details" Clicked="DetailsButtonClicked" CommandParameter="{Binding .}" HorizontalOptions="End" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
+                        <Button x:Name="btnDelivered" Text="Delivered" Clicked="btnDelivered_Clicked" CommandParameter="{Binding .}"  HorizontalOptions="End" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
+
+                        
 
                     </Grid>
                 </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label x:Name="lblSubId"/>
+
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>

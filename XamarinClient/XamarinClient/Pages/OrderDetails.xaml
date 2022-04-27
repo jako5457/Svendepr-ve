@@ -25,12 +25,9 @@
                    
             <Label FontSize="18" Text="Deliver To:" Grid.Column="0" Grid.Row="2"/>
             <Label FontSize="18" Text="{Binding DeliveryAddress, Mode=OneWay}" Grid.Column="2" Grid.Row="2" />
-                   
-            <Label FontSize="18" Text="Driver Name:" Grid.Column="0" Grid.Row="3"/>
-            <Label FontSize="18" Text="{Binding Driver, Mode=OneWay}" Grid.Column="2" Grid.Row="3"/>
-                   
-            <Label FontSize="18" Text="Order Status:" Grid.Column="0" Grid.Row="4"/>
-            <Label FontSize="18" Text="{Binding Status, Mode=OneWay}" Grid.Column="2" Grid.Row="4"/>
+
+            <Label FontSize="18" Text="Order Status:" Grid.Column="0" Grid.Row="3"/>
+            <Label FontSize="18" Text="{Binding Status, Mode=OneWay}" Grid.Column="2" Grid.Row="3"/>
 
             <Button Text="Take Order" Grid.Column="1" Grid.Row="5"/>
 

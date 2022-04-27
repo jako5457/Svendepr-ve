@@ -20,12 +20,18 @@ namespace XamarinClient
             {
                 FlyOutMyProfile.IsEnabled = true;
                 FlyOutMyProfile.IsVisible = true;
+
+                FlyOutScanner.IsEnabled = true;
+                FlyOutScanner.IsVisible = true;
             });
 
             MessagingCenter.Subscribe<AppShell>(this, "SwitchOff", (sender) =>
             {
                 FlyOutMyProfile.IsEnabled = false;
                 FlyOutMyProfile.IsVisible = false;
+
+                FlyOutScanner.IsEnabled = false;
+                FlyOutScanner.IsVisible = false;
             });
         }
     }
