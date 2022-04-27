@@ -14,7 +14,7 @@ namespace WebClient.Helpers.Api
             _configuration = configuration;
         }
 
-        public async Task<T> GetTAsync<T>(HttpMethod method, string url, string accessToken)
+        public async Task<T?> GetTAsync<T>(HttpMethod method, string url, string accessToken)
         {
             try
             {

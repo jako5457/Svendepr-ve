@@ -44,7 +44,6 @@ namespace IdentityServer
                 ClientId = "client",
                 ClientSecrets = { new Secret("secret".Sha256())},
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
-                AllowedScopes = {"Api1"}
             },
             new Client
             {
@@ -92,14 +91,13 @@ namespace IdentityServer
 
                 RedirectUris = {"com.companyname.xamarinclient://callback"},
                 
-                PostLogoutRedirectUris = { "oidcxamarin101:/signout-callback-oidc" },
+                PostLogoutRedirectUris = { "com.companyname.xamarinclient://callback" },
 
                 AllowedScopes = new List<string>
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.OfflineAccess,
-                    "Api1"
                 }
             }
         };

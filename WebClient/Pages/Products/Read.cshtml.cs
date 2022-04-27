@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebClient.Helpers.Api;
+using WebClient.Helpers.Constants;
 using WebClient.Helpers.Pagenation;
+using WebClient.Helpers.ShoppingCart;
 
 namespace WebClient.Pages.Products
 {
@@ -15,13 +17,17 @@ namespace WebClient.Pages.Products
         public int Currentpage { get; set; } //Required for pagenation
         private IApiCaller apiCaller { get; set; }
 
-        public async Task OnGetAsync(string kategory, int? currentpage)
+        public void OnGetAsync(int? currentpage)
         {
             Currentpage = currentpage.GetValueOrDefault(); //Required for pagenation
 
-            //SomeList = await apiCaller.GetTAsync<List<Root>>(HttpMethod.Get, "/users", "");
+        }
 
-            var mystring = "";
+        public async Task<IActionResult> OnPostAdd(string id, string name)
+        {
+            ShoppingCart shoppingCart = new ShoppingCart(HttpContext);
+            shoppingCart.AddItem(new Item { Id = id, amount = 1, Name = name});
+            return RedirectToPage();
         }
     }
 }

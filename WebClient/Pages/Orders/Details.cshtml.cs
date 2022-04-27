@@ -11,6 +11,8 @@ namespace WebClient.Pages.Orders
         {
             //Get Order Details
 
+            var claims = HttpContext.User.Claims;
+
             ViewData["Title"] = $"Details - {id}";
 
             trackingid = id;
