@@ -20,7 +20,7 @@ namespace Api.Controllers
         [Route("{TrackingCode}")]
         public async Task<List<TrackingInfo>> GetTrackingInfos(string TrackingCode)
         {
-            return await _Dbcontext.TrackingInfos.Where(ti => ti.TrackingInfoId.ToString() == TrackingCode).ToListAsync();
+            return await _Dbcontext.TrackingInfos.Where(ti => ti.TrackingCode.ToString() == TrackingCode).ToListAsync();
         } 
     }
 }

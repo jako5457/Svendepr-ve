@@ -99,8 +99,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.OAuthScopes("openid", "profile");
-        c.OAuthClientId("web");
-        c.OAuthClientSecret("websecret");
+        c.OAuthClientId("Api");
+        c.OAuthClientSecret("Apisecret");
         c.OAuthUsePkce();
     });
 }
