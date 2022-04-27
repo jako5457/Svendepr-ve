@@ -44,7 +44,6 @@ namespace IdentityServer
                 ClientId = "client",
                 ClientSecrets = { new Secret("secret".Sha256())},
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
-                AllowedScopes = {"Api1"}
             },
             new Client
             {
@@ -99,7 +98,6 @@ namespace IdentityServer
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.OfflineAccess,
-                    "Api1"
                 }
             }
         };
