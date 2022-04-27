@@ -51,6 +51,43 @@ namespace IdentityServer
                 ClientSecrets = {new Secret("websecret".Sha256())},
                 AllowedGrantTypes = GrantTypes.Code,
                 // where to redirect to after login
+                RedirectUris = { "https://localhost:5002/signin-oidc" },
+
+                // where to redirect to after logout
+                PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc" },
+
+                AllowOfflineAccess = true,
+
+                AllowedScopes = new List<string>
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile,
+                    IdentityServerConstants.StandardScopes.OfflineAccess,
+                    //"company_read",
+                    //"company_write",
+                    //"driver_read",
+                    //"driver_write",
+                    //"employee_read",
+                    //"employee_write",
+                    //"order_read",
+                    //"order_write",
+                    //"product_read",
+                    //"product_write",
+                    //"product_request_read",
+                    //"product_request_write",
+                    //"warehouse_read",
+                    //"warehouse_write",
+                    //"api_all_read",
+                    //"api_all_write",
+                }
+
+            },
+            new Client
+            {
+                ClientId = "Api",
+                ClientSecrets = {new Secret("Apisecret".Sha256())},
+                AllowedGrantTypes = GrantTypes.Code,
+                // where to redirect to after login
                 RedirectUris = { "https://localhost:7039/swagger/oauth2-redirect.html" },
 
                 // where to redirect to after logout
@@ -62,6 +99,7 @@ namespace IdentityServer
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
+                    IdentityServerConstants.StandardScopes.OfflineAccess,
                     "company_read",
                     "company_write",
                     "driver_read",

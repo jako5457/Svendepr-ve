@@ -17,7 +17,7 @@ namespace WebClient.Pages.Products
         public int Currentpage { get; set; } //Required for pagenation
         private IApiCaller apiCaller { get; set; }
 
-        public void OnGetAsync(int? currentpage)
+        public async Task OnGetAsync(int? currentpage)
         {
             Currentpage = currentpage.GetValueOrDefault(); //Required for pagenation
 
@@ -26,7 +26,7 @@ namespace WebClient.Pages.Products
         public async Task<IActionResult> OnPostAdd(string id, string name)
         {
             ShoppingCart shoppingCart = new ShoppingCart(HttpContext);
-            shoppingCart.AddItem(new Item { Id = id, amount = 1, Name = name});
+            shoppingCart.AddItem(new Item { Id = id, amount = 1, name = name});
             return RedirectToPage();
         }
     }

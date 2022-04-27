@@ -1,4 +1,5 @@
-﻿@model WebClient.Pages.Shared._WebCartModel
+﻿@using WebClient.Helpers.ShoppingCart
+@model WebClient.Pages.Shared._WebCartModel
 @{
 }
 
@@ -6,20 +7,26 @@
     <div class="btn-group">
         <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="~/lib/bootstrap/Icons/cart.svg" class="text-light" alt="Bootstrap" width="24" height="24" />
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                @Model.GetCartItemsCount()
-            </span>
+            @if (Model.shoppingCart.mycart.items.Any())
+            {
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    @Model.shoppingCart.GetCartItemsCount()
+                </span>           
+            }
         </button>
         <ul class="dropdown-menu list-group-flush" aria-labelledby="dropdownMenuButton">
-            @foreach (var item in Model.MyCart?.items)
+            @foreach (Item item in Model.shoppingCart.mycart.items)
             {
-                <a asp-page="/Products/Details" asp-route-id="@item.Id">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        @item.Name
-                        <span class="badge badge-primary badge-pill">@item.amount</span>
-                    </li>
+                <a class="list-group-item list-group-item-action flex-column align-items-start " asp-page="/Products/Details" asp-route-id="@item.Id">
+                    @item.name
+                    <span class="badge badge-primary rounded-pill bg-info">@item.amount</span>
                 </a>
             }
+            <li class="list-group-item list-group-item-action flex-column">
+                <a asp-page="/Orders/Checkout">
+                    CheckOut
+                </a>
+            </li>
         </ul>
     </div>
 </li>

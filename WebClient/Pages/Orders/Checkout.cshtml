@@ -1,0 +1,92 @@
+﻿@page
+@using WebClient.Helpers.ShoppingCart
+@model WebClient.Pages.Orders.CheckoutModel
+@{
+    ViewData["Title"] = "CheckOut";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <h3 class="text-center"></h3>
+            <div class="card w-100">
+                <div class="card-body">
+                    <div class="card-header row">
+                        <div class="text-start col-4">
+                            Item
+                        </div>
+                        <div class="col-6">
+                            Description
+                        </div>
+                        <div class="text-end col-2">
+                            Amount
+                        </div>
+                    </div>
+
+                    <ul class="list-group list-group-flush">
+                        @if (Model.shoppingCart.mycart.items.Any())
+                        {
+                            @foreach (Item? item in Model?.shoppingCart?.ListItems())
+                            {
+                                <li class="list-group-item">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <img src="~/images/placeholder-image.png" class="img-fluid rounded-start center-block" alt="...">
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="card-body">
+                                                <h5 class="card-title">@item.name</h5>
+                                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-2 text-end">
+                                            @item.amount
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="list-group-item text-center">
+                                <p>Cart is empty, find some products <a asp-page="/Products/Read">here</a></p>
+                            </li>
+                        }
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-9">
+                                    Total:
+                                </div>
+                                <div class="col-3 text-end">
+                                    <span style="font-weight: 800"> @Model.shoppingCart.GetCartItemsCount() </span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="card-footer text-center text-muted">
+                        @DateTime.Now.ToLongDateString()
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card w-100">
+                <div class="card-body">
+                    <div class="card-header row">
+                        <div class="text-start col-4">
+                            Item
+                        </div>
+                        <div class="col-6">
+                            Description
+                        </div>
+                        <div class="text-end col-2">
+                            Amount
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
