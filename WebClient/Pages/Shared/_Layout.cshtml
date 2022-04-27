@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebClient.styles.css" asp-append-version="true" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 </head>
 <body>
     <header>
@@ -35,14 +39,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">@User?.Claims.GetValueFromClaim("name")</a>
                             </li>
-                            <li>
-                                <form asp-page="/Account/Logout" method="post">
-                                    <button class="btn btn-light" type="submit">
-                                        Log out
-                                        <img src="~/lib/bootstrap/Icons/box-arrow-right.svg" />
-                                    </button>
-                                </form>
-                            </li>
+                            <partial name="_WebCart" model="new _WebCartModel(@Context)"/>
                             <li class="nav-item">
                                 <div class="btn-group">
                                     <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -56,8 +53,17 @@
                                         <li>
                                             <a class="dropdown-item" href="@IdentityConst.IdentityServer/Identity/Account/Manage/index">My Account</a>
                                         </li>
-                                        <li class="nav-item">
+                                        <li>
                                             <a class="dropdown-item" asp-area="" asp-page="/Privacy">Privacy</a>
+                                        </li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li class="nav-item text-center">
+                                            <form asp-page="/Account/Logout" method="post">
+                                                <button class="btn btn-light" type="submit">
+                                                    Log out
+                                                    <img src="~/lib/bootstrap/Icons/box-arrow-right.svg" />
+                                                </button>
+                                            </form>
                                         </li>
                                     </ul>
                                 </div>

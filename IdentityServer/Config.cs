@@ -92,7 +92,7 @@ namespace IdentityServer
 
                 RedirectUris = {"com.companyname.xamarinclient://callback"},
                 
-                PostLogoutRedirectUris = { "oidcxamarin101:/signout-callback-oidc" },
+                PostLogoutRedirectUris = { "com.companyname.xamarinclient://callback" },
 
                 AllowedScopes = new List<string>
                 {
