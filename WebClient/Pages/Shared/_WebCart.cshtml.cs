@@ -8,7 +8,7 @@ namespace WebClient.Pages.Shared
     public class _WebCartModel : PageModel
     {
         private HttpContext HttpContext;
-        public Cart MyCart { get; set; }
+        public Cart? MyCart { get; set; }
         public _WebCartModel(HttpContext httpContext)
         {
             HttpContext = httpContext;
@@ -24,9 +24,16 @@ namespace WebClient.Pages.Shared
             }
         }
 
-        public int GetCartItems()
+        public int GetCartItemsCount()
         {
-            return MyCart.items.Count();
+            int counter = 0;
+
+            foreach (var item in MyCart.items)
+            {
+                counter += item.amount;
+            }
+
+            return counter;
         }
     }
 }

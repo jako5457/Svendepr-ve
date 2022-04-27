@@ -7,7 +7,7 @@
             items = new List<Item>();
         }
 
-        public ICollection<Item>? items { get; set; }
+        public List<Item>? items { get; set; }
 
         public int CalTotalItems()
         {
@@ -21,6 +21,7 @@
     public class Item
     {
         public string? Id { get; set; }
+        public string Name { get; set; }
         public int amount { get; set; }
     }
 }

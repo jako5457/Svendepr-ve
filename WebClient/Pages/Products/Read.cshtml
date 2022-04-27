@@ -1,4 +1,4 @@
-﻿@page "{kategory?}/{currentpage?}"
+﻿@page "{currentpage?}"
 @model WebClient.Pages.Products.ReadModel
 @{
     ViewData["Title"] = "Products";
@@ -48,7 +48,7 @@
                         <a asp-page="/Products/Details" asp-route-id="@i" class="btn btn-light">
                             Details <img src="~/lib/bootstrap/Icons/zoom-in.svg" />
                         </a>
-                        <form method="post" asp-page-handler="Add" id="@i" >
+                        <form method="post" asp-page-handler="Add" asp-route-id="@i" asp-route-name="Hej Item" >
                             <button type="submit" class="btn btn-light float-right">
                                 Add to Cart <img src="~/lib/bootstrap/Icons/cart-plus.svg" />
                             </button>

@@ -23,12 +23,11 @@ namespace WebClient.Pages.Products
 
         }
 
-        //public async Task<IActionResult> OnPostAdd(int id)
-        //{
-        //    Cart mycart = HttpContext.Session.Get<Cart>(CartConst.CartSession);
-        //    mycart.items.Add( new Item { amount = 1, Id = id.ToString()});
-        //    HttpContext.Session.Set<Cart>(CartConst.CartSession, mycart);
-        //    return RedirectToPage();
-        //}
+        public async Task<IActionResult> OnPostAdd(string id, string name)
+        {
+            ShoppingCart shoppingCart = new ShoppingCart(HttpContext);
+            shoppingCart.AddItem(new Item { Id = id, amount = 1, Name = name});
+            return RedirectToPage();
+        }
     }
 }

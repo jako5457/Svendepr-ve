@@ -2,4 +2,24 @@
 @{
 }
 
-@Model.GetCartItems()
+<li class="nav-item">
+    <div class="btn-group">
+        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="~/lib/bootstrap/Icons/cart.svg" class="text-light" alt="Bootstrap" width="24" height="24" />
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                @Model.GetCartItemsCount()
+            </span>
+        </button>
+        <ul class="dropdown-menu list-group-flush" aria-labelledby="dropdownMenuButton">
+            @foreach (var item in Model.MyCart?.items)
+            {
+                <a asp-page="/Products/Details" asp-route-id="@item.Id">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        @item.Name
+                        <span class="badge badge-primary badge-pill">@item.amount</span>
+                    </li>
+                </a>
+            }
+        </ul>
+    </div>
+</li>
