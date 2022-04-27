@@ -53,7 +53,7 @@ namespace Api.Controllers
                 EmployeeId = model.EmployeeId,
                 DeliveryAddress = model.DeliveryAddress,
                 DeliveryLocation = model.DeliveryLocation,
-                TrackingInfoId = Guid.NewGuid(),
+                TrackingCode = Guid.NewGuid(),
             };
 
             if (model.Products != null)

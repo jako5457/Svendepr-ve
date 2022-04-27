@@ -17,10 +17,10 @@ namespace Api.Controllers
 
         [HttpGet]
         [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:order:read")]
-        [Route("{TrackingId}")]
-        public async Task<List<TrackingInfo>> GetTrackingInfos(string TrackingId)
+        [Route("{TrackingCode}")]
+        public async Task<List<TrackingInfo>> GetTrackingInfos(string TrackingCode)
         {
-            return await _Dbcontext.TrackingInfos.Where(ti => ti.TrackingInfoId.ToString() == TrackingId).ToListAsync();
+            return await _Dbcontext.TrackingInfos.Where(ti => ti.TrackingInfoId.ToString() == TrackingCode).ToListAsync();
         } 
     }
 }

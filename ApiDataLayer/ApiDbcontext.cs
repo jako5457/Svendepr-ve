@@ -148,7 +148,7 @@ namespace ApiDataLayer
                 DriverId=1,
                 DeliveryAddress = "SomeWhere",
                 DeliveryLocation = "222222222",
-                TrackingInfoId = TrackingGuid,
+                TrackingCode = TrackingGuid,
             });
 
             modelBuilder.Entity<OrderProduct>().HasData(

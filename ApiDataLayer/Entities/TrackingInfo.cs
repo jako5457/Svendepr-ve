@@ -8,7 +8,9 @@ namespace ApiDataLayer.Entities
 {
     public class TrackingInfo
     {
-        public Guid TrackingInfoId { get; set; }
+        public int TrackingInfoId { get; set; }
+
+        public Guid TrackingCode { get; set; }
 
         public string Longitude { get; set; } = default!;
 

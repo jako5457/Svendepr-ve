@@ -22,10 +22,10 @@
 
             TrackingInfo info = new TrackingInfo()
             {
-                TrackingInfoId = new Guid(data[0]),
-                CreationDate = DateTimeOffset.FromUnixTimeMilliseconds(Convert.ToInt64(data[3])).DateTime,
-                Longitude = data[1],
-                Latitude = data[2],
+                TrackingCode = new Guid(data[0]),
+                CreationDate = DateTimeOffset.FromUnixTimeSeconds(Convert.ToInt64(data[3])).DateTime,
+                Longitude = data[2],
+                Latitude = data[1],
             };
 
             try

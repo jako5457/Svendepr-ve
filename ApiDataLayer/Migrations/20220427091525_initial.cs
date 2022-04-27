@@ -59,7 +59,9 @@ namespace ApiDataLayer.Migrations
                 name: "TrackingInfos",
                 columns: table => new
                 {
-                    TrackingInfoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TrackingInfoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TrackingCode = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Longitude = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Latitude = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -211,7 +213,7 @@ namespace ApiDataLayer.Migrations
                     DriverId = table.Column<int>(type: "int", nullable: true),
                     EmployeeId = table.Column<int>(type: "int", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TrackingInfoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TrackingCode = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DeliveryAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DeliveryLocation = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -316,8 +318,8 @@ namespace ApiDataLayer.Migrations
 
             migrationBuilder.InsertData(
                 table: "Orders",
-                columns: new[] { "OrderId", "CreatedDate", "DeliveryAddress", "DeliveryLocation", "DriverId", "EmployeeId", "TrackingInfoId" },
-                values: new object[] { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "SomeWhere", "222222222", 1, 1, new Guid("38f5f83b-7ad4-4a36-8253-fc76e4dcbd28") });
+                columns: new[] { "OrderId", "CreatedDate", "DeliveryAddress", "DeliveryLocation", "DriverId", "EmployeeId", "TrackingCode" },
+                values: new object[] { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "SomeWhere", "222222222", 1, 1, new Guid("a585b5ca-6d8d-4362-99fa-1cd01e6f878c") });
 
             migrationBuilder.InsertData(
                 table: "OrderProduct",

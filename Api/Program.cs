@@ -4,8 +4,6 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string endpoint = "https://localhost:5001";
-
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -21,7 +19,7 @@ builder.Services.AddTfRabbitConnectionFactory(factory =>
     factory.Port = builder.Configuration.GetValue<int>("RabbitMq:Port");
 });
 
-builder.Services.AddTfRabbit();
+var IdentityEndpoint = builder.Configuration.GetValue<string>("IdentityEndpoint");
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -54,8 +52,8 @@ builder.Services.AddSwaggerGen(options =>
         {
             AuthorizationCode = new OpenApiOAuthFlow
             {
-                AuthorizationUrl = new Uri($"{endpoint}/connect/authorize"),
-                TokenUrl = new Uri($"{endpoint}/connect/token"),
+                AuthorizationUrl = new Uri($"{IdentityEndpoint}/connect/authorize"),
+                TokenUrl = new Uri($"{IdentityEndpoint}/connect/token"),
                 Scopes = scopes
             }
         },
@@ -78,10 +76,12 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddDbContext<ApiDbcontext>(b => b.UseSqlServer(builder.Configuration.GetConnectionString("ApiDatabase")));
 
+builder.Services.AddTfRabbit();
+
 builder.Services.AddAuthentication("Bearer")
 .AddJwtBearer("Bearer", options =>
 {
-    options.Authority = endpoint;
+    options.Authority = IdentityEndpoint;
 
     options.TokenValidationParameters = new TokenValidationParameters
     {

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiDataLayer.Migrations
 {
     [DbContext(typeof(ApiDbcontext))]
-    [Migration("20220426124347_initial")]
+    [Migration("20220427091525_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -193,7 +193,7 @@ namespace ApiDataLayer.Migrations
                     b.Property<int?>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("TrackingInfoId")
+                    b.Property<Guid>("TrackingCode")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("OrderId");
@@ -213,7 +213,7 @@ namespace ApiDataLayer.Migrations
                             DeliveryLocation = "222222222",
                             DriverId = 1,
                             EmployeeId = 1,
-                            TrackingInfoId = new Guid("38f5f83b-7ad4-4a36-8253-fc76e4dcbd28")
+                            TrackingCode = new Guid("a585b5ca-6d8d-4362-99fa-1cd01e6f878c")
                         });
                 });
 
@@ -355,9 +355,11 @@ namespace ApiDataLayer.Migrations
 
             modelBuilder.Entity("ApiDataLayer.Entities.TrackingInfo", b =>
                 {
-                    b.Property<Guid>("TrackingInfoId")
+                    b.Property<int>("TrackingInfoId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TrackingInfoId"), 1L, 1);
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
@@ -369,6 +371,9 @@ namespace ApiDataLayer.Migrations
                     b.Property<string>("Longitude")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("TrackingCode")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("TrackingInfoId");
 
