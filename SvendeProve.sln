@@ -26,6 +26,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A8E0A61E-2357-4684-A274-4C43B45BD6E9}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\Api-Test.yml = .github\workflows\Api-Test.yml
+		Readme.md = Readme.md
 	EndProjectSection
 EndProject
 Global
