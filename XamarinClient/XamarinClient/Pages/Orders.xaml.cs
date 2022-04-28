@@ -22,11 +22,11 @@ namespace XamarinClient
 
             OrderList = new ObservableCollection<TestOrder>
             {
-                new TestOrder{ Id = 1, Name = "Testatatata", DeliveryAddress = "Ukraine", Driver = "", Status = 1},
-                new TestOrder{ Id = 2, Name = "Testhmmmm", DeliveryAddress = "Sweden", Driver = "", Status = 1},
-                new TestOrder{ Id = 3, Name = "Testttttttt", DeliveryAddress = "Estonia", Driver = "", Status = 1},
-                new TestOrder{ Id = 4, Name = "Testman", DeliveryAddress = "Germany", Driver = "", Status = 1},
-                new TestOrder{ Id = 5, Name = "Testicle", DeliveryAddress = "Ukraine", Driver = "", Status = 1}
+                new TestOrder{ Id = "1", Name = "Testatatata", DeliveryAddress = "Ukraine", Driver = "", Status = 1},
+                new TestOrder{ Id = "2", Name = "Testhmmmm", DeliveryAddress = "Sweden", Driver = "", Status = 1},
+                new TestOrder{ Id = "3", Name = "Testttttttt", DeliveryAddress = "Estonia", Driver = "", Status = 1},
+                new TestOrder{ Id = "4", Name = "Testman", DeliveryAddress = "Germany", Driver = "", Status = 1},
+                new TestOrder{ Id = "5", Name = "Testicle", DeliveryAddress = "Ukraine", Driver = "", Status = 1}
             };
 
             MyListView.ItemsSource = OrderList;

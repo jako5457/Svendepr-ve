@@ -13,22 +13,25 @@ namespace XamarinClient
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Scanner : ContentPage
     {
-        int id;
 
         public Scanner()
         {
             InitializeComponent();
 
             zxing.OnScanResult += (result) => Device.BeginInvokeOnMainThread(() => {
-                btnSeeOrder.IsEnabled = true;
-                id = Convert.ToInt32(result.Text);
+                try
+                {
+                    Navigation.PushAsync(new OrderDetails(result.Text));
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                
+                
             });
         }
 
-        private void btnSeeOrder_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new OrderDetails(id));
-        }
 
         protected override void OnAppearing()
         {

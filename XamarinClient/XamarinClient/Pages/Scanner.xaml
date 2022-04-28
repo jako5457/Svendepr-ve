@@ -5,7 +5,6 @@
     <ContentPage.Content>
         <StackLayout>
             <zxing:ZXingScannerView x:Name="zxing" VerticalOptions="FillAndExpand"/>
-            <Button x:Name="btnSeeOrder" Clicked="btnSeeOrder_Clicked" IsEnabled="False" Text="See Order" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

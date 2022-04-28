@@ -13,7 +13,7 @@ namespace XamarinClient.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OrderDetails : ContentPage
     {
-        public OrderDetails(int id)
+        public OrderDetails(string id)
         {
             InitializeComponent();
 
