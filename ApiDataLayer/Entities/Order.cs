@@ -23,6 +23,8 @@ namespace ApiDataLayer.Entities
 
         public string DeliveryLocation { get; set; } = default!;
 
+        public bool IsDelivered { get; set; } = default!;
+
         public Driver? Driver { get; set; } = default!;
 
         public Employee? Employee { get; set; } = default!;
