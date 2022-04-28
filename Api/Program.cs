@@ -74,10 +74,10 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-//builder.Services.AddDbContext<ApiDbcontext>(b => b.UseSqlServer(builder.Configuration.GetConnectionString("ApiDatabase")));
-builder.Services.AddDbContext<ApiDbcontext>(b => b.UseSqlServer(builder.Configuration.GetConnectionString("LocalConnection")));
+builder.Services.AddDbContext<ApiDbcontext>(b => b.UseSqlServer(builder.Configuration.GetConnectionString("ApiDatabase")));
+//builder.Services.AddDbContext<ApiDbcontext>(b => b.UseSqlServer(builder.Configuration.GetConnectionString("LocalConnection")));
 
-//builder.Services.AddTfRabbit();
+builder.Services.AddTfRabbit();
 
 builder.Services.AddAuthentication("Bearer")
 .AddJwtBearer("Bearer", options =>
