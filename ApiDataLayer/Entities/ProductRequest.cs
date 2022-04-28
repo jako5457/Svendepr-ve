@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ApiDataLayer.Entities
@@ -14,8 +15,10 @@ namespace ApiDataLayer.Entities
 
         public int EmployeeId { get; set; }
 
+        [JsonIgnore]
         public Employee Employee { get; set; } = default!;
 
+        [JsonIgnore]
         public List<ProductRequestProduct> Products { get; set; } = default!;
     }
 }

@@ -43,6 +43,37 @@ namespace Api.Controllers
                                    .ToListAsync();
         }
 
+        [HttpGet]
+        [Route("{OrderId}")]
+        public async Task<IActionResult> GetOrderAsync(int OrderId)
+        {
+            Order order = await _Dbcontext.Orders
+                                   .Where(o => o.OrderId == OrderId)
+                                   .FirstOrDefaultAsync();
+
+            if (order == null)
+                return NotFound();
+            return Ok(order);
+        }
+
+
+        [HttpPut]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:order:write")]
+        public async Task<IActionResult> EditOrder(Order order)
+        {
+            try
+            {
+                _Dbcontext.Attach(order);
+                _Dbcontext.Entry(order).State = EntityState.Modified;
+                await _Dbcontext.SaveChangesAsync();
+                return Ok("Order Updated..");
+            }
+            catch (Exception)
+            {
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
+        }
+
         [HttpPost]
         [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:order:write")]
         public async Task<IActionResult> CreateOrderAsync(OrderModel model)
@@ -53,6 +84,7 @@ namespace Api.Controllers
                 EmployeeId = model.EmployeeId,
                 DeliveryAddress = model.DeliveryAddress,
                 DeliveryLocation = model.DeliveryLocation,
+                IsDelivered = model.IsDelivered,
                 TrackingCode = Guid.NewGuid(),
             };
 
