@@ -37,22 +37,22 @@
         </div>
     </div>
     <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-bottom: 15px;">
-        @for (var i = 0; i < 10; i++)
+        @foreach (var item in Model?.products)
         {
             <div class="col">
                 <div class="card h-100">
                     <img src="~/images/placeholder-image.png" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Description</p>
                         <div class="row">
                             <div class="col-6">
-                                <a asp-page="/Products/Details" asp-route-id="@i" class="btn btn-outline-secondary w-100">
+                                <a asp-page="/Products/Details" asp-route-id="@item.ProductId" class="btn btn-outline-secondary w-100">
                                     Details <img src="~/lib/bootstrap/Icons/zoom-in.svg" />
                                 </a>
                             </div>
                             <div class="col-6">
-                                <form method="post" asp-page-handler="Add" asp-route-id="@i" asp-route-name="Hej Item">
+                                <form method="post" asp-page-handler="Add" asp-route-id="@item.ProductId" asp-route-name="@item.Name">
                                     <button type="submit" class="btn btn-outline-secondary w-100">
                                         Add <img src="~/lib/bootstrap/Icons/cart-plus.svg" />
                                     </button>
@@ -61,7 +61,8 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
+                        <small class="text-muted">@item.EAN</small>
+                        <small class="text-muted text-end">stock <span style="color: green">@item.</span></small>
                     </div>
                 </div>
             </div>

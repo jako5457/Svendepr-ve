@@ -1,5 +1,7 @@
 ﻿using System.Net.Http.Headers;
+using System.Text;
 using System.Text.Json;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WebClient.Helpers.Api
 {
@@ -14,21 +16,81 @@ namespace WebClient.Helpers.Api
             _configuration = configuration;
         }
 
-        public async Task<T?> GetTAsync<T>(HttpMethod method, string url, string accessToken)
+        private Tuple<HttpClient, HttpRequestMessage> SetupClient(HttpMethod httpMethod, string url, string accessToken)
+        {
+            url = _configuration.GetValue<string>("Api:Endpoint") + url;
+            var httpRequestMessage = new HttpRequestMessage(httpMethod, url);
+            httpRequestMessage.Headers.Add("Accept", "application/json");
+            var httpclient = _httpClientFactory.CreateClient();
+            httpclient.DefaultRequestHeaders.Authorization = String.IsNullOrEmpty(accessToken) ? null : new AuthenticationHeaderValue("Bearer", accessToken); //No access token authenticationheader = null
+            return Tuple.Create(httpclient, httpRequestMessage);
+        }
+
+        public async Task PostAsync<T>(string url, string accessToken, T Input)
         {
             try
             {
-                url = _configuration.GetValue<string>("Api:Endpoint") + url;
-                var httpRequestMessage = new HttpRequestMessage(method, url);
+                var setup = SetupClient(HttpMethod.Post, url, accessToken);
 
-                httpRequestMessage.Headers.Add("Accept", "application/json");
-                //httpRequestMessage.Headers.Add("Content-Type", "application/json");
+                HttpContent content = new StringContent(JsonSerializer.Serialize<T>(Input), Encoding.UTF8, Application.Json);
 
-                var httpclient = _httpClientFactory.CreateClient();
+                HttpResponseMessage response = await setup.Item1.PostAsync(setup.Item2.RequestUri, content );
 
-                httpclient.DefaultRequestHeaders.Authorization = !String.IsNullOrEmpty(accessToken) ? null : new AuthenticationHeaderValue("Bearer", accessToken); //No access token authenticationheader = null
+                response.EnsureSuccessStatusCode();
+            }
+            catch (Exception)
+            {
 
-                var response = await httpclient.SendAsync(httpRequestMessage);
+                throw;
+            }
+        }
+
+        public async Task PutAsync(string url, string accessToken, string id)
+        {
+            try
+            {
+                var setup = SetupClient(HttpMethod.Put, url + "/" + id, accessToken);
+
+                var response = await setup.Item1.SendAsync(setup.Item2);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    using (var content = await response.Content.ReadAsStreamAsync())
+                    {
+                        //return await JsonSerializer.DeserializeAsync<T>(content);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task DeleteAsync(string url, string accessToken, string id)
+        {
+            try
+            {
+                var setup = SetupClient(HttpMethod.Delete, url + "/" + id, accessToken);
+
+                var response = await setup.Item1.DeleteAsync(setup.Item2.RequestUri);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<T?> GetTAsync<T>(string url, string accessToken)
+        {
+            try
+            {
+                var setup = SetupClient(HttpMethod.Get, url, accessToken);
+
+                var response = await setup.Item1.SendAsync(setup.Item2);
+
 
                 if (response.IsSuccessStatusCode)
                 {

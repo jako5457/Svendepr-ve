@@ -42,10 +42,10 @@ builder.Services.AddAuthentication(options =>
         //options.Scope.Add("employee_write");
         //options.Scope.Add("order_read");
         //options.Scope.Add("order_write");
-        //options.Scope.Add("product_read");
-        //options.Scope.Add("product_write");
-        //options.Scope.Add("product_request_read");
-        //options.Scope.Add("product_request_write");
+        options.Scope.Add("product_read");
+        options.Scope.Add("product_write");
+        options.Scope.Add("product_request_read");
+        options.Scope.Add("product_request_write");
         //options.Scope.Add("warehouse_read");
         //options.Scope.Add("warehouse_write");
         //options.Scope.Add("api_all_read");

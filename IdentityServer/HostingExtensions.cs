@@ -32,7 +32,12 @@ namespace IdentityServer
                             b.WithOrigins("https://localhost:7039")
                                 .AllowAnyMethod()
                                 .AllowAnyHeader(); 
-                }); 
+                });
+                o.AddDefaultPolicy(b => {
+                    b.WithOrigins("https://svendproveapi.azurewebsites.net")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
             });
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()

@@ -82,25 +82,56 @@ namespace IdentityServer
                 {
                     Log.Debug("bob already exists");
                 }
+
+                var admin = userMgr.FindByNameAsync("admin").Result;
+                if (admin == null)
+                {
+                    admin = new ApplicationUser
+                    {
+                        UserName = "admin",
+                        Email = "mart624n@elevcampus.dk",
+                        EmailConfirmed = true,
+                    };
+                    var result = userMgr.CreateAsync(admin, "P@ssw0rd").Result;
+                    if (!result.Succeeded)
+                    {
+                        throw new Exception(result.Errors.First().Description);
+                    }
+
+                    result = userMgr.AddClaimsAsync(admin, new Claim[]{
+                            new Claim(JwtClaimTypes.Name, "Admin admin"),
+                            new Claim(JwtClaimTypes.GivenName, "Admin"),
+                            new Claim(JwtClaimTypes.FamilyName, "admin"),
+                        }).Result;
+                }
             }
         }
 
-        public static async Task CreateRoles(IServiceProvider service)
+        public static async Task CreateRoles(WebApplication app)
         {
-            var RoleMananger = service.GetRequiredService<RoleManager<IdentityRole>>();
-            var UserMananger = service.GetRequiredService<UserManager<ApplicationUser>>();
-
-            IdentityResult adminRoleResult;
-
-            bool adminRoleExists = await RoleMananger.RoleExistsAsync("Admin");
-
-            if (!adminRoleExists)
+            using (var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                adminRoleResult = await RoleMananger.CreateAsync(new IdentityRole("Admin"));
+                var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
+
+                var RoleMananger = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                var UserMananger = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+                IdentityResult adminRoleResult;
+
+                bool adminRoleExists = await RoleMananger.RoleExistsAsync("Admin");
+
+                if (!adminRoleExists)
+                {
+                    adminRoleResult = await RoleMananger.CreateAsync(new IdentityRole("Admin"));
+                    if (adminRoleResult.Succeeded)
+                    {
+                        ApplicationUser adminuser = await UserMananger.FindByNameAsync("Admin");
+                        await UserMananger.AddToRoleAsync(adminuser, "Admin");
+                    }
+                }
+
             }
 
-            ApplicationUser adminuser = await UserMananger.FindByNameAsync("Alice");
-            await UserMananger.AddToRoleAsync(adminuser, "Admin");
         }
     }
 }

@@ -11,6 +11,7 @@ namespace IdentityServer
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile()
+                
             };
 
         public static IEnumerable<ApiScope> ApiScopes =>
@@ -63,6 +64,7 @@ namespace IdentityServer
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.OfflineAccess,
+                    "id_token",
                     //"company_read",
                     //"company_write",
                     //"driver_read",
@@ -71,10 +73,10 @@ namespace IdentityServer
                     //"employee_write",
                     //"order_read",
                     //"order_write",
-                    //"product_read",
-                    //"product_write",
-                    //"product_request_read",
-                    //"product_request_write",
+                    "product_read",
+                    "product_write",
+                    "product_request_read",
+                    "product_request_write",
                     //"warehouse_read",
                     //"warehouse_write",
                     //"api_all_read",
@@ -90,8 +92,39 @@ namespace IdentityServer
                 // where to redirect to after login
                 RedirectUris = { "https://localhost:7039/swagger/oauth2-redirect.html" },
 
-                // where to redirect to after logout
-                PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc" },
+                AllowOfflineAccess = true,
+
+                AllowedScopes = new List<string>
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile,
+                    IdentityServerConstants.StandardScopes.OfflineAccess,
+                    "company_read",
+                    "company_write",
+                    "driver_read",
+                    "driver_write",
+                    "employee_read",
+                    "employee_write",
+                    "order_read",
+                    "order_write",
+                    "product_read",
+                    "product_write",
+                    "product_request_read",
+                    "product_request_write",
+                    "warehouse_read",
+                    "warehouse_write",
+                    "api_all_read",
+                    "api_all_write",
+                }
+
+            },
+            new Client
+            {
+                ClientId = "Api2",
+                ClientSecrets = {new Secret("Apisecret2".Sha256())},
+                AllowedGrantTypes = GrantTypes.Code,
+                // where to redirect to after login
+                RedirectUris = { "https://svendproveapi.azurewebsites.net/swagger/oauth2-redirect.html" },
 
                 AllowOfflineAccess = true,
 
@@ -128,7 +161,7 @@ namespace IdentityServer
                 AllowOfflineAccess = true,
 
                 RedirectUris = {"com.companyname.xamarinclient://callback"},
-                
+
                 PostLogoutRedirectUris = { "com.companyname.xamarinclient://callback" },
 
                 AllowedScopes = new List<string>
