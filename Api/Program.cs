@@ -10,7 +10,6 @@ builder.Services.AddControllers();
 
 TfRabbitmqService.MqttMode = true;
 TfRabbitmqService.MessageDebug = true;
-builder.Services.AddTopicFrameWork(Assembly.GetEntryAssembly());
 builder.Services.AddTfRabbitConnectionFactory(factory =>
 {
     factory.HostName = builder.Configuration.GetValue<string>("RabbitMq:Host");
@@ -77,8 +76,6 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddDbContext<ApiDbcontext>(b => b.UseSqlServer(builder.Configuration.GetConnectionString("ApiDatabase")));
 //builder.Services.AddDbContext<ApiDbcontext>(b => b.UseSqlServer(builder.Configuration.GetConnectionString("LocalConnection")));
 
-builder.Services.AddTfRabbit();
-
 builder.Services.AddAuthentication("Bearer")
 .AddJwtBearer("Bearer", options =>
 {
@@ -97,6 +94,9 @@ builder.Services.AddCors(o => {
             .AllowAnyHeader();
     });
 });
+
+builder.Services.AddTopicFrameWork(Assembly.GetEntryAssembly());
+builder.Services.AddTfRabbit();
 
 var app = builder.Build();
 
