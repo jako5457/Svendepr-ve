@@ -1,15 +1,15 @@
-# Svendeprøve Projekt
+# SvendeprÃ¸ve Projekt
 
 _Case: Ukraine Casen_
 
-## Indhold
+## Indhold (Wiki)[https://github.com/jako5457/Svendepr-ve/wiki]
 - Backend
-  - [[Datalayer|Datalayer]]
-    - [[Entiteter|Datalayer#Entiteter]]
-    - [[Klassediagram|Datalayer#Klassediagram]]
-  - [[Api|Api]]
-    - [[Dokumentation|Api#Dokumentation]]
-    - [[Api Beskrivelse|Api#Api-Beskrivelse]]
+  - Datalayer
+    - Entiteter
+    - Klassediagram
+  - Api
+    - Dokumentation
+    - Api Beskrivelse
 - Xamarin
 - Website
 
