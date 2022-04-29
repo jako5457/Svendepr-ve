@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinClient.Pages.OrderDetails">
     <ContentPage.Content>
+        <StackLayout>
+            <Label x:Name="lblLoading" />
+            <ActivityIndicator x:Name="activityIndicator" IsRunning="true" HorizontalOptions="Center"/>
         <Grid VerticalOptions="Start" Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -32,8 +35,9 @@
             <Button x:Name="btnTakeOrder" Text="Take Order" Clicked="btnTakeOrder_Clicked" Grid.Column="1" Grid.Row="5"/>
 
         </Grid>
-        
-        
-        
+        </StackLayout>
+
+
+
     </ContentPage.Content>
 </ContentPage>

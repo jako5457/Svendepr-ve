@@ -27,17 +27,21 @@ namespace XamarinClient.Pages
             this.BindingContext = order;
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
-            LoadOrder();
-            LoadDriver();
+            
+            await LoadOrder();
+            await LoadDriver();
         }
 
         public async Task LoadOrder()
         {
+            lblLoading.Text = "";
+
             var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Application.Current.Properties["access_token"].ToString());
             httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Application.Current.Properties["access_token"].ToString());
+            
             var response = await httpClient.GetAsync("https://svendproveapi.azurewebsites.net/api/Order/" + Application.Current.Properties["order_id"]);
 
 
@@ -52,8 +56,12 @@ namespace XamarinClient.Pages
                     lblDeliveryAddress.Text = order.deliveryAddress;
                     lblStatus.Text = order.isDelivered.ToString();
 
-                    
+                    activityIndicator.IsRunning = false;
                 }
+            }
+            else
+            {
+                lblLoading.Text = "Fejl med at kontakte API";
             }
         }
 
@@ -84,7 +92,9 @@ namespace XamarinClient.Pages
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Application.Current.Properties["access_token"].ToString());
             httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
             var content = JsonSerializer.Serialize(order);
+            httpClient.BaseAddress = new Uri("https://svendproveapi.azurewebsites.net/api/Order/");
             await httpClient.PutAsync("https://svendproveapi.azurewebsites.net/api/Order/", new StringContent(content));
+
         }
     }
 }

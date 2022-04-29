@@ -27,6 +27,7 @@ namespace XamarinClient
 
         public async Task LoadOrders()
         {
+            lblLoading.Text = "";
 
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Application.Current.Properties["access_token"].ToString());
@@ -54,7 +55,6 @@ namespace XamarinClient
 
         protected async override void OnAppearing()
         {
-            lblLoading.Text = "";
             await LoadOrders();
         }
 
