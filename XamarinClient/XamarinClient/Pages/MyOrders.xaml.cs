@@ -14,19 +14,15 @@ namespace XamarinClient
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MyOrders : ContentPage
     {
-        public ObservableCollection<TestOrder> OrderList { get; set; }
+        public ObservableCollection<Order> OrderList { get; set; }
 
         public MyOrders(string id)
         {
             InitializeComponent();
 
-            OrderList = new ObservableCollection<TestOrder>
+            OrderList = new ObservableCollection<Order>
             {
-                new TestOrder{ Id = "1", Name = "Testatatata", DeliveryAddress = "Ukraine", Driver = "", Status = 1},
-                new TestOrder{ Id = "2", Name = "Testhmmmm", DeliveryAddress = "Sweden", Driver = "", Status = 1},
-                new TestOrder{ Id = "3", Name = "Testttttttt", DeliveryAddress = "Estonia", Driver = "", Status = 1},
-                new TestOrder{ Id = "4", Name = "Testman", DeliveryAddress = "Germany", Driver = "", Status = 1},
-                new TestOrder{ Id = "5", Name = "Testicle", DeliveryAddress = "Ukraine", Driver = "", Status = 1}
+
             };
 
             MyListView.ItemsSource = OrderList;
@@ -34,9 +30,10 @@ namespace XamarinClient
 
         }
 
+
         private void btnDelivered_Clicked(object sender, EventArgs e)
         {
-            var testorder = (TestOrder)((Button)sender).CommandParameter;
+            var testorder = (Order)((Button)sender).CommandParameter;
             
 
         }

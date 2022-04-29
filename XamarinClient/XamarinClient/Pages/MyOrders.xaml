@@ -21,8 +21,8 @@
                         </Grid.RowDefinitions>
 
 
-                        <Label Text="{Binding Name}" FontSize="18" Grid.Column="0" Grid.Row="0" />
-                        <Label Text="{Binding DeliveryAddress}" FontSize="16" Grid.Column="0" Grid.Row="1"  />
+                        <Label Text="{Binding orderId}" FontSize="18" Grid.Column="0" Grid.Row="0" />
+                        <Label Text="{Binding deliveryAddress}" FontSize="16" Grid.Column="0" Grid.Row="1"  />
                         <Button x:Name="btnDelivered" Text="Delivered" Clicked="btnDelivered_Clicked" CommandParameter="{Binding .}"  HorizontalOptions="End" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
 
                         

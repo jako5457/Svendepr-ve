@@ -23,6 +23,9 @@ namespace XamarinClient
 
                 FlyOutScanner.IsEnabled = true;
                 FlyOutScanner.IsVisible = true;
+
+                FlyOutOrders.IsEnabled = true;
+                FlyOutOrders.IsVisible = true;
             });
 
             MessagingCenter.Subscribe<AppShell>(this, "SwitchOff", (sender) =>
@@ -32,6 +35,9 @@ namespace XamarinClient
 
                 FlyOutScanner.IsEnabled = false;
                 FlyOutScanner.IsVisible = false;
+
+                FlyOutOrders.IsEnabled = false;
+                FlyOutOrders.IsVisible = false;
             });
         }
     }

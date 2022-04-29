@@ -18,18 +18,18 @@
             </Grid.RowDefinitions>
 
             <Label FontSize="18" Text="Order Id:" Grid.Column="0" Grid.Row="0"/>
-            <Label FontSize="18" Text="{Binding Id, Mode=OneWay}" Grid.Column="2" Grid.Row="0"/>
+            <Label x:Name="lblOrderId" FontSize="18" Text="{Binding orderId, Mode=OneWay}" Grid.Column="2" Grid.Row="0"/>
                    
-            <Label FontSize="18" Text="Order Name:" Grid.Column="0" Grid.Row="1"/>
-            <Label FontSize="18" Text="{Binding Name, Mode=OneWay}" Grid.Column="2" Grid.Row="1"/>
+            <Label FontSize="18" Text="Employee Id:" Grid.Column="0" Grid.Row="1"/>
+            <Label x:Name="lblEmployeeId" FontSize="18" Text="{Binding employeeId, Mode=OneWay}" Grid.Column="2" Grid.Row="1"/>
                    
             <Label FontSize="18" Text="Deliver To:" Grid.Column="0" Grid.Row="2"/>
-            <Label FontSize="18" Text="{Binding DeliveryAddress, Mode=OneWay}" Grid.Column="2" Grid.Row="2" />
+            <Label x:Name="lblDeliveryAddress" FontSize="18" Text="{Binding deliveryAddress, Mode=OneWay}" Grid.Column="2" Grid.Row="2" />
 
-            <Label FontSize="18" Text="Order Status:" Grid.Column="0" Grid.Row="3"/>
-            <Label FontSize="18" Text="{Binding Status, Mode=OneWay}" Grid.Column="2" Grid.Row="3"/>
+            <Label FontSize="18" Text="Delivered:" Grid.Column="0" Grid.Row="3"/>
+            <Label x:Name="lblStatus" FontSize="18" Text="{Binding Status, Mode=OneWay}" Grid.Column="2" Grid.Row="3"/>
 
-            <Button Text="Take Order" Grid.Column="1" Grid.Row="5"/>
+            <Button x:Name="btnTakeOrder" Text="Take Order" Clicked="btnTakeOrder_Clicked" Grid.Column="1" Grid.Row="5"/>
 
         </Grid>
         

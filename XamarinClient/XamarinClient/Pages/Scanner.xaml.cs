@@ -21,7 +21,8 @@ namespace XamarinClient
             zxing.OnScanResult += (result) => Device.BeginInvokeOnMainThread(() => {
                 try
                 {
-                    Navigation.PushAsync(new OrderDetails(result.Text));
+                    Application.Current.Properties["order_id"] = result.Text;
+                    Navigation.PushAsync(new OrderDetails());
                 }
                 catch (Exception ex)
                 {

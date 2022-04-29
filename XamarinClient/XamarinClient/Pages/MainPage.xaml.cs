@@ -63,6 +63,8 @@ namespace XamarinClient
             sb.AppendFormat("\n{0}: {1}\n", "refresh token", _result?.RefreshToken ?? "none");
             sb.AppendFormat("\n{0}: {1}\n", "access token", _result.AccessToken);
 
+            Application.Current.Properties["access_token"] = _result.AccessToken;
+
             OutputText.Text = sb.ToString();
 
             _apiClient.Value.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _result?.AccessToken ?? "");

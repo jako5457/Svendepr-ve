@@ -10,7 +10,7 @@
         </Tab>
     </FlyoutItem>
 
-    <FlyoutItem Title="Orders"
+    <FlyoutItem IsEnabled="False" IsVisible="False" x:Name="FlyOutOrders" Title="Orders"
                 Icon="monkey.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate pages:Orders}" />

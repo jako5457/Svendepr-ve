@@ -84,7 +84,7 @@ namespace XamarinClient
                 }
 
 
-                await Task.Delay(60000); // 1 minut
+                await Task.Delay(10000); // 10 sekunder
             }
         }
     }

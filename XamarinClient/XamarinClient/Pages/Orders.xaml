@@ -2,6 +2,24 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinClient.Orders">
+
+    <StackLayout>
+
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+
+            <Label x:Name="lblLoading" IsVisible="false" Text="" Grid.Column="0" Grid.Row="0" HorizontalOptions="Center"/>
+            <ActivityIndicator x:Name="activityIndicator" IsRunning="true" Grid.Column="0" Grid.Row="0" HorizontalOptions="Center"/>
+            
+        </Grid>
+    
+
     <ListView x:Name="MyListView"
             ItemsSource="{Binding Items}"
             ItemTapped="Handle_ItemTapped"
@@ -21,8 +39,8 @@
                         </Grid.RowDefinitions>
 
 
-                        <Label Text="{Binding Name}" FontSize="18" Grid.Column="0" Grid.Row="0" />
-                        <Label Text="{Binding DeliveryAddress}" FontSize="16" Grid.Column="0" Grid.Row="1"  />
+                        <Label Text="{Binding orderId}" FontSize="18" Grid.Column="0" Grid.Row="0" />
+                        <Label Text="{Binding deliveryAddress}" FontSize="16" Grid.Column="0" Grid.Row="1"  />
                         <Button Text="Details" Clicked="DetailsButtonClicked" CommandParameter="{Binding .}" HorizontalOptions="End" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
 
                     </Grid>
@@ -30,4 +48,5 @@
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
+    </StackLayout>
 </ContentPage>

@@ -2,6 +2,9 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -14,22 +17,45 @@ namespace XamarinClient
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Orders : ContentPage
     {
-        public ObservableCollection<TestOrder> OrderList { get; set; }
+        public ObservableCollection<Order> OrderList { get; set; }
 
         public Orders()
         {
             InitializeComponent();
 
-            OrderList = new ObservableCollection<TestOrder>
+        }
+
+        public async Task LoadOrders()
+        {
+
+            var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Application.Current.Properties["access_token"].ToString());
+            httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+            var response = await httpClient.GetAsync("https://svendproveapi.azurewebsites.net/api/Order");
+
+            if (response.IsSuccessStatusCode)
             {
-                new TestOrder{ Id = "1", Name = "Testatatata", DeliveryAddress = "Ukraine", Driver = "", Status = 1},
-                new TestOrder{ Id = "2", Name = "Testhmmmm", DeliveryAddress = "Sweden", Driver = "", Status = 1},
-                new TestOrder{ Id = "3", Name = "Testttttttt", DeliveryAddress = "Estonia", Driver = "", Status = 1},
-                new TestOrder{ Id = "4", Name = "Testman", DeliveryAddress = "Germany", Driver = "", Status = 1},
-                new TestOrder{ Id = "5", Name = "Testicle", DeliveryAddress = "Ukraine", Driver = "", Status = 1}
-            };
+                using (var content = await response.Content.ReadAsStreamAsync())
+                {
+                    OrderList = await JsonSerializer.DeserializeAsync<ObservableCollection<Order>>(content);
+                }
+                lblLoading.IsVisible = false;
+                activityIndicator.IsRunning = false;
+                activityIndicator.IsVisible = false;
+            }
+            else
+            {
+                lblLoading.Text = "Fejl med at kontakte API";
+            }
+
 
             MyListView.ItemsSource = OrderList;
+        }
+
+        protected async override void OnAppearing()
+        {
+            lblLoading.Text = "";
+            await LoadOrders();
         }
 
         async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -45,8 +71,9 @@ namespace XamarinClient
 
         async void DetailsButtonClicked (object sender, EventArgs e)
         {
-            var testorder = (TestOrder)((Button)sender).CommandParameter;
-            await Navigation.PushAsync(new OrderDetails(testorder.Id));
+            var order = (Order)((Button)sender).CommandParameter;
+            Application.Current.Properties["order_id"] = order.orderId;
+            await Navigation.PushAsync(new OrderDetails());
         }
     }
 }
