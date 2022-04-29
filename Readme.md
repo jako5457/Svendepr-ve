@@ -2,7 +2,9 @@
 
 _Case: Ukraine Casen_
 
-## Indhold (Wiki)[https://github.com/jako5457/Svendepr-ve/wiki]
+> Alt dokumentation ligger [her](https://github.com/jako5457/Svendepr-ve/wiki)
+
+## Indhold
 - Backend
   - Datalayer
     - Entiteter
