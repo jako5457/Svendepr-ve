@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 
 TfRabbitmqService.MqttMode = true;
 TfRabbitmqService.MessageDebug = true;
-
+builder.Services.AddTopicFrameWork(Assembly.GetEntryAssembly());
 builder.Services.AddTfRabbitConnectionFactory(factory =>
 {
     factory.HostName = builder.Configuration.GetValue<string>("RabbitMq:Host");
@@ -76,7 +76,7 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddDbContext<ApiDbcontext>(b => b.UseSqlServer(builder.Configuration.GetConnectionString("ApiDatabase")));
 
-//builder.Services.AddTfRabbit();
+builder.Services.AddTfRabbit();
 
 builder.Services.AddAuthentication("Bearer")
 .AddJwtBearer("Bearer", options =>
@@ -89,9 +89,17 @@ builder.Services.AddAuthentication("Bearer")
     };
 });
 
-builder.Services.AddTopicFrameWork(Assembly.GetEntryAssembly());
+builder.Services.AddCors(o => {
+    o.AddDefaultPolicy(b => {
+        b.WithOrigins("https://svendproveapi.azurewebsites.net")
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
+app.UseSwagger();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -101,6 +109,15 @@ if (app.Environment.IsDevelopment())
         c.OAuthScopes("openid", "profile");
         c.OAuthClientId("Api");
         c.OAuthClientSecret("Apisecret");
+        c.OAuthUsePkce();
+    });
+}
+
+if (app.Environment.IsProduction())
+{
+    app.UseSwaggerUI(c =>
+    {
+        c.OAuthScopes("openid", "profile");
         c.OAuthUsePkce();
     });
 }
