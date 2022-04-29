@@ -25,6 +25,19 @@ namespace Api.Controllers
 
         [HttpGet]
         [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:product:read")]
+        [Route("{ProductId}")]
+        public async Task<IActionResult> GetProductById(int ProductId)
+        {
+            var product = await _Dbcontext.Products.Where(p => p.ProductId == ProductId).FirstOrDefaultAsync();
+
+            if(product == null)
+                return NotFound();
+
+            return Ok(product);
+        }
+
+        [HttpGet]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:product:read")]
         [Route("list/category/{CategoryId}")]
         public async Task<List<Product>> GetProductsByCategoryAsync(int CategoryId)
         {

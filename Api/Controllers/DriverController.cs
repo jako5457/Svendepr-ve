@@ -31,6 +31,19 @@ namespace Api.Controllers
             .ToListAsync();
         }
 
+        [HttpGet]
+        [Route("{driverId}")]
+        [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:driver:read")]
+        public async Task<IActionResult> GetDriverByIdAsync(int driverId)
+        {
+            var driver = await _Dbcontext.Drivers.Where(d => d.DriverId == driverId).FirstOrDefaultAsync();
+
+            if (driver == null)
+                return NotFound();
+
+            return Ok(driver);
+        }
+
         [HttpPost]
         [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:driver:write")]
         public async Task<IActionResult> CreateDriverAsync(int EmployeeId)
