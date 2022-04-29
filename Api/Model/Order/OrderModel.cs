@@ -10,6 +10,8 @@
 
         public string DeliveryLocation { get; set; } = default!;
 
+        public bool IsDelivered { get; set; } = default!;
+
         public List<OrderProductModel> Products = default!;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ApiDataLayer.Entities
@@ -21,8 +22,10 @@ namespace ApiDataLayer.Entities
 
         public string Phone { get; set; } = default!;
 
+        [JsonIgnore]
         public List<Warehouse> Warehouses { get; set; } = default!;
 
+        [JsonIgnore]
         public List<Employee> Employees { get; set; } = default!;
 
     }

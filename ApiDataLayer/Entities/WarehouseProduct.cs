@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ApiDataLayer.Entities
@@ -14,8 +15,10 @@ namespace ApiDataLayer.Entities
 
         public int Amount { get; set; }
 
+        [JsonIgnore]
         public Product Product { get; set; } = default!;
 
+        [JsonIgnore]
         public Warehouse Warehouse { get; set; } = default!;
     }
 }

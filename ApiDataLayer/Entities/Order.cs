@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ApiDataLayer.Entities
@@ -23,10 +24,15 @@ namespace ApiDataLayer.Entities
 
         public string DeliveryLocation { get; set; } = default!;
 
+        public bool IsDelivered { get; set; } = default!;
+
+        [JsonIgnore]
         public Driver? Driver { get; set; } = default!;
 
+        [JsonIgnore]
         public Employee? Employee { get; set; } = default!;
 
+        [JsonIgnore]
         public List<OrderProduct> Products { get; set; } = default!;
 
     }
