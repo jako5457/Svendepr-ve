@@ -87,15 +87,11 @@ namespace WebClient.Helpers.Api
         {
             try
             {
-                url = _configuration.GetValue<string>("Api:Endpoint") + url;
-                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, url);
-                //httpRequestMessage.Headers.Add("Accept", "application/json");
-                var httpclient = _httpClientFactory.CreateClient();
-                httpclient.DefaultRequestHeaders.Authorization = String.IsNullOrEmpty(accessToken) ? null : new AuthenticationHeaderValue("Bearer", accessToken); //No access token authenticationheader = null
+                var setup = SetupClient(HttpMethod.Get, url, accessToken);
 
                 //var setup = SetupClient(HttpMethod.Get, url, accessToken);
 
-                var response = await httpclient.SendAsync(httpRequestMessage);
+                var response = await setup.Item1.SendAsync(setup.Item2);
 
                 using var ContentStream = await response.Content.ReadAsStreamAsync();
 

@@ -34,20 +34,20 @@ builder.Services.AddAuthentication(options =>
         options.ResponseType = "code";
 
         //options.Scope.Clear();
-        //options.Scope.Add("company_read");
-        //options.Scope.Add("company_write");
-        //options.Scope.Add("driver_read");
-        //options.Scope.Add("driver_write");
-        //options.Scope.Add("employee_read");
-        //options.Scope.Add("employee_write");
-        //options.Scope.Add("order_read");
-        //options.Scope.Add("order_write");
+        options.Scope.Add("company_read");
+        options.Scope.Add("company_write");
+        options.Scope.Add("driver_read");
+        options.Scope.Add("driver_write");
+        options.Scope.Add("employee_read");
+        options.Scope.Add("employee_write");
+        options.Scope.Add("order_read");
+        options.Scope.Add("order_write");
         options.Scope.Add("product_read");
         options.Scope.Add("product_write");
         options.Scope.Add("product_request_read");
         options.Scope.Add("product_request_write");
-        //options.Scope.Add("warehouse_read");
-        //options.Scope.Add("warehouse_write");
+        options.Scope.Add("warehouse_read");
+        options.Scope.Add("warehouse_write");
         //options.Scope.Add("api_all_read");
         //options.Scope.Add("api_all_write");
         options.Scope.Add("offline_access"); //Client Request AccesToken
@@ -60,7 +60,7 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddHttpClient();
 
-builder.Services.AddScoped<IApiCaller, ApiCaller>();
+builder.Services.AddTransient<IApiCaller, ApiCaller>();
 #endregion
 
 // Add services to the container.

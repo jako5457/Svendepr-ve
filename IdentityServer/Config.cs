@@ -66,23 +66,20 @@ namespace IdentityServer
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.OfflineAccess,
-                    "id_token",
-                    //"company_read",
-                    //"company_write",
-                    //"driver_read",
-                    //"driver_write",
-                    //"employee_read",
-                    //"employee_write",
-                    //"order_read",
-                    //"order_write",
+                    "company_read",
+                    "company_write",
+                    "driver_read",
+                    "driver_write",
+                    "employee_read",
+                    "employee_write",
+                    "order_read",
+                    "order_write",
                     "product_read",
                     "product_write",
                     "product_request_read",
                     "product_request_write",
-                    //"warehouse_read",
-                    //"warehouse_write",
-                    //"api_all_read",
-                    //"api_all_write",
+                    "warehouse_read",
+                    "warehouse_write"
                 }
 
             },
@@ -176,61 +173,3 @@ namespace IdentityServer
         };
     }
 }
-//new Client[]
-//{
-//    // This would be an example off adding our api, therefore machine to machine
-//    // m2m client credentials flow client
-//    new Client
-//    {
-//        ClientId = "m2m.client",
-//        ClientName = "Client Credentials Client",
-
-//        AllowedGrantTypes = GrantTypes.ClientCredentials,
-//        ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
-
-//        AllowedScopes = { "scope1" }
-//    },
-//    //Here i configure our client WebRazor.
-//    new Client
-//    {
-//        ClientId = "WebRazor",
-//        ClientSecrets = { new Secret("ThisIsASecretRazor".Sha256())},
-
-//        AllowedGrantTypes = GrantTypes.Code,
-
-//        RedirectUris = { "https://localhost:44300/signin-oidc" },
-//        FrontChannelLogoutUri = "https://localhost:44300/signout-oidc",
-//        PostLogoutRedirectUris = { "https://localhost:44300/signout-callback-oidc" },
-
-//        //Giver Clienten en AccessToken.
-//        AllowOfflineAccess = true,
-
-//        AllowedScopes = new List<string>
-//        {
-//            IdentityServerConstants.StandardScopes.OpenId,
-//            IdentityServerConstants.StandardScopes.Profile,
-//            "Api1"
-//        }
-//    },
-//    new Client
-//    {
-//        ClientId = "Xamarin",
-//        ClientName = "TrackingAPP",
-//        AllowedGrantTypes = GrantTypes.Code,
-//        ClientSecrets = { new Secret("ThisIsAXamarinSecret".Sha256()) },
-//        AllowOfflineAccess = true,
-//        RequireClientSecret = false,
-//        RedirectUris = { "dk.duende.xamarin" },
-//        RequireConsent = false,
-//        RequirePkce = true,
-//        PostLogoutRedirectUris = { $"dk.duende.xamarin/Account/Redirecting" },
-//        AllowedScopes = new List<string>
-//        {
-//            IdentityServerConstants.StandardScopes.OpenId,
-//            IdentityServerConstants.StandardScopes.Profile,
-//            IdentityServerConstants.StandardScopes.OfflineAccess,
-//            "Api1"
-//        },
-//        AllowAccessTokensViaBrowser = true
-//    }
-//};
