@@ -116,17 +116,27 @@ namespace IdentityServer
                 var RoleMananger = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
                 var UserMananger = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-                IdentityResult adminRoleResult;
-
                 bool adminRoleExists = await RoleMananger.RoleExistsAsync("Admin");
 
                 if (!adminRoleExists)
                 {
-                    adminRoleResult = await RoleMananger.CreateAsync(new IdentityRole("Admin"));
+                    IdentityResult adminRoleResult = await RoleMananger.CreateAsync(new IdentityRole("Admin"));
                     if (adminRoleResult.Succeeded)
                     {
                         ApplicationUser adminuser = await UserMananger.FindByNameAsync("Admin");
                         await UserMananger.AddToRoleAsync(adminuser, "Admin");
+                    }
+                }
+
+                bool UserRoleExists = await RoleMananger.RoleExistsAsync("User");
+
+                if (!UserRoleExists)
+                {
+                    IdentityResult userRoleResult = await RoleMananger.CreateAsync(new IdentityRole("User"));
+                    if (userRoleResult.Succeeded)
+                    {
+                        ApplicationUser user = await UserMananger.FindByNameAsync("Alice");
+                        await UserMananger.AddToRoleAsync(user, "User");
                     }
                 }
 

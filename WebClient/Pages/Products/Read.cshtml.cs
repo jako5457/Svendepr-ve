@@ -24,7 +24,7 @@ namespace WebClient.Pages.Products
         public List<Product> products { get; set; }
 
         public async Task OnGetAsync(int? currentpage)
-        {
+         {
             Currentpage = currentpage.GetValueOrDefault(); //Required for pagenation
             products = await apiCaller.GetTAsync<List<Product>>("Product/list", await HttpContext.GetTokenAsync("access_token"));
         }

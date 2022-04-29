@@ -59,6 +59,8 @@ namespace IdentityServer
 
                 AllowOfflineAccess = true,
 
+                //RequirePkce = false,
+
                 AllowedScopes = new List<string>
                 {
                     IdentityServerConstants.StandardScopes.OpenId,

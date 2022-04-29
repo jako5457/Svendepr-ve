@@ -20,7 +20,7 @@ namespace WebClient.Helpers.Api
         {
             url = _configuration.GetValue<string>("Api:Endpoint") + url;
             var httpRequestMessage = new HttpRequestMessage(httpMethod, url);
-            httpRequestMessage.Headers.Add("Accept", "application/json");
+            //httpRequestMessage.Headers.Add("Accept", "application/json");
             var httpclient = _httpClientFactory.CreateClient();
             httpclient.DefaultRequestHeaders.Authorization = String.IsNullOrEmpty(accessToken) ? null : new AuthenticationHeaderValue("Bearer", accessToken); //No access token authenticationheader = null
             return Tuple.Create(httpclient, httpRequestMessage);
@@ -83,22 +83,23 @@ namespace WebClient.Helpers.Api
             }
         }
 
-        public async Task<T?> GetTAsync<T>(string url, string accessToken)
+        public async Task<T> GetTAsync<T>(string url, string accessToken)
         {
             try
             {
-                var setup = SetupClient(HttpMethod.Get, url, accessToken);
+                url = _configuration.GetValue<string>("Api:Endpoint") + url;
+                var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, url);
+                //httpRequestMessage.Headers.Add("Accept", "application/json");
+                var httpclient = _httpClientFactory.CreateClient();
+                httpclient.DefaultRequestHeaders.Authorization = String.IsNullOrEmpty(accessToken) ? null : new AuthenticationHeaderValue("Bearer", accessToken); //No access token authenticationheader = null
 
-                var response = await setup.Item1.SendAsync(setup.Item2);
+                //var setup = SetupClient(HttpMethod.Get, url, accessToken);
 
+                var response = await httpclient.SendAsync(httpRequestMessage);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    using (var content = await response.Content.ReadAsStreamAsync())
-                    {
-                        return await JsonSerializer.DeserializeAsync<T>(content);
-                    }
-                }
+                using var ContentStream = await response.Content.ReadAsStreamAsync();
+
+                return await JsonSerializer.DeserializeAsync<T>(ContentStream);
             }
             catch (Exception e)
             {
