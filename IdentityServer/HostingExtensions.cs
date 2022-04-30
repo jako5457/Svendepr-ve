@@ -15,8 +15,25 @@ namespace IdentityServer
         {
             builder.Services.AddRazorPages();
 
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("LocalConnection")));
+            if (builder.Environment.IsDevelopment())
+            {
+                builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                                options.UseSqlServer(builder.Configuration.GetConnectionString("LocalConnection")));
+            }
+
+            if (builder.Environment.IsProduction())
+            {
+                builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            }
+
+            builder.Services.AddCors(o => { 
+                o.AddDefaultPolicy(b => { 
+                            b.WithOrigins("https://localhost:7039")
+                                .AllowAnyMethod()
+                                .AllowAnyHeader(); 
+                }); 
+            });
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -29,28 +46,25 @@ namespace IdentityServer
                     options.Events.RaiseInformationEvents = true;
                     options.Events.RaiseFailureEvents = true;
                     options.Events.RaiseSuccessEvents = true;
-
-                // see https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/
-                options.EmitStaticAudienceClaim = true;
+                    options.Endpoints.EnableAuthorizeEndpoint = true;
+                    options.Endpoints.EnableIntrospectionEndpoint = true;
+                    // see https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/
+                    options.EmitStaticAudienceClaim = true;
                 })
                 .AddInMemoryIdentityResources(Config.IdentityResources)
                 .AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryClients(Config.Clients)
                 .AddAspNetIdentity<ApplicationUser>();
 
-            builder.Services.AddAuthentication()
-                .AddGoogle(options =>
-                {
-                    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-
-                // register your IdentityServer with Google at https://console.developers.google.com
-                // enable the Google+ API
-                // set the redirect URI to https://localhost:5001/signin-google
-                options.ClientId = "copy client ID from Google here";
-                    options.ClientSecret = "copy client secret from Google here";
-                });
-
-            builder.Services.AddTransient<IEmailSender, EmailSender>();
+            builder.Services.AddTransient<IEmailSender, EmailSender>(i => 
+                new EmailSender(
+                    builder.Configuration["EmailSender:host"],
+                    builder.Configuration.GetValue<int>("EmailSender:port"),
+                    builder.Configuration.GetValue<bool>("EmailSender:enableSSL"),
+                    builder.Configuration["EmailSender:userName"],
+                    builder.Configuration["EmailSender:password"]
+                    )
+            );
 
             return builder.Build();
         }
@@ -64,8 +78,16 @@ namespace IdentityServer
                 app.UseDeveloperExceptionPage();
             }
 
+            if (app.Environment.IsProduction())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
             app.UseStaticFiles();
             app.UseRouting();
+
+            app.UseCors();
+
             app.UseIdentityServer();
             app.UseAuthorization();
 

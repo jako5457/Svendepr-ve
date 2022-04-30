@@ -1,4 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
+using WebClient.Helpers.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,15 @@ var builder = WebApplication.CreateBuilder(args);
 #region ConfigureServices
 
 builder.Services.AddRazorPages();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+});
+
+builder.Services.AddMemoryCache();
+
+builder.Services.AddMvc();
 
 JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
@@ -17,14 +27,13 @@ builder.Services.AddAuthentication(options =>
     .AddCookie("Cookies")
     .AddOpenIdConnect("oidc", options =>
     {
-        options.Authority = "https://10.135.16.153:5001";
+        options.Authority = "https://identityserversvende.azurewebsites.net/";
 
-        options.ClientId = "WebRazor";
-        options.ClientSecret = "ThisIsASecretRazor";
+        options.ClientId = "web";
+        options.ClientSecret = "websecret";
         options.ResponseType = "code";
-        
 
-        options.SaveTokens = true;
+        //options.Scope.Clear();
         options.Scope.Add("offline_access"); //Client Request AccesToken
         options.Scope.Add("openid");
         options.Scope.Add("profile");
@@ -32,12 +41,11 @@ builder.Services.AddAuthentication(options =>
         options.GetClaimsFromUserInfoEndpoint = true; //User Information
         options.SaveTokens = true; //Client saves AccessToken
 
-        HttpClientHandler handler = new HttpClientHandler();
-        handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-        options.BackchannelHttpHandler = handler;
     });
 
+builder.Services.AddHttpClient();
 
+builder.Services.AddScoped<IApiCaller, ApiCaller>();
 #endregion
 
 // Add services to the container.
@@ -56,19 +64,13 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseSession();
 
 app.UseRouting();
-
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseEndpoints(endpoins =>
-{
-    endpoins.MapDefaultControllerRoute()
-    .RequireAuthorization();
-});
-
-app.MapRazorPages();
+app.MapRazorPages().RequireAuthorization();
 
 app.Run();
 

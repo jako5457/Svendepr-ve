@@ -26,7 +26,7 @@
                 }
                 else
                 {
-                    <li class="page-item"><a class="page-link" asp-page="" asp-route-currentpage="@item.ToString()">@item.ToString()</a></li>
+                    <li class="page-item"><a class="page-link" asp-route-currentpage="@item.ToString()">@item.ToString()</a></li>
                 }
             }
             @if (Model.Pager?.CurrentPage >= Model.Pager?.EndPage)

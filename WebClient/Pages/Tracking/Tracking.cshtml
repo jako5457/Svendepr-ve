@@ -1,4 +1,36 @@
 ﻿@page "{id}"
 @model WebClient.Pages.Tracking.TrackingModel
 @{
+
 }
+
+
+<div class="container">
+    <h3>My Google Maps Demo</h3>
+    <div id="map"></div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhShiSbwyU-t0uvBojMmt29E0lrFYx3jA&callback=initMap&v=weekly" defer></script>
+
+<script type="text/javascript" src="~/js/Mapslocal.js"></script>
+
+@*<div class="container ">
+    <div class="row">
+    <iframe width="600"
+    height="450"
+    style="border:0"
+    loading="lazy"
+    disableDefaultUI="true"
+    allowfullscreen
+    referrerpolicy="no-referrer-when-downgrade"
+    frameborder="0"
+    src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyAhShiSbwyU-t0uvBojMmt29E0lrFYx3jA&origin=Oslo+Norway&destination=Telemark+Norway&units=metric">
+    </iframe>
+    </div>
+    </div>*@
+
+<script>
+    $(window).on('load',function (){
+    setTimeout(callRoute(54.913811,9.792178,50.450001,30.523333), 100)
+    });
+</script>

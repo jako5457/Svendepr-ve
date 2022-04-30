@@ -1,4 +1,4 @@
-﻿@page "{kategory?}/{currentpage?}"
+﻿@page "{currentpage?}"
 @model WebClient.Pages.Products.ReadModel
 @{
     ViewData["Title"] = "Products";
@@ -45,7 +45,14 @@
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <a asp-page="/Products/Details" asp-route-id="@i" class="btn btn-primary">Go somewhere</a>
+                        <a asp-page="/Products/Details" asp-route-id="@i" class="btn btn-light">
+                            Details <img src="~/lib/bootstrap/Icons/zoom-in.svg" />
+                        </a>
+                        <form method="post" asp-page-handler="Add" asp-route-id="@i" asp-route-name="Hej Item" >
+                            <button type="submit" class="btn btn-light float-right">
+                                Add to Cart <img src="~/lib/bootstrap/Icons/cart-plus.svg" />
+                            </button>
+                        </form>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">Last updated 3 mins ago</small>
