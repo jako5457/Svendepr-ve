@@ -8,16 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-TfRabbitmqService.MqttMode = true;
-TfRabbitmqService.MessageDebug = true;
-builder.Services.AddTfRabbitConnectionFactory(factory =>
-{
-    factory.HostName = builder.Configuration.GetValue<string>("RabbitMq:Host");
-    factory.UserName = builder.Configuration.GetValue<string>("RabbitMq:User");
-    factory.Password = builder.Configuration.GetValue<string>("RabbitMq:Password");
-    factory.Port = builder.Configuration.GetValue<int>("RabbitMq:Port");
-});
-
 var IdentityEndpoint = builder.Configuration.GetValue<string>("IdentityEndpoint");
 
 builder.Services.AddSwaggerGen(options =>
@@ -73,8 +63,8 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-builder.Services.AddDbContext<ApiDbcontext>(b => b.UseSqlServer(builder.Configuration.GetConnectionString("ApiDatabase")));
-//builder.Services.AddDbContext<ApiDbcontext>(b => b.UseSqlServer(builder.Configuration.GetConnectionString("LocalConnection")));
+//builder.Services.AddDbContext<ApiDbcontext>(b => b.UseSqlServer(builder.Configuration.GetConnectionString("ApiDatabase")));
+builder.Services.AddDbContext<ApiDbcontext>(b => b.UseSqlServer(builder.Configuration.GetConnectionString("LocalConnection")));
 
 builder.Services.AddAuthentication("Bearer")
 .AddJwtBearer("Bearer", options =>
@@ -94,9 +84,6 @@ builder.Services.AddCors(o => {
             .AllowAnyHeader();
     });
 });
-
-builder.Services.AddTopicFrameWork(Assembly.GetEntryAssembly());
-builder.Services.AddTfRabbit();
 
 var app = builder.Build();
 

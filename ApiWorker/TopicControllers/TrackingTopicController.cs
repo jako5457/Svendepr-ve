@@ -1,4 +1,11 @@
-﻿namespace Api.TopicControllers
+﻿using ApiDataLayer;
+using ApiDataLayer.Entities;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using TopicFramework.Attributes;
+using TopicFramework.Controllers;
+
+namespace Api.TopicControllers
 {
     [TopicController("Track")]
     public class TrackingTopicController : TopicControllerBase
@@ -32,6 +39,7 @@
             {
                 _Dbcontext.TrackingInfos.Add(info);
                 await _Dbcontext.SaveChangesAsync();
+                _Logger.LogInformation($"[{info.CreationDate.ToLongDateString()}] Recieved data from {info.TrackingCode}");
             }
             catch (Exception e)
             {
