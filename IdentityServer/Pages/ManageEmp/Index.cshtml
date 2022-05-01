@@ -1,0 +1,48 @@
+﻿@page
+@using IdentityServer.Models
+@model IdentityServer.Pages.ManageEmp.IndexModel
+@{
+}
+
+<div class="container">
+    <table class="table">
+        <thead>
+        <th scope="col">ID</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">PhoneNumber</th>
+        <th scope="col">Role</th>
+        <th scope="col"></th>
+        </thead>
+        <tbody>
+            @foreach (ApplicationUser user in Model.MyUsers)
+            {
+                <tr>
+                    <th scope="row">@user.Id</th>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>@user.PhoneNumber</td>
+                    <td>
+                        @{
+                            var myroles = await Model._userManager.GetRolesAsync(user);
+
+                            foreach (string item in myroles)
+                            {
+                                <span>@item</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        <form>
+
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+

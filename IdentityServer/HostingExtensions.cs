@@ -18,7 +18,7 @@ namespace IdentityServer
             if (builder.Environment.IsDevelopment())
             {
                 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                                options.UseSqlServer(builder.Configuration.GetConnectionString("LocalConnection")));
+                                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             }
 
             if (builder.Environment.IsProduction())
@@ -65,7 +65,7 @@ namespace IdentityServer
                 new EmailSender(
                     builder.Configuration["EmailSender:host"],
                     builder.Configuration.GetValue<int>("EmailSender:port"),
-                    builder.Configuration.GetValue<bool>("EmailSender:enableSSL"),
+                    true,
                     builder.Configuration["EmailSender:userName"],
                     builder.Configuration["EmailSender:password"]
                     )

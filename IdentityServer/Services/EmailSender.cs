@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.UI.Services;
+using System.Net;
+using System.Net.Mail;
 
 namespace IdentityServer.Services
 {
@@ -21,7 +23,16 @@ namespace IdentityServer.Services
 
         public Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            throw new NotImplementedException();
+            using SmtpClient smtpClient = new SmtpClient(host, port)
+            {
+                Credentials = new NetworkCredential(userName, password),
+                EnableSsl = enableSSL
+            };
+
+            return smtpClient.SendMailAsync(
+                new MailMessage(this.userName, email, subject, htmlMessage) { IsBodyHtml = true }
+                );
+
         }
     }
 }
