@@ -2,6 +2,6 @@
 {
     public class IdentityConst
     {
-        public const string IdentityServer = "https://localhost:5001";
+        public const string IdentityServer = "https://identityserversvende.azurewebsites.net/";
     }
 }
