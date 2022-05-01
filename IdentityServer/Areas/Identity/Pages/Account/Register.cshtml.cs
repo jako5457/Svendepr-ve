@@ -40,7 +40,7 @@ namespace IdentityServer.Areas.Identity.Pages.Account
         [BindProperty]
         public InputModel Input { get; set; }
 
-        public string? ReturnUrl { get; set; }
+        public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
@@ -65,8 +65,15 @@ namespace IdentityServer.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            ReturnUrl = TempData.Peek("returnUrl").ToString();
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            if (String.IsNullOrEmpty(TempData.Peek("returnUrl").ToString()))
+            {
+                returnUrl ??= Url.Content("~/");
+            }
+            else
+            {
+                ReturnUrl = TempData.Peek("returnUrl").ToString();
+                ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            }
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
