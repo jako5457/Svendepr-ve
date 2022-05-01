@@ -2,6 +2,7 @@ using IdentityServer.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Claims;
 
 namespace IdentityServer.Pages.Shared
 {
@@ -11,9 +12,11 @@ namespace IdentityServer.Pages.Shared
 
         public string _role;
 
-        public _RoleNavModel()
+        public _RoleNavModel(UserManager<ApplicationUser> userManager, ClaimsPrincipal currentuser)
         {
-            var user = _userManager.GetUserAsync(User).Result;
+            _userManager = userManager;
+
+            var user = _userManager.GetUserAsync(currentuser).Result;
 
             _role = _userManager.GetRolesAsync(user).Result.Where(r => r.Contains("Admin")).FirstOrDefault();
         }

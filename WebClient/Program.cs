@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using WebClient.Helpers.Api;
+using WebClient.Helpers.Constants;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +28,7 @@ builder.Services.AddAuthentication(options =>
     .AddCookie("Cookies")
     .AddOpenIdConnect("oidc", options =>
     {
-        options.Authority = "https://identityserversvende.azurewebsites.net/";
+        options.Authority = IdentityConst.IdentityServer;
 
         options.ClientId = "web";
         options.ClientSecret = "websecret";

@@ -1,5 +1,8 @@
 @using Duende.IdentityServer.Extensions
+@using IdentityServer.Models
 @using IdentityServer.Pages.Shared
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> _userMananger
 @{
     string name = null;
     if (!true.Equals(ViewData["signed-out"]))
@@ -40,6 +43,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="https://localhost:5002/Index">Lilla Kors</a>
                 </li>
+                <partial name="_RoleNav" model="new _RoleNavModel(_userMananger, @User)"/>
             </ul>
         }
         else

@@ -8,10 +8,10 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    @if (!String.IsNullOrEmpty(Model._role))
+    @if (!String.IsNullOrEmpty(Model._role)) 
     {
         <li class="nav-item">
-            <a class="nav-link" asp-page="/ManageEmp">Manage Users</a>
+            <a class="nav-link" asp-area="" asp-page="/ManageEmp/index">Manage Users</a>
         </li>
     }
     
