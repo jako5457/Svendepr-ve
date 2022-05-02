@@ -66,7 +66,7 @@ namespace XamarinClient
 
         private void btnMyOrders_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new MyOrders(Application.Current.Properties["sub"].ToString()));
+            Navigation.PushAsync(new MyOrders());
         }
     }
 }

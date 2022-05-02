@@ -2,37 +2,49 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamarinClient.MyOrders">
-    <ListView x:Name="MyListView"
+    <StackLayout>
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+
+            <Label x:Name="lblLoading" IsVisible="false" Text="" Grid.Column="0" Grid.Row="0" HorizontalOptions="Center"/>
+            <ActivityIndicator x:Name="activityIndicator" IsRunning="true" Grid.Column="0" Grid.Row="0" HorizontalOptions="Center"/>
+
+        </Grid>
+        <ListView x:Name="MyListView"
             ItemsSource="{Binding Items}"
             CachingStrategy="RecycleElement"
             RowHeight="60">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
 
 
-                        <Label Text="{Binding orderId}" FontSize="18" Grid.Column="0" Grid.Row="0" />
-                        <Label Text="{Binding deliveryAddress}" FontSize="16" Grid.Column="0" Grid.Row="1"  />
-                        <Button x:Name="btnDelivered" Text="Delivered" Clicked="btnDelivered_Clicked" CommandParameter="{Binding .}"  HorizontalOptions="End" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
+                            <Label Text="{Binding orderId}" FontSize="18" Grid.Column="0" Grid.Row="0" />
+                            <Label Text="{Binding deliveryAddress}" FontSize="16" Grid.Column="0" Grid.Row="1"  />
+                            <Button x:Name="btnDelivered" Text="Delivered" Clicked="btnDelivered_Clicked" CommandParameter="{Binding .}"  HorizontalOptions="End" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
 
-                        
 
-                    </Grid>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
-    <ContentPage.Content>
+
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -44,5 +56,5 @@
             <Label x:Name="lblSubId"/>
 
         </Grid>
-    </ContentPage.Content>
+    </StackLayout>
 </ContentPage>

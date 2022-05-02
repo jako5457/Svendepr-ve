@@ -22,6 +22,7 @@
     <PackageReference Include="IdentityModel.OidcClient" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.4" />
     <PackageReference Include="RabbitMQ.Client" Version="6.2.4" />
+    <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
     <PackageReference Include="Xamarin.Forms.Background" Version="0.10.0--date20201015-0154.git-9ac6556" />
