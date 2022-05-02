@@ -59,12 +59,23 @@ namespace Api.Controllers
 
         [HttpPut]
         [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:order:write")]
-        public async Task<IActionResult> EditOrder(Order order)
+        [Route("{OrderId}")]
+        public async Task<IActionResult> EditOrder(OrderModel order,int OrderId)
         {
+
+            Order? exorder = await _Dbcontext.Orders.Where(o => o.OrderId == OrderId).FirstOrDefaultAsync();
+
+            if (exorder == null)
+                return NotFound();
+
+            exorder.IsDelivered = order.IsDelivered;
+            exorder.DeliveryLocation = order.DeliveryLocation;
+            exorder.DriverId = order.DriverId;
+            exorder.EmployeeId = order.EmployeeId;
+            exorder.DeliveryAddress = order.DeliveryAddress;
+
             try
             {
-                _Dbcontext.Attach(order);
-                _Dbcontext.Entry(order).State = EntityState.Modified;
                 await _Dbcontext.SaveChangesAsync();
                 return Ok("Order Updated..");
             }
