@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  apiworker:
+    image: ${DOCKER_REGISTRY-}apiworker
+    build:
+      context: .
+      dockerfile: ApiWorker/Dockerfile

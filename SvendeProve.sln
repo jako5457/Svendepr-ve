@@ -29,7 +29,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Readme.md = Readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiWorker", "ApiWorker\ApiWorker.csproj", "{498FC9F9-3BCE-4387-BCAA-3597D6BC27B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiWorker", "ApiWorker\ApiWorker.csproj", "{498FC9F9-3BCE-4387-BCAA-3597D6BC27B1}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F20FD5DD-ACCD-4A88-8BA8-C81DCC661F88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -172,6 +174,22 @@ Global
 		{498FC9F9-3BCE-4387-BCAA-3597D6BC27B1}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{498FC9F9-3BCE-4387-BCAA-3597D6BC27B1}.Release|x86.ActiveCfg = Release|Any CPU
 		{498FC9F9-3BCE-4387-BCAA-3597D6BC27B1}.Release|x86.Build.0 = Release|Any CPU
+		{F20FD5DD-ACCD-4A88-8BA8-C81DCC661F88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F20FD5DD-ACCD-4A88-8BA8-C81DCC661F88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F20FD5DD-ACCD-4A88-8BA8-C81DCC661F88}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{F20FD5DD-ACCD-4A88-8BA8-C81DCC661F88}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{F20FD5DD-ACCD-4A88-8BA8-C81DCC661F88}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{F20FD5DD-ACCD-4A88-8BA8-C81DCC661F88}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{F20FD5DD-ACCD-4A88-8BA8-C81DCC661F88}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F20FD5DD-ACCD-4A88-8BA8-C81DCC661F88}.Debug|x86.Build.0 = Debug|Any CPU
+		{F20FD5DD-ACCD-4A88-8BA8-C81DCC661F88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F20FD5DD-ACCD-4A88-8BA8-C81DCC661F88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F20FD5DD-ACCD-4A88-8BA8-C81DCC661F88}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{F20FD5DD-ACCD-4A88-8BA8-C81DCC661F88}.Release|iPhone.Build.0 = Release|Any CPU
+		{F20FD5DD-ACCD-4A88-8BA8-C81DCC661F88}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{F20FD5DD-ACCD-4A88-8BA8-C81DCC661F88}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{F20FD5DD-ACCD-4A88-8BA8-C81DCC661F88}.Release|x86.ActiveCfg = Release|Any CPU
+		{F20FD5DD-ACCD-4A88-8BA8-C81DCC661F88}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
