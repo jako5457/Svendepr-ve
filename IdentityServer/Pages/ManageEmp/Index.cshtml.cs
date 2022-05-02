@@ -26,7 +26,7 @@ namespace IdentityServer.Pages.ManageEmp
             _roleManager = roleManager;
         }
 
-        public async void OnGet()
+        public void OnGet()
         {
             MyUsers = _userManager.Users.ToList();
             //var Mylist = await _userManager.GetRolesAsync(MyUsers[3]);

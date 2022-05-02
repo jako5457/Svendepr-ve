@@ -1,3 +1,5 @@
+using IdentityModel;
+using Microsoft.AspNetCore.Authentication;
 using System.IdentityModel.Tokens.Jwt;
 using WebClient.Helpers.Api;
 using WebClient.Helpers.Constants;
@@ -54,6 +56,8 @@ builder.Services.AddAuthentication(options =>
         options.Scope.Add("offline_access"); //Client Request AccesToken
         options.Scope.Add("openid");
         options.Scope.Add("profile");
+        options.Scope.Add("Mailverf");
+        options.ClaimActions.MapJsonKey(JwtClaimTypes.Role, JwtClaimTypes.Role);
         options.GetClaimsFromUserInfoEndpoint = true; //User Information
         options.SaveTokens = true; //Client saves AccessToken
 

@@ -1,4 +1,5 @@
 ﻿@page "{id}"
+@using WebClient.Helpers.Navigation
 @model WebClient.Pages.Tracking.TrackingModel
 @{
 
@@ -6,16 +7,54 @@
 
 
 <div class="container">
-    <h3>My Google Maps Demo</h3>
-    <div id="map"></div>
+    @if (String.IsNullOrEmpty(Model.Error))
+    {
+        <div class="col-12">
+            <div class="col-4">
+                Status
+                @if (Model.order.isDelivered)
+                {
+                    <span class="badge bg-success">Delivered</span>
+                }
+                else
+                {
+                    <span class="badge bg-secondary">Proccesing</span>
+                }
+            </div>
+            <div class="col-4">
+                Current Postition: Lat: @Model.CurrentPosition.latitude , Lng: @Model.CurrentPosition.longitude
+            </div>
+            <div class="col-4">
+                Destination:
+            </div>
+        </div>
+        <div class="col-12" id="map"></div>
+    }
+    else
+    {
+        <div class="col-12" style="color: red;">
+            @Model.Error
+        </div>
+    }
 </div>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhShiSbwyU-t0uvBojMmt29E0lrFYx3jA&callback=initMap&v=weekly" defer></script>
 
 <script type="text/javascript" src="~/js/Mapslocal.js"></script>
 
-<script>
-    $(window).on('load',function (){
-    setTimeout(callRoute(54.913811,9.792178,50.450001,30.523333), 100)
-    });
-</script>
+@if (Model.Trackings.Any())
+{
+    <script>
+                $(window).on('load',function (){
+                setTimeout(callRoute(
+        @Model.CurrentPosition.latitude.ReplaceComma(),
+        @Model.CurrentPosition.longitude.ReplaceComma(),
+        @Model.Destination.latitude.ReplaceComma(),
+        @Model.Destination.longitude.ReplaceComma()), 100)
+                });
+
+                window.setTimeout( function() {
+          window.location.reload();
+        }, 30000);
+    </script>
+}

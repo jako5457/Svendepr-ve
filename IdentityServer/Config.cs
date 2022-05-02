@@ -10,7 +10,17 @@ namespace IdentityServer
             new IdentityResource[]
             {
                 new IdentityResources.OpenId(),
-                new IdentityResources.Profile()
+                new IdentityResources.Profile(),
+                new IdentityResource()
+                {
+                    Name = "Mailverf",
+                    UserClaims = new List<string>
+                    {
+                        JwtClaimTypes.Email,
+                        JwtClaimTypes.EmailVerified,
+                        JwtClaimTypes.Role
+                    }
+                }
                 
             };
 
@@ -79,7 +89,10 @@ namespace IdentityServer
                     "product_request_read",
                     "product_request_write",
                     "warehouse_read",
-                    "warehouse_write"
+                    "warehouse_write",
+                    "api_all_read",
+                    "api_all_write",
+                    "Mailverf"
                 }
 
             },
@@ -168,6 +181,20 @@ namespace IdentityServer
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.OfflineAccess,
+                    "company_read",
+                    "company_write",
+                    "driver_read",
+                    "driver_write",
+                    "employee_read",
+                    "employee_write",
+                    "order_read",
+                    "order_write",
+                    "product_read",
+                    "product_write",
+                    "product_request_read",
+                    "product_request_write",
+                    "warehouse_read",
+                    "warehouse_write"
                 }
             }
         };

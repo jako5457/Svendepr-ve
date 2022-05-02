@@ -53,6 +53,15 @@
                                         <li>
                                             <a class="dropdown-item" href="@IdentityConst.IdentityServer/Identity/Account/Manage/index">My Account</a>
                                         </li>
+                                        @if (User?.Claims.GetValueFromClaim("role") == "Admin")
+                                        {
+                                            <li>
+                                                <a class="dropdown-item" href="@IdentityConst.IdentityServer/ManageEmp/index">Manage Users</a>
+                                            </li>
+                                        }
+                                        <li>
+
+                                        </li>
                                         <li>
                                             <a class="dropdown-item" asp-area="" asp-page="/Privacy">Privacy</a>
                                         </li>
