@@ -57,6 +57,15 @@ namespace XamarinClient.Pages
                     lblDeliveryAddress.Text = order.deliveryAddress;
                     lblStatus.Text = order.isDelivered.ToString();
 
+                    if (order.isDelivered == true)
+                    {
+                        btnTakeOrder.IsEnabled = false;
+                    }
+                    else
+                    {
+                        btnTakeOrder.IsEnabled = true;
+                    }
+
                     activityIndicator.IsRunning = false;
                 }
             }
