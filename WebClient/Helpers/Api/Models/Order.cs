@@ -3,7 +3,7 @@
     public class Order
     {
         public int orderId { get; set; }
-        public int driverId { get; set; }
+        public int? driverId { get; set; }
         public int employeeId { get; set; }
         public DateTime createdDate { get; set; }
         public string trackingCode { get; set; }

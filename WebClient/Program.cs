@@ -22,6 +22,12 @@ builder.Services.AddMvc();
 
 JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Admin", policy => policy.RequireClaim("role", "Admin"));
+    options.AddPolicy("Admin", policy => policy.RequireClaim("role", "User"));
+});
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = "Cookies";

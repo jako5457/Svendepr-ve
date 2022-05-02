@@ -5,31 +5,40 @@
 }
 
 <div class="container">
-    <div class="row" style="background: lightgrey;border-radius: 0.25rem;">
-        <h3 class="text-center">
-            Tracking
-        </h3>
-        <div class="container">
-            <div class="row px-3">
-                <div class="col-6 text-start">
-                    <img src="~/lib/bootstrap/Icons/truck.svg" width="64" height="64" />
+    @if (!String.IsNullOrEmpty(Model.Order.trackingCode))
+    {
+        <div class="row" style="background: lightgrey;border-radius: 0.25rem;">
+            <h3 class="text-center">
+                Tracking
+            </h3>
+            <div class="container">
+                <div class="row px-3">
+                    <div class="col-6 text-start">
+                        <img src="~/lib/bootstrap/Icons/truck.svg" width="64" height="64" />
+                    </div>
+                    <div class="col-6 text-end">
+                        <img src="~/lib/bootstrap/Icons/box-seam.svg" width="64" height="64" />
+                    </div>
                 </div>
-                <div class="col-6 text-end">
-                    <img src="~/lib/bootstrap/Icons/box-seam.svg" width="64" height="64" />
+                <div class="col-12 px-3 align-content-center" style="margin-top: 15px;">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                    </div>
                 </div>
             </div>
-            <div class="col-12 px-3 align-content-center" style="margin-top: 15px;">
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                </div>
-            </div>
+            <h6 class="text-center" style="margin-top: 15px;">
+                <a asp-page="/Tracking/Tracking" asp-route-id="@Model?.Order.trackingCode" >
+                    See live tracking
+                </a>
+            </h6>
         </div>
-        <h6 class="text-center" style="margin-top: 15px;">
-            <a asp-page="/Tracking/Tracking" asp-route-id="@Model?.trackingid" >
-                See live tracking
-            </a>
-        </h6>
-    </div>
+    }
+    else
+    {
+        <div class="row">
+            Order not being tracked yet, come back to see update.
+        </div>
+    }
 
     <h3 class="text-center"></h3>
     <div class="row">
@@ -37,7 +46,7 @@
             <div class="card-body">
                 <div class="card-header row">
                     <div class="text-start col-6">
-                        OrderID
+                        Order number: @Model?.Order.orderId
                     </div>
                     <div class="text-end col-6">
                         <span class="badge bg-info text-dark">Info</span>
@@ -74,7 +83,7 @@
                 </ul>
 
                 <div class="card-footer text-center text-muted">
-                    @DateTime.Now.ToLongDateString()
+                    Order Made: @Model?.Order.createdDate
                 </div>
             </div>
         </div>

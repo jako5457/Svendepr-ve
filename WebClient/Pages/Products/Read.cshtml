@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-bottom: 15px;">
-        @if (Model.products == null)
+        @if (Model.Products == null)
         {
             <div class="col">
                 <p>No Products</p>
@@ -46,7 +46,7 @@
         }
         else
         {
-            foreach (var item in Model.products)
+            foreach (var item in Model.Products)
             {
                 <div class="col">
                     <div class="card h-100">
@@ -71,11 +71,30 @@
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">@item.ean</small>
-                            <small class="text-muted text-end">stock <span style="color: green">@item</span></small>
+                            <form method="post" asp-page-handler="Remove" asp-route-id="@item.productId">
+                                <input class="form-control" asp-for="@Model.Confirm" placeholder="Write Item name">
+                                <button type="submit" class="btn btn-outline-danger w-100">
+                                    Remove <img class="danger" src="~/lib/bootstrap/Icons/trash.svg" />
+                                </button>
+                            </form>
+                            @*                            <small class="text-muted text-end">stock <span style="color: green">@item</span></small>*@
                         </div>
                     </div>
                 </div>
-            }           
+            }
+            if (Model.IsAdmin)
+            {
+                <a asp-page="/Products/Create">
+                    <div class="col text-center">
+                        <img src="~/lib/bootstrap/Icons/plus-circle.svg" class="card-img-top w-50" />
+                        <div class="card-body">
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">This is only visible as admin</small>
+                        </div>
+                    </div>
+                </a>
+            }
         }
     </div>
 

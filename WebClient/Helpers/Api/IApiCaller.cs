@@ -4,10 +4,10 @@
     {
         Task<T> GetTAsync<T>( string url, string accessToken);
 
-        Task PostAsync<T>(string url, string accessToken, T Input);
+        Task<bool> PostAsync<T>(string url, string accessToken, T Input);
 
         Task PutAsync(string url, string accessToken, string id);
 
-        Task DeleteAsync(string url, string accessToken, string id);
+        Task<bool> DeleteAsync(string url, string accessToken, string id);
     }
 }

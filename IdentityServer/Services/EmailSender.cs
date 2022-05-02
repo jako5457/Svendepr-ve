@@ -6,11 +6,11 @@ namespace IdentityServer.Services
 {
     public class EmailSender : IEmailSender
     {
-        private string host;
-        private int port;
-        private bool enableSSL;
-        private string userName;
-        private string password;
+        private readonly string host;
+        private readonly int port;
+        private readonly bool enableSSL;
+        private readonly string userName;
+        private readonly string password;
 
         public EmailSender(string host, int port, bool enableSSL, string userName, string password)
         {
@@ -23,7 +23,7 @@ namespace IdentityServer.Services
 
         public Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            using SmtpClient smtpClient = new SmtpClient(host, port)
+            using SmtpClient smtpClient = new(host, port)
             {
                 Credentials = new NetworkCredential(userName, password),
                 EnableSsl = enableSSL

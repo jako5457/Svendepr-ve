@@ -26,7 +26,7 @@ namespace WebClient.Helpers.Api
             return Tuple.Create(httpclient, httpRequestMessage);
         }
 
-        public async Task PostAsync<T>(string url, string accessToken, T Input)
+        public async Task<bool> PostAsync<T>(string url, string accessToken, T Input)
         {
             try
             {
@@ -37,11 +37,12 @@ namespace WebClient.Helpers.Api
                 HttpResponseMessage response = await setup.Item1.PostAsync(setup.Item2.RequestUri, content );
 
                 response.EnsureSuccessStatusCode();
+
+                return response.IsSuccessStatusCode;
             }
             catch (Exception)
             {
-
-                throw;
+                return false;
             }
         }
 
@@ -55,10 +56,8 @@ namespace WebClient.Helpers.Api
 
                 if (response.IsSuccessStatusCode)
                 {
-                    using (var content = await response.Content.ReadAsStreamAsync())
-                    {
-                        //return await JsonSerializer.DeserializeAsync<T>(content);
-                    }
+                    using var content = await response.Content.ReadAsStreamAsync();
+                    //return await JsonSerializer.DeserializeAsync<T>(content);
                 }
             }
             catch (Exception)
@@ -68,18 +67,21 @@ namespace WebClient.Helpers.Api
             }
         }
 
-        public async Task DeleteAsync(string url, string accessToken, string id)
+        public async Task<bool> DeleteAsync(string url, string accessToken, string id)
         {
             try
             {
-                var setup = SetupClient(HttpMethod.Delete, url + "/" + id, accessToken);
+                var setup = SetupClient(HttpMethod.Delete, url , accessToken);
 
-                var response = await setup.Item1.DeleteAsync(setup.Item2.RequestUri);
+                HttpResponseMessage response = await setup.Item1.DeleteAsync(setup.Item2.RequestUri);
+
+                response.EnsureSuccessStatusCode();
+
+                return response.IsSuccessStatusCode;
             }
             catch (Exception)
             {
-
-                throw;
+                return false;
             }
         }
 
@@ -97,7 +99,7 @@ namespace WebClient.Helpers.Api
 
                 return await JsonSerializer.DeserializeAsync<T>(ContentStream);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return default;
             }

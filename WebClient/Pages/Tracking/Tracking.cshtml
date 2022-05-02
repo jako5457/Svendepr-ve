@@ -12,7 +12,7 @@
         <div class="col-12">
             <div class="col-4">
                 Status
-                @if (Model.order.isDelivered)
+                @if (Model.Order.isDelivered)
                 {
                     <span class="badge bg-success">Delivered</span>
                 }
@@ -22,7 +22,7 @@
                 }
             </div>
             <div class="col-4">
-                Current Postition: Lat: @Model.CurrentPosition.latitude , Lng: @Model.CurrentPosition.longitude
+                Current Postition: Lat: @Model.CurrentPosition?.latitude , Lng: @Model.CurrentPosition?.longitude
             </div>
             <div class="col-4">
                 Destination:
@@ -57,4 +57,10 @@
           window.location.reload();
         }, 30000);
     </script>
+}
+
+else{
+    <div class="row" style="color:red">
+        <h1>NO TRACKING DATA</h1>     
+    </div>
 }

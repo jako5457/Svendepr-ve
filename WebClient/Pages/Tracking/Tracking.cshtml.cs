@@ -14,9 +14,9 @@ namespace WebClient.Pages.Tracking
 
         private readonly IApiCaller _apicaller;
 
-        public Employee employee { get; set; }
+        public Employee Employee { get; set; }
 
-        public Order order { get; set; }
+        public Order Order { get; set; }
 
         public List<Track> Trackings { get; set; }
 
@@ -34,20 +34,27 @@ namespace WebClient.Pages.Tracking
         {
             try
             {
-                id = "11";
                 string mymail = HttpUtility.UrlEncode(User?.Claims.GetValueFromClaim("email"));
                 string token = await HttpContext.GetTokenAsync("access_token");
-                employee = await _apicaller.GetTAsync<Employee>("Employee/" + mymail, token);
+                Employee = await _apicaller.GetTAsync<Employee>("Employee/" + mymail, token);
 
-                order = await  _apicaller.GetTAsync<Order>("Order/" + id , token);
+                Order = await  _apicaller.GetTAsync<Order>("Order/" + id , token);
 
-                Trackings = await _apicaller.GetTAsync<List<Track>>("Tracking/" + order.trackingCode, token);
+                Trackings = await _apicaller.GetTAsync<List<Track>>("Tracking/" + Order.trackingCode, token);
 
-                CurrentPosition = Trackings.First();
+                if (Trackings == null)
+                {
+                    Trackings = new List<Track>();
+                }
+                else
+                {
+                    CurrentPosition = Trackings.First();
 
-                Destination = Trackings.Last();
+                    Destination = Trackings.Last();
 
-                string test1 = CurrentPosition.latitude.ReplaceComma();
+                    string test1 = CurrentPosition.latitude.ReplaceComma();
+                }
+
 
             }
             catch (Exception e)
