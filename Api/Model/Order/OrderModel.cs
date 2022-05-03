@@ -12,6 +12,6 @@
 
         public bool IsDelivered { get; set; } = default!;
 
-        public List<OrderProductModel> Products = default!;
+        public List<OrderProductModel> Products { get; set; } = default!;
     }
 }

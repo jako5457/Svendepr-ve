@@ -6,3 +6,9 @@ services:
     build:
       context: .
       dockerfile: ApiWorker/Dockerfile
+    environment:
+      - ConnectionStrings__ApiDatabase=Server=<CONNECIONSTRING>
+      - RabbitMq__Host=<HOSTNAME>
+      - RabbitMq__Port=5672
+      - RabbitMq__User=<USERNAME>
+      - RabbitMq__Password=<PASSWORD>
