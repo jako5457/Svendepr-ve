@@ -27,7 +27,7 @@
                 </div>
             </div>
             <h6 class="text-center" style="margin-top: 15px;">
-                <a asp-page="/Tracking/Tracking" asp-route-id="@Model?.Order.trackingCode" >
+                <a asp-page="/Tracking/Tracking" asp-route-trackid="@Model?.Order.trackingCode" asp-route-orderid="@Model?.Order.orderId" >
                     See live tracking
                 </a>
             </h6>

@@ -11,7 +11,7 @@
     }
     public class Item
     {
-        public string? Id { get; set; }
+        public int Id { get; set; }
         public string name { get; set; }
         public int amount { get; set; }
     }

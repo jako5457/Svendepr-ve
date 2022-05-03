@@ -51,7 +51,7 @@ namespace WebClient.Pages.Products
         public async Task<IActionResult> OnPostAdd(string id, string name)
         {
             ShoppingCart shoppingCart = new(HttpContext);
-            shoppingCart.AddItem(new Item { Id = id, amount = 1, name = name });
+            shoppingCart.AddItem(new Item { Id = Int32.Parse(id), amount = 1, name = name });
             return RedirectToPage();
         }
 

@@ -1,4 +1,4 @@
-﻿@page "{id}"
+﻿@page "{trackid}/{orderid}"
 @using WebClient.Helpers.Navigation
 @model WebClient.Pages.Tracking.TrackingModel
 @{
@@ -33,7 +33,7 @@
     else
     {
         <div class="col-12" style="color: red;">
-            @Model.Error
+            Fejl: @Model.Error
         </div>
     }
 </div>
@@ -45,22 +45,27 @@
 @if (Model.Trackings.Any())
 {
     <script>
-                $(window).on('load',function (){
-                setTimeout(callRoute(
+        $(window).on('load',function (){
+        setTimeout(callRoute(
         @Model.CurrentPosition.latitude.ReplaceComma(),
         @Model.CurrentPosition.longitude.ReplaceComma(),
-        @Model.Destination.latitude.ReplaceComma(),
-        @Model.Destination.longitude.ReplaceComma()), 100)
-                });
+        @Model.Destination.latitude,
+        @Model.Destination.longitude), 100)});
 
-                window.setTimeout( function() {
-          window.location.reload();
-        }, 30000);
     </script>
 }
 
-else{
-    <div class="row" style="color:red">
-        <h1>NO TRACKING DATA</h1>     
-    </div>
+@if (!Model.Order.isDelivered)
+{
+    <script>
+             window.setTimeout( function() {
+          window.location.reload();
+        }, 30000);
+    </script>    
+}
+else
+{
+<div class="row text-center" style="color:red">
+    <h1>NO TRACKING DATA</h1>
+</div>
 }

@@ -1,9 +1,9 @@
-using Api.Model;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebClient.Helpers.Api;
+using WebClient.Helpers.Api.Models;
 
 namespace WebClient.Pages.Products
 {

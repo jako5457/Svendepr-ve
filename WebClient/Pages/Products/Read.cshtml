@@ -71,12 +71,15 @@
                         </div>
                         <div class="card-footer">
                             <small class="text-muted">@item.ean</small>
-                            <form method="post" asp-page-handler="Remove" asp-route-id="@item.productId">
-                                <input class="form-control" asp-for="@Model.Confirm" placeholder="Write Item name">
-                                <button type="submit" class="btn btn-outline-danger w-100">
-                                    Remove <img class="danger" src="~/lib/bootstrap/Icons/trash.svg" />
-                                </button>
-                            </form>
+                            @if (Model.IsAdmin)
+                            {
+                                <form method="post" asp-page-handler="Remove" asp-route-id="@item.productId">
+                                    <input class="form-control" asp-for="@Model.Confirm" placeholder="Write Item name">
+                                    <button type="submit" class="btn btn-outline-danger w-100">
+                                        Remove <img class="danger" src="~/lib/bootstrap/Icons/trash.svg" />
+                                    </button>
+                                </form>                                
+                            }
                             @*                            <small class="text-muted text-end">stock <span style="color: green">@item</span></small>*@
                         </div>
                     </div>

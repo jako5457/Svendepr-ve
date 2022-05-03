@@ -34,13 +34,13 @@ namespace WebClient.Helpers.Api
 
                 HttpContent content = new StringContent(JsonSerializer.Serialize<T>(Input), Encoding.UTF8, Application.Json);
 
-                HttpResponseMessage response = await setup.Item1.PostAsync(setup.Item2.RequestUri, content );
+                HttpResponseMessage response = await setup.Item1.PostAsJsonAsync<T>(setup.Item2.RequestUri, Input );
 
                 response.EnsureSuccessStatusCode();
 
                 return response.IsSuccessStatusCode;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return false;
             }

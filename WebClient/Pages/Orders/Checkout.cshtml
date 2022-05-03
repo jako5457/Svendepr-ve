@@ -79,44 +79,44 @@
                         Destination
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form method="post">
                             <div class="form-groupe">
                                 <div class="row mt-1">
                                     <div class="col">
                                         <label class="form-label">Delivery Address</label>
-                                        <input id="ship-address" name="ship-address" placeholder="Delivery Address" required autocomplete="off" type="text" class="form-control">
+                                        <input id="shipaddress" name="shipaddress" asp-for="@Model.Address.shipaddress" placeholder="Delivery Address" required autocomplete="off" type="text" class="form-control">
                                     </div>
                                 </div>
                                 <div class="row mt-1">
                                     <div class="col">
                                         <label class="form-label">Apartment, unit, suite, or floor #</label>
-                                        <input id="address2" name="address2" class="form-control">
+                                        <input id="address2" name="address2" asp-for="@Model.Address.address2" class="form-control">
                                     </div>
                                 </div>
                                 <div class="row mt-1">
                                     <div class="col">
                                         <label class="form-label">City*</label>
-                                        <input id="locality" name="locality" required class="form-control">
+                                        <input id="locality" name="locality" asp-for="@Model.Address.locality" required class="form-control">
                                     </div>
                                 </div>
                                 <div class="row mt-1">
                                     <div class="col">
                                         <label class="form-label">State/Province*</label>
-                                        <input id="state" name="state" required  class="form-control">
+                                        <input id="state" name="state" asp-for="@Model.Address.state"  class="form-control">
                                     </div>
                                     <div class="col mt-1">
                                         <label class="form-label">Postal code*</label>
-                                        <input id="postcode" name="postcode" required class="form-control">
+                                        <input id="postcode" name="postcode" asp-for="@Model.Address.postcode" required class="form-control">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col mt-1">
                                         <label class="form-label">Country/Region*</label>
-                                        <input id="country" name="country" required class="form-control">
+                                        <input id="country" name="country" required asp-for="@Model.Address.country" class="form-control">
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-outline-secondary mt-2">Save address</button>
+                            <button type="submit" class="btn btn-outline-secondary mt-2">Check Out</button>
                         </form>
                     </div>
                 </div>

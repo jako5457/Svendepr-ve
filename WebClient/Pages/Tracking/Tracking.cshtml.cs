@@ -20,8 +20,8 @@ namespace WebClient.Pages.Tracking
 
         public List<Track> Trackings { get; set; }
 
-        public Track Destination { get; set; }
-        public Track CurrentPosition { get; set; }
+        public TrackSimple? Destination { get; set; }
+        public Track? CurrentPosition { get; set; }
 
         public string Error { get; set; }
 
@@ -30,17 +30,17 @@ namespace WebClient.Pages.Tracking
             this._apicaller = apicaller;
         }
 
-        public async Task OnGetAsync(string id)
+        public async Task OnGetAsync(string trackid, string orderid)
         {
             try
             {
                 string mymail = HttpUtility.UrlEncode(User?.Claims.GetValueFromClaim("email"));
                 string token = await HttpContext.GetTokenAsync("access_token");
-                Employee = await _apicaller.GetTAsync<Employee>("Employee/" + mymail, token);
+                //Employee = await _apicaller.GetTAsync<Employee>("Employee/" + mymail, token);
 
-                Order = await  _apicaller.GetTAsync<Order>("Order/" + id , token);
+                Order = await  _apicaller.GetTAsync<Order>("Order/" + orderid, token);
 
-                Trackings = await _apicaller.GetTAsync<List<Track>>("Tracking/" + Order.trackingCode, token);
+                Trackings = await _apicaller.GetTAsync<List<Track>>("Tracking/" + trackid, token);
 
                 if (Trackings == null)
                 {
@@ -48,9 +48,15 @@ namespace WebClient.Pages.Tracking
                 }
                 else
                 {
-                    CurrentPosition = Trackings.First();
+                    CurrentPosition = Trackings.Last();
 
-                    Destination = Trackings.Last();
+                    char[] delimiterchar = { ',' };
+
+                    string[] location = Order.deliveryLocation.Split(delimiterchar, 2);
+
+                    Destination = new TrackSimple();
+                    Destination.latitude = location[0];
+                    Destination.longitude = location[1];
 
                     string test1 = CurrentPosition.latitude.ReplaceComma();
                 }
