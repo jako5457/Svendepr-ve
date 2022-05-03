@@ -60,7 +60,7 @@ namespace Api.Controllers
         [HttpPut]
         [RequiredScope(RequiredScopesConfigurationKey = "api:scopes:order:write")]
         [Route("{OrderId}")]
-        public async Task<IActionResult> EditOrder(OrderModel order,int OrderId)
+        public async Task<IActionResult> EditOrder(OrderUpdateModel order,int OrderId)
         {
 
             Order? exorder = await _Dbcontext.Orders.Where(o => o.OrderId == OrderId).FirstOrDefaultAsync();
