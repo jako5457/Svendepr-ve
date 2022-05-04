@@ -89,24 +89,25 @@ namespace XamarinClient
             }
         }
 
-        public async Task UpdateTracking()
-        {
-            await LoadOrders();
-            await LoadDriver();
-        }
-
         async Task TrackLocation()
         {
+
+            
+
             while (true)
             {
                 try
                 {
+                    LoadDriver();
+                    LoadOrders();
+
                     var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
                     cts = new CancellationTokenSource();
                     var location = await Geolocation.GetLocationAsync(request, cts.Token);
 
                     if (location != null && Application.Current.Properties["name"] != null)
                     {
+
                         foreach (Order order in orderlist)
                         {
                             IBasicProperties props = channel.CreateBasicProperties();
@@ -122,6 +123,8 @@ namespace XamarinClient
 
                             channel.BasicPublish("amq.topic", "Track.Location", props, messageBodyBytes);
                         }
+
+                        
                     }
                 }
 

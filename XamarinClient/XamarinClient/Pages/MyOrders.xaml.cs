@@ -91,7 +91,6 @@ namespace XamarinClient
         private async void btnDelivered_Clicked(object sender, EventArgs e)
         {
             var order = (Order)((Button)sender).CommandParameter;
-            TrackingService trackingService = DependencyService.Get<TrackingService>();
 
             order.isDelivered = true;
             var httpClient = new HttpClient();
@@ -99,8 +98,9 @@ namespace XamarinClient
             httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
             HttpResponseMessage response = await httpClient.PutAsJsonAsync<Order>("https://svendproveapi.azurewebsites.net/api/Order/" + order.orderId, order);
             response.EnsureSuccessStatusCode();
-            await trackingService.UpdateTracking();
-            await LoadOrders();
+            LoadOrders();
+
+
         }
     }
 }
