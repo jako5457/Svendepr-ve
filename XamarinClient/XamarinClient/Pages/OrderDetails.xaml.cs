@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -56,6 +57,15 @@ namespace XamarinClient.Pages
                     lblDeliveryAddress.Text = order.deliveryAddress;
                     lblStatus.Text = order.isDelivered.ToString();
 
+                    if (order.isDelivered == true)
+                    {
+                        btnTakeOrder.IsEnabled = false;
+                    }
+                    else
+                    {
+                        btnTakeOrder.IsEnabled = true;
+                    }
+
                     activityIndicator.IsRunning = false;
                 }
             }
@@ -91,9 +101,9 @@ namespace XamarinClient.Pages
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Application.Current.Properties["access_token"].ToString());
             httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
-            var content = JsonSerializer.Serialize(order);
-            httpClient.BaseAddress = new Uri("https://svendproveapi.azurewebsites.net/api/Order/");
-            await httpClient.PutAsync("https://svendproveapi.azurewebsites.net/api/Order/", new StringContent(content));
+            HttpResponseMessage response = await httpClient.PutAsJsonAsync<Order>("https://svendproveapi.azurewebsites.net/api/Order/" + order.orderId, order);
+            response.EnsureSuccessStatusCode();
+            await Navigation.PopAsync();
 
         }
     }

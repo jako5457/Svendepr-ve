@@ -17,7 +17,7 @@ namespace XamarinClient
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Orders : ContentPage
     {
-        public ObservableCollection<Order> OrderList { get; set; }
+        public ObservableCollection<Order> OrderCollection { get; set; }
 
         public Orders()
         {
@@ -38,7 +38,10 @@ namespace XamarinClient
             {
                 using (var content = await response.Content.ReadAsStreamAsync())
                 {
-                    OrderList = await JsonSerializer.DeserializeAsync<ObservableCollection<Order>>(content);
+                    OrderCollection = new ObservableCollection<Order>();
+                    var Orderresponse = await JsonSerializer.DeserializeAsync<ObservableCollection<Order>>(content);
+                    var Orderlist = Orderresponse.Where(x => x.driverId == null && x.isDelivered == false).ToList();
+                    Orderlist.ForEach(x => OrderCollection.Add(x));
                 }
                 lblLoading.IsVisible = false;
                 activityIndicator.IsRunning = false;
@@ -50,7 +53,7 @@ namespace XamarinClient
             }
 
 
-            MyListView.ItemsSource = OrderList;
+            MyListView.ItemsSource = OrderCollection;
         }
 
         protected async override void OnAppearing()
