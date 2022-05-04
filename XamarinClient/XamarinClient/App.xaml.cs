@@ -16,7 +16,9 @@ namespace XamarinClient
 
         protected override void OnStart()
         {
-            BackgroundAggregatorService.Add(() => new TrackingService());
+            var trackingservice = new TrackingService();
+            DependencyService.RegisterSingleton(trackingservice);
+            BackgroundAggregatorService.Add(() => trackingservice);
 
             BackgroundAggregatorService.StartBackgroundService();
         }

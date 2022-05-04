@@ -97,12 +97,15 @@ namespace XamarinClient.Pages
 
         private async void btnTakeOrder_Clicked(object sender, EventArgs e)
         {
+            TrackingService trackingService = DependencyService.Get<TrackingService>();
+
             order.driverId = driver.driverId;
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Application.Current.Properties["access_token"].ToString());
             httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
             HttpResponseMessage response = await httpClient.PutAsJsonAsync<Order>("https://svendproveapi.azurewebsites.net/api/Order/" + order.orderId, order);
             response.EnsureSuccessStatusCode();
+            await trackingService.UpdateTracking();
             await Navigation.PopAsync();
 
         }
