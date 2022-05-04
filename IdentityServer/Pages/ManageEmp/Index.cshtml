@@ -1,0 +1,51 @@
+﻿@page
+@using IdentityServer.Models
+@model IdentityServer.Pages.ManageEmp.IndexModel
+@{
+}
+
+<div class="container">
+    <table class="table table-responsive">
+        <thead>
+            <th scope="col">ID</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+            <th scope="col">PhoneNumber</th>
+            <th scope="col">Role</th>
+            <th scope="col">Funktions</th>
+        </thead>
+        <tbody>
+            @foreach (ApplicationUser user in Model.MyUsers)
+            {
+                <tr>
+                    <th scope="row">@user.Id</th>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>@user.PhoneNumber</td>
+                    <td>
+                        @{
+                            var myroles = await Model._userManager.GetRolesAsync(user);
+
+                            foreach (string item in myroles)
+                            {
+                                <span>@item</span>
+                            }
+                        }
+                    </td>
+                    <td>
+                        <form asp-page="/ManageEmp/Index" asp-route-id="@user.Id" >
+                            <button class="btn btn-primary" name="Button" value="Edit">Edit</button>
+                            <button class="btn btn-secondary" name="Button" value="Delete">Delete</button>
+                            <button class="btn btn-secondary" name="Button" value="Promote">Promote</button>                           
+                            <button class="btn btn-secondary" name="Button" value="Demote">Demote</button>                           
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+

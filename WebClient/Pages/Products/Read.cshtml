@@ -1,4 +1,5 @@
 ﻿@page "{currentpage?}"
+@using ApiDataLayer.Entities;
 @model WebClient.Pages.Products.ReadModel
 @{
     ViewData["Title"] = "Products";
@@ -9,7 +10,7 @@
         <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button text-center btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <button class="accordion-button text-center btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         Filtering
                     </button>
                 </h2>
@@ -37,28 +38,66 @@
         </div>
     </div>
     <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-bottom: 15px;">
-        @for (var i = 0; i < 10; i++)
+        @if (Model.Products == null)
         {
             <div class="col">
-                <div class="card h-100">
-                    <img src="~/images/placeholder-image.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <a asp-page="/Products/Details" asp-route-id="@i" class="btn btn-light">
-                            Details <img src="~/lib/bootstrap/Icons/zoom-in.svg" />
-                        </a>
-                        <form method="post" asp-page-handler="Add" asp-route-id="@i" asp-route-name="Hej Item" >
-                            <button type="submit" class="btn btn-light float-right">
-                                Add to Cart <img src="~/lib/bootstrap/Icons/cart-plus.svg" />
-                            </button>
-                        </form>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
+                <p>No Products</p>
+            </div>
+        }
+        else
+        {
+            foreach (var item in Model.Products)
+            {
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="~/images/placeholder-image.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.name</h5>
+                            <p class="card-text">@item.description</p>
+                            <div class="row">
+                                <div class="col-6">
+                                    <a asp-page="/Products/Details" asp-route-id="@item.productId" class="btn btn-outline-secondary w-100">
+                                        Details <img src="~/lib/bootstrap/Icons/zoom-in.svg" />
+                                    </a>
+                                </div>
+                                <div class="col-6">
+                                    <form method="post" asp-page-handler="Add" asp-route-id="@item.productId" asp-route-name="@item.name">
+                                        <button type="submit" class="btn btn-outline-secondary w-100">
+                                            Add <img src="~/lib/bootstrap/Icons/cart-plus.svg" />
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">@item.ean</small>
+                            @if (Model.IsAdmin)
+                            {
+                                <form method="post" asp-page-handler="Remove" asp-route-id="@item.productId">
+                                    <input class="form-control" asp-for="@Model.Confirm" placeholder="Write Item name">
+                                    <button type="submit" class="btn btn-outline-danger w-100">
+                                        Remove <img class="danger" src="~/lib/bootstrap/Icons/trash.svg" />
+                                    </button>
+                                </form>                                
+                            }
+                            @*                            <small class="text-muted text-end">stock <span style="color: green">@item</span></small>*@
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
+            if (Model.IsAdmin)
+            {
+                <a asp-page="/Products/Create">
+                    <div class="col text-center">
+                        <img src="~/lib/bootstrap/Icons/plus-circle.svg" class="card-img-top w-50" />
+                        <div class="card-body">
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">This is only visible as admin</small>
+                        </div>
+                    </div>
+                </a>
+            }
         }
     </div>
 

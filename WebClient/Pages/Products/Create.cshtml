@@ -1,4 +1,47 @@
 ﻿@page
 @model WebClient.Pages.Products.CreateModel
 @{
+    ViewData["Title"] = "Create";
 }
+
+<div class="container">
+    <div class="row">
+        <form method="post">
+            <div class="form-groupe">
+                <div class="row mt-1">
+                    <div class="col">
+                        <label class="form-label">Name</label>
+                        <input asp-for="@Model.MyProduct.Name" class="form-control">
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col">
+                        <label class="form-label">Description</label>
+                        <input asp-for="@Model.MyProduct.Description" class="form-control">
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col">
+                        <label class="form-label">Price</label>
+                        <input asp-for="@Model.MyProduct.BuyPrice" class="form-control">
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col">
+                        <label class="form-label">EAN Number</label>
+                        <input asp-for="@Model.MyProduct.EAN" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-outline-secondary mt-2">Add Product</button>
+        </form>
+    </div>
+    @if (!String.IsNullOrEmpty(Model.Error))
+    {
+        <div class="row">
+            <span style="color: red">
+
+            </span>
+        </div>
+    }
+</div>

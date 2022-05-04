@@ -1,4 +1,8 @@
 @using Duende.IdentityServer.Extensions
+@using IdentityServer.Models
+@using IdentityServer.Pages.Shared
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> _userMananger
 @{
     string name = null;
     if (!true.Equals(ViewData["signed-out"]))
@@ -25,6 +29,21 @@
                         <a class="dropdown-item" asp-page="/Account/Logout/Index">Logout</a>
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Account Settings <b class="caret"></b></a>
+
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="~/Identity/Account/Manage/ChangePassword">Change Password</a>
+                        <a class="dropdown-item" href="~/Identity/Account/Manage/PersonalData">My Personal Data</a>
+                        <a class="dropdown-item" href="~/Identity/Account/Manage/Email">Email</a>
+                        <a class="dropdown-item" href="~/Identity/Account/Manage/EnableAuthenticator">Enable Authenticator</a>
+                        <a class="dropdown-item" href="~/Identity/Account/Manage/Index">Update Phone number</a>
+                    </div>
+                </li>
+                <partial name="_RoleNav" model="new _RoleNavModel(_userMananger, @User)"/>
+                <li class="nav-item float-right">
+                    <a class="nav-link" href="https://localhost:5002/Index">Back to Lilla Kors</a>
+                </li>
             </ul>
         }
         else
@@ -34,7 +53,8 @@
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Options <b class="caret"></b></a>
 
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" asp-area="Areas" asp-page="/Account/Register">Register</a>
+                        <a class="dropdown-item" href="~/Identity/Account/Register">Register</a>
+                        <a class="dropdown-item" asp-page="/Account/Login/Index">Login</a>
                     </div>
                 </li>
             </ul>

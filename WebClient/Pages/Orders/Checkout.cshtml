@@ -1,0 +1,128 @@
+﻿@page
+@using WebClient.Helpers.ShoppingCart
+@model WebClient.Pages.Orders.CheckoutModel
+@{
+    ViewData["Title"] = "CheckOut";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <div class="card w-100 shadow">
+                <div class="card-body">
+                    <div class="card-header row">
+                        <div class="text-start col-4">
+                            Item
+                        </div>
+                        <div class="col-6">
+                            Description
+                        </div>
+                        <div class="text-end col-2">
+                            Amount
+                        </div>
+                    </div>
+
+                    <ul class="list-group list-group-flush">
+                        @if (Model.shoppingCart.mycart.items.Any())
+                        {
+                            @foreach (Item? item in Model?.shoppingCart?.ListItems())
+                            {
+                                <li class="list-group-item">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <img src="~/images/placeholder-image.png" class="img-fluid rounded-start center-block" alt="...">
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="card-body">
+                                                <h5 class="card-title">@item.name</h5>
+                                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-2 text-center">
+                                            <span style="position:absolute;top:45%;">
+                                                Qty: @item.amount
+                                            </span>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="list-group-item text-center">
+                                <p>Cart is empty, find some products <a asp-page="/Products/Read">here</a></p>
+                            </li>
+                        }
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-9">
+                                    Total Qty:
+                                </div>
+                                <div class="col-3 text-end">
+                                    <span style="font-weight: 800"> @Model.shoppingCart.GetCartItemsCount() </span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="card-footer text-center text-muted">
+                        @DateTime.Now.ToLongDateString()
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card w-100 shadow">
+                <div class="card-body">
+                    <div class="card-header">
+                        Destination
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            <div class="form-groupe">
+                                <div class="row mt-1">
+                                    <div class="col">
+                                        <label class="form-label">Delivery Address</label>
+                                        <input id="shipaddress" name="shipaddress" asp-for="@Model.Address.shipaddress" placeholder="Delivery Address" required autocomplete="off" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row mt-1">
+                                    <div class="col">
+                                        <label class="form-label">Apartment, unit, suite, or floor #</label>
+                                        <input id="address2" name="address2" asp-for="@Model.Address.address2" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row mt-1">
+                                    <div class="col">
+                                        <label class="form-label">City*</label>
+                                        <input id="locality" name="locality" asp-for="@Model.Address.locality" required class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row mt-1">
+                                    <div class="col">
+                                        <label class="form-label">State/Province*</label>
+                                        <input id="state" name="state" asp-for="@Model.Address.state"  class="form-control">
+                                    </div>
+                                    <div class="col mt-1">
+                                        <label class="form-label">Postal code*</label>
+                                        <input id="postcode" name="postcode" asp-for="@Model.Address.postcode" required class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mt-1">
+                                        <label class="form-label">Country/Region*</label>
+                                        <input id="country" name="country" required asp-for="@Model.Address.country" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-outline-secondary mt-2">Check Out</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhShiSbwyU-t0uvBojMmt29E0lrFYx3jA&callback=initAutocomplete&libraries=places&v=weekly" defer></script>
+<script type="text/javascript" src="~/js/AutofillGoogle.js"></script>

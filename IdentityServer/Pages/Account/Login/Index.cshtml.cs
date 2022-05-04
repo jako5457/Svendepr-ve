@@ -53,6 +53,8 @@ namespace IdentityServer.Pages.Login
         {
             await BuildModelAsync(returnUrl);
 
+            TempData["returnUrl"] = returnUrl;
+
             if (View.IsExternalLoginOnly)
             {
                 // we only have one option for logging in and it's an external provider

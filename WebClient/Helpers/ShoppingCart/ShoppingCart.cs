@@ -3,17 +3,54 @@
 
 namespace WebClient.Helpers.ShoppingCart
 {
-    public class ShoppingCart : Cart
+    public class ShoppingCart
     {
+        public Cart? mycart;
         public ShoppingCart(HttpContext httpContext)
         {
             HttpContext = httpContext;
+
+            if (GetCartSession() == null)
+            {
+                mycart = new Cart();
+                SetCartSession();
+            }
+            else
+            {
+                mycart = GetCartSession();
+            }
         }
         private HttpContext HttpContext { get; set; }
 
+        private Cart? GetCartSession()
+        {
+            return HttpContext.Session.Get<Cart>(CartConst.CartSession);
+        }
+
+        private void SetCartSession()
+        {
+            HttpContext.Session.Set<Cart>(CartConst.CartSession, mycart);
+        }
+
+        public void ClearCart()
+        {
+            HttpContext.Session.Remove(CartConst.CartSession);
+        }
+
+        public int GetCartItemsCount()
+        {
+            int counter = 0;
+
+            foreach (Item item in mycart.items)
+            {
+                counter += item.amount;
+            }
+
+            return counter;
+        }
+
         public void AddItem(Item item)
         {
-            Cart? mycart = HttpContext.Session.Get<Cart>(CartConst.CartSession);
             Item? myitem = mycart?.items?.Where(i => i.Id == item.Id).FirstOrDefault();
             if (myitem != null)
             {
@@ -21,15 +58,27 @@ namespace WebClient.Helpers.ShoppingCart
             }
             else
             {
-                mycart?.items?.Add(new Item { amount = 1, Id = item.Id, Name = item.Name });
+                mycart?.items?.Add(new Item { amount = 1, Id = item.Id, name = item.name });
             }
 
-            HttpContext.Session.Set<Cart>(CartConst.CartSession, mycart);
+            SetCartSession();
+        }
+
+        public List<Item> ListItems()
+        {
+            if (mycart.items.Any())
+            {
+                return mycart.items;
+            }
+
+            return default; //null
         }
 
         public void RemoveItem(Item item)
         {
+            mycart?.items?.Remove(item);
 
+            SetCartSession();
         }
     }
 }

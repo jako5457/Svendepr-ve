@@ -1,0 +1,18 @@
+﻿@using IdentityServer.Models
+@using Microsoft.AspNetCore.Identity
+@model IdentityServer.Pages.Shared._RoleNavModel
+@inject UserManager<ApplicationUser> userManager
+@{
+
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    @if (!String.IsNullOrEmpty(Model._role)) 
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-page="/ManageEmp/index">Manage Users</a>
+        </li>
+    }
+    
+}

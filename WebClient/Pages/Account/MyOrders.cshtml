@@ -8,24 +8,39 @@
 
 <div class="container">
     <div class="row g-2">
-        @for (var i = 0; i < 4; i++)
+        @if (Model.Orders.Any())
         {
-            <div class="row p-3 ms-1 border bg-light">
-                <div class="col-3">
-                    <span>OrdreId</span>
-                    <span class="badge bg-info text-dark">Info</span>
+            foreach (var item in Model.Orders)
+            {
+                <div class="row p-3 ms-1 border bg-light">
+                    <div class="col-3">
+                        <span>OrdreId: @item.orderId</span>
+                        @if (item.isDelivered)
+                        {
+                            <span class="badge bg-info text-dark">Delivered</span>                            
+                        }
+                        else
+                        {
+                            <span class="badge bg-info text-dark">Proccesing</span> 
+                        }
+                    </div>
+                    <div class="col-6 text-center">
+                       @item.createdDate.ToLongDateString();
+                    </div>
+                    <div class="col-3 text-end">
+                        <a asp-route-id="@item.orderId" asp-page="/Orders/Details">
+                            <img src="~/lib/bootstrap/Icons/info-square-fill.svg" width="24" height="24" />
+                        </a>
+                    </div>
                 </div>
-                <div class="col-6 text-center">
-                    Dato?
-                </div>
-                <div class="col-3 text-end">
-                    <a asp-route-id="Something" asp-page="/Orders/Details">
-                        <img src="~/lib/bootstrap/Icons/info-square-fill.svg" width="24" height="24" />
-                    </a>
-                </div>
-            </div>
+                
+            }           
+            <partial name="_Pagenation" model="@new _PagenationModel(Model?.Currentpage, 130)" />           
         }
-        <partial name="_Pagenation" model="@new _PagenationModel(Model?.Currentpage, 130)" />
+        else
+        {
+            <h4>No Orders Placed Yet</h4>
+        }
 
     </div>
 </div>

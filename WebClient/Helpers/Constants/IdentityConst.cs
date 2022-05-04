@@ -2,6 +2,6 @@
 {
     public class IdentityConst
     {
-        public const string IdentityServer = "https://identityserversvende.azurewebsites.net";
+        public const string IdentityServer = "https://identityserversvende.azurewebsites.net/";
     }
 }
