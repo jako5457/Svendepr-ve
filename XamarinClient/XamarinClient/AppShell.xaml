@@ -3,29 +3,25 @@
        x:Class="XamarinClient.AppShell"
        xmlns:pages="XamarinClient.Pages">
 
-    <FlyoutItem Title="Login"
-                Icon="monkey.png">
+    <FlyoutItem Title="Login">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate pages:MainPage}" />
         </Tab>
     </FlyoutItem>
 
-    <FlyoutItem IsEnabled="False" IsVisible="False" x:Name="FlyOutOrders" Title="Orders"
-                Icon="monkey.png">
+    <FlyoutItem IsEnabled="False" IsVisible="False" x:Name="FlyOutOrders" Title="Orders">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate pages:Orders}" />
         </Tab>
     </FlyoutItem>
 
-    <FlyoutItem IsEnabled="False" IsVisible="False" x:Name="FlyOutMyProfile" Title="My Profile"
-                Icon="monkey.png">
+    <FlyoutItem IsEnabled="False" IsVisible="False" x:Name="FlyOutMyProfile" Title="My Profile">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate pages:ProfilePage}" />
         </Tab>
     </FlyoutItem>
 
-    <FlyoutItem IsEnabled="False" IsVisible="False" x:Name="FlyOutScanner" Title="Scanner"
-                Icon="monkey.png">
+    <FlyoutItem IsEnabled="False" IsVisible="False" x:Name="FlyOutScanner" Title="Scanner">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate pages:Scanner}" />
         </Tab>
